@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
     end
   
     s.subspec 'Core' do |ss|
-      ss.preserve_paths = 'build/ios/*.a'
+      ss.preserve_paths = 'wallet-core/build/ios/*.a'
       ss.vendored_libraries =
         'wallet-core/build/ios/libprotobuf.a',
         'wallet-core/build/ios/libTrezorCrypto.a',
@@ -38,7 +38,8 @@ Pod::Spec.new do |s|
         'wallet-core/swift/Sources/*.h'
       ss.libraries = 'c++'
       ss.xcconfig = {
-          'SYSTEM_HEADER_SEARCH_PATHS' => '$(inherited) ${PODS_ROOT}/TrustWalletCore/include',
+          'PRODUCT_MODULE_NAME' => 'TrustWalletCore',
+          'SYSTEM_HEADER_SEARCH_PATHS' => '$(inherited) ${PODS_ROOT}/WalletCore/include ${PODS_ROOT}/WalletCore/swift/Sources',
           'OTHER_LDFLAGS' => '$(inherited) -fprofile-instr-generate'
       }
       ss.pod_target_xcconfig = {
