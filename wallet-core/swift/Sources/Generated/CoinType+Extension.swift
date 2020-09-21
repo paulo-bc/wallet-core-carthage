@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -43,6 +43,10 @@ extension CoinType {
 
     public var staticPrefix: UInt8 {
         return TWCoinTypeStaticPrefix(TWCoinType(rawValue: rawValue))
+    }
+
+    public var slip44Id: UInt32 {
+        return TWCoinTypeSlip44Id(TWCoinType(rawValue: rawValue))
     }
 
     public func validate(address: String) -> Bool {

@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -14,6 +14,11 @@ extension Data {
             string = String(hexString.dropFirst(2))
         } else {
             string = hexString
+        }
+
+        // Check odd length hex string
+        if string.count % 2 != 0 {
+            return nil
         }
 
         // Convert the string to bytes for better performance

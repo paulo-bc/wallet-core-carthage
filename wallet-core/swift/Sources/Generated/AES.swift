@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -11,7 +11,7 @@ import Foundation
 
 public struct AES {
 
-    public static func cbcencrypt(key: Data, data: Data, iv: Data) -> Data? {
+    public static func encryptCBC(key: Data, data: Data, iv: Data, mode: AESPaddingMode) -> Data? {
         let keyData = TWDataCreateWithNSData(key)
         defer {
             TWDataDelete(keyData)
@@ -24,13 +24,13 @@ public struct AES {
         defer {
             TWDataDelete(ivData)
         }
-        guard let result = TWAESCBCEncrypt(keyData, dataData, ivData) else {
+        guard let result = TWAESEncryptCBC(keyData, dataData, ivData, TWAESPaddingMode(rawValue: mode.rawValue)) else {
             return nil
         }
         return TWDataNSData(result)
     }
 
-    public static func cbcdecrypt(key: Data, data: Data, iv: Data) -> Data? {
+    public static func decryptCBC(key: Data, data: Data, iv: Data, mode: AESPaddingMode) -> Data? {
         let keyData = TWDataCreateWithNSData(key)
         defer {
             TWDataDelete(keyData)
@@ -43,13 +43,13 @@ public struct AES {
         defer {
             TWDataDelete(ivData)
         }
-        guard let result = TWAESCBCDecrypt(keyData, dataData, ivData) else {
+        guard let result = TWAESDecryptCBC(keyData, dataData, ivData, TWAESPaddingMode(rawValue: mode.rawValue)) else {
             return nil
         }
         return TWDataNSData(result)
     }
 
-    public static func ctrencrypt(key: Data, data: Data, iv: Data) -> Data? {
+    public static func encryptCTR(key: Data, data: Data, iv: Data) -> Data? {
         let keyData = TWDataCreateWithNSData(key)
         defer {
             TWDataDelete(keyData)
@@ -62,13 +62,13 @@ public struct AES {
         defer {
             TWDataDelete(ivData)
         }
-        guard let result = TWAESCTREncrypt(keyData, dataData, ivData) else {
+        guard let result = TWAESEncryptCTR(keyData, dataData, ivData) else {
             return nil
         }
         return TWDataNSData(result)
     }
 
-    public static func ctrdecrypt(key: Data, data: Data, iv: Data) -> Data? {
+    public static func decryptCTR(key: Data, data: Data, iv: Data) -> Data? {
         let keyData = TWDataCreateWithNSData(key)
         defer {
             TWDataDelete(keyData)
@@ -81,7 +81,7 @@ public struct AES {
         defer {
             TWDataDelete(ivData)
         }
-        guard let result = TWAESCTRDecrypt(keyData, dataData, ivData) else {
+        guard let result = TWAESDecryptCTR(keyData, dataData, ivData) else {
             return nil
         }
         return TWDataNSData(result)

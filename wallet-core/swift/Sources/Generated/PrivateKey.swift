@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -69,6 +69,10 @@ public final class PrivateKey {
 
     public func getPublicKeyEd25519Blake2b() -> PublicKey {
         return PublicKey(rawValue: TWPrivateKeyGetPublicKeyEd25519Blake2b(rawValue))
+    }
+
+    public func getPublicKeyEd25519Extended() -> PublicKey {
+        return PublicKey(rawValue: TWPrivateKeyGetPublicKeyEd25519Extended(rawValue))
     }
 
     public func getPublicKeyCurve25519() -> PublicKey {

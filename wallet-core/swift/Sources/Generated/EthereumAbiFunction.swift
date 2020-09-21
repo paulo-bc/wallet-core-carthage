@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -17,15 +17,12 @@ public final class EthereumAbiFunction {
         self.rawValue = rawValue
     }
 
-    public init?(name: String) {
+    public init(name: String) {
         let nameString = TWStringCreateWithNSString(name)
         defer {
             TWStringDelete(nameString)
         }
-        guard let rawValue = TWEthereumAbiFunctionCreateWithString(nameString) else {
-            return nil
-        }
-        self.rawValue = rawValue
+        rawValue = TWEthereumAbiFunctionCreateWithString(nameString)
     }
 
     deinit {
@@ -36,22 +33,27 @@ public final class EthereumAbiFunction {
         return TWStringNSString(TWEthereumAbiFunctionGetType(rawValue))
     }
 
+    @discardableResult
     public func addParamUInt8(val: UInt8, isOutput: Bool) -> Int32 {
         return TWEthereumAbiFunctionAddParamUInt8(rawValue, val, isOutput)
     }
 
+    @discardableResult
     public func addParamUInt16(val: UInt16, isOutput: Bool) -> Int32 {
         return TWEthereumAbiFunctionAddParamUInt16(rawValue, val, isOutput)
     }
 
+    @discardableResult
     public func addParamUInt32(val: UInt32, isOutput: Bool) -> Int32 {
         return TWEthereumAbiFunctionAddParamUInt32(rawValue, val, isOutput)
     }
 
+    @discardableResult
     public func addParamUInt64(val: UInt64, isOutput: Bool) -> Int32 {
         return TWEthereumAbiFunctionAddParamUInt64(rawValue, val, isOutput)
     }
 
+    @discardableResult
     public func addParamUInt256(val: Data, isOutput: Bool) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -60,6 +62,7 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddParamUInt256(rawValue, valData, isOutput)
     }
 
+    @discardableResult
     public func addParamUIntN(bits: Int32, val: Data, isOutput: Bool) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -68,22 +71,27 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddParamUIntN(rawValue, Int32(bits), valData, isOutput)
     }
 
+    @discardableResult
     public func addParamInt8(val: Int8, isOutput: Bool) -> Int32 {
         return TWEthereumAbiFunctionAddParamInt8(rawValue, val, isOutput)
     }
 
+    @discardableResult
     public func addParamInt16(val: Int16, isOutput: Bool) -> Int32 {
         return TWEthereumAbiFunctionAddParamInt16(rawValue, val, isOutput)
     }
 
+    @discardableResult
     public func addParamInt32(val: Int32, isOutput: Bool) -> Int32 {
         return TWEthereumAbiFunctionAddParamInt32(rawValue, val, isOutput)
     }
 
+    @discardableResult
     public func addParamInt64(val: Int64, isOutput: Bool) -> Int32 {
         return TWEthereumAbiFunctionAddParamInt64(rawValue, val, isOutput)
     }
 
+    @discardableResult
     public func addParamInt256(val: Data, isOutput: Bool) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -92,6 +100,7 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddParamInt256(rawValue, valData, isOutput)
     }
 
+    @discardableResult
     public func addParamIntN(bits: Int32, val: Data, isOutput: Bool) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -100,10 +109,12 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddParamIntN(rawValue, Int32(bits), valData, isOutput)
     }
 
+    @discardableResult
     public func addParamBool(val: Bool, isOutput: Bool) -> Int32 {
         return TWEthereumAbiFunctionAddParamBool(rawValue, val, isOutput)
     }
 
+    @discardableResult
     public func addParamString(val: String, isOutput: Bool) -> Int32 {
         let valString = TWStringCreateWithNSString(val)
         defer {
@@ -112,6 +123,7 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddParamString(rawValue, valString, isOutput)
     }
 
+    @discardableResult
     public func addParamAddress(val: Data, isOutput: Bool) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -120,6 +132,7 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddParamAddress(rawValue, valData, isOutput)
     }
 
+    @discardableResult
     public func addParamBytes(val: Data, isOutput: Bool) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -128,14 +141,16 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddParamBytes(rawValue, valData, isOutput)
     }
 
-    public func addParamBytesFix(count_in: Int, val: Data, isOutput: Bool) -> Int32 {
+    @discardableResult
+    public func addParamBytesFix(size: Int, val: Data, isOutput: Bool) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
             TWDataDelete(valData)
         }
-        return TWEthereumAbiFunctionAddParamBytesFix(rawValue, count_in, valData, isOutput)
+        return TWEthereumAbiFunctionAddParamBytesFix(rawValue, size, valData, isOutput)
     }
 
+    @discardableResult
     public func addParamArray(isOutput: Bool) -> Int32 {
         return TWEthereumAbiFunctionAddParamArray(rawValue, isOutput)
     }
@@ -164,22 +179,27 @@ public final class EthereumAbiFunction {
         return TWDataNSData(TWEthereumAbiFunctionGetParamAddress(rawValue, Int32(idx), isOutput))
     }
 
+    @discardableResult
     public func addInArrayParamUInt8(arrayIdx: Int32, val: UInt8) -> Int32 {
         return TWEthereumAbiFunctionAddInArrayParamUInt8(rawValue, Int32(arrayIdx), val)
     }
 
+    @discardableResult
     public func addInArrayParamUInt16(arrayIdx: Int32, val: UInt16) -> Int32 {
         return TWEthereumAbiFunctionAddInArrayParamUInt16(rawValue, Int32(arrayIdx), val)
     }
 
+    @discardableResult
     public func addInArrayParamUInt32(arrayIdx: Int32, val: UInt32) -> Int32 {
         return TWEthereumAbiFunctionAddInArrayParamUInt32(rawValue, Int32(arrayIdx), val)
     }
 
+    @discardableResult
     public func addInArrayParamUInt64(arrayIdx: Int32, val: UInt64) -> Int32 {
         return TWEthereumAbiFunctionAddInArrayParamUInt64(rawValue, Int32(arrayIdx), val)
     }
 
+    @discardableResult
     public func addInArrayParamUInt256(arrayIdx: Int32, val: Data) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -188,6 +208,7 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddInArrayParamUInt256(rawValue, Int32(arrayIdx), valData)
     }
 
+    @discardableResult
     public func addInArrayParamUIntN(arrayIdx: Int32, bits: Int32, val: Data) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -196,22 +217,27 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddInArrayParamUIntN(rawValue, Int32(arrayIdx), Int32(bits), valData)
     }
 
+    @discardableResult
     public func addInArrayParamInt8(arrayIdx: Int32, val: Int8) -> Int32 {
         return TWEthereumAbiFunctionAddInArrayParamInt8(rawValue, Int32(arrayIdx), val)
     }
 
+    @discardableResult
     public func addInArrayParamInt16(arrayIdx: Int32, val: Int16) -> Int32 {
         return TWEthereumAbiFunctionAddInArrayParamInt16(rawValue, Int32(arrayIdx), val)
     }
 
+    @discardableResult
     public func addInArrayParamInt32(arrayIdx: Int32, val: Int32) -> Int32 {
         return TWEthereumAbiFunctionAddInArrayParamInt32(rawValue, Int32(arrayIdx), val)
     }
 
+    @discardableResult
     public func addInArrayParamInt64(arrayIdx: Int32, val: Int64) -> Int32 {
         return TWEthereumAbiFunctionAddInArrayParamInt64(rawValue, Int32(arrayIdx), val)
     }
 
+    @discardableResult
     public func addInArrayParamInt256(arrayIdx: Int32, val: Data) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -220,6 +246,7 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddInArrayParamInt256(rawValue, Int32(arrayIdx), valData)
     }
 
+    @discardableResult
     public func addInArrayParamIntN(arrayIdx: Int32, bits: Int32, val: Data) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -228,10 +255,12 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddInArrayParamIntN(rawValue, Int32(arrayIdx), Int32(bits), valData)
     }
 
+    @discardableResult
     public func addInArrayParamBool(arrayIdx: Int32, val: Bool) -> Int32 {
         return TWEthereumAbiFunctionAddInArrayParamBool(rawValue, Int32(arrayIdx), val)
     }
 
+    @discardableResult
     public func addInArrayParamString(arrayIdx: Int32, val: String) -> Int32 {
         let valString = TWStringCreateWithNSString(val)
         defer {
@@ -240,6 +269,7 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddInArrayParamString(rawValue, Int32(arrayIdx), valString)
     }
 
+    @discardableResult
     public func addInArrayParamAddress(arrayIdx: Int32, val: Data) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -248,6 +278,7 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddInArrayParamAddress(rawValue, Int32(arrayIdx), valData)
     }
 
+    @discardableResult
     public func addInArrayParamBytes(arrayIdx: Int32, val: Data) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
@@ -256,12 +287,13 @@ public final class EthereumAbiFunction {
         return TWEthereumAbiFunctionAddInArrayParamBytes(rawValue, Int32(arrayIdx), valData)
     }
 
-    public func addInArrayParamBytesFix(arrayIdx: Int32, count_in: Int, val: Data) -> Int32 {
+    @discardableResult
+    public func addInArrayParamBytesFix(arrayIdx: Int32, size: Int, val: Data) -> Int32 {
         let valData = TWDataCreateWithNSData(val)
         defer {
             TWDataDelete(valData)
         }
-        return TWEthereumAbiFunctionAddInArrayParamBytesFix(rawValue, Int32(arrayIdx), count_in, valData)
+        return TWEthereumAbiFunctionAddInArrayParamBytesFix(rawValue, Int32(arrayIdx), size, valData)
     }
 
 }

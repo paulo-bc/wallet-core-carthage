@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -22,7 +22,7 @@ public final class StoredKey {
         return StoredKey(rawValue: value)
     }
 
-    public static func importPrivateKey(privateKey: Data, name: String, password: String, coin: CoinType) -> StoredKey? {
+    public static func importPrivateKey(privateKey: Data, name: String, password: Data, coin: CoinType) -> StoredKey? {
         let privateKeyData = TWDataCreateWithNSData(privateKey)
         defer {
             TWDataDelete(privateKeyData)
@@ -31,17 +31,17 @@ public final class StoredKey {
         defer {
             TWStringDelete(nameString)
         }
-        let passwordString = TWStringCreateWithNSString(password)
+        let passwordData = TWDataCreateWithNSData(password)
         defer {
-            TWStringDelete(passwordString)
+            TWDataDelete(passwordData)
         }
-        guard let value = TWStoredKeyImportPrivateKey(privateKeyData, nameString, passwordString, TWCoinType(rawValue: coin.rawValue)) else {
+        guard let value = TWStoredKeyImportPrivateKey(privateKeyData, nameString, passwordData, TWCoinType(rawValue: coin.rawValue)) else {
             return nil
         }
         return StoredKey(rawValue: value)
     }
 
-    public static func importHDWallet(mnemonic: String, name: String, password: String, coin: CoinType) -> StoredKey? {
+    public static func importHDWallet(mnemonic: String, name: String, password: Data, coin: CoinType) -> StoredKey? {
         let mnemonicString = TWStringCreateWithNSString(mnemonic)
         defer {
             TWStringDelete(mnemonicString)
@@ -50,11 +50,11 @@ public final class StoredKey {
         defer {
             TWStringDelete(nameString)
         }
-        let passwordString = TWStringCreateWithNSString(password)
+        let passwordData = TWDataCreateWithNSData(password)
         defer {
-            TWStringDelete(passwordString)
+            TWDataDelete(passwordData)
         }
-        guard let value = TWStoredKeyImportHDWallet(mnemonicString, nameString, passwordString, TWCoinType(rawValue: coin.rawValue)) else {
+        guard let value = TWStoredKeyImportHDWallet(mnemonicString, nameString, passwordData, TWCoinType(rawValue: coin.rawValue)) else {
             return nil
         }
         return StoredKey(rawValue: value)
@@ -96,16 +96,16 @@ public final class StoredKey {
         self.rawValue = rawValue
     }
 
-    public init(name: String, password: String) {
+    public init(name: String, password: Data) {
         let nameString = TWStringCreateWithNSString(name)
         defer {
             TWStringDelete(nameString)
         }
-        let passwordString = TWStringCreateWithNSString(password)
+        let passwordData = TWDataCreateWithNSData(password)
         defer {
-            TWStringDelete(passwordString)
+            TWDataDelete(passwordData)
         }
-        rawValue = TWStoredKeyCreate(nameString, passwordString)
+        rawValue = TWStoredKeyCreate(nameString, passwordData)
     }
 
     deinit {
@@ -130,7 +130,7 @@ public final class StoredKey {
         return TWStoredKeyRemoveAccountForCoin(rawValue, TWCoinType(rawValue: coin.rawValue))
     }
 
-    public func addAccount(address: String, derivationPath: String, extetndedPublicKey: String) -> Void {
+    public func addAccount(address: String, coin: CoinType, derivationPath: String, extetndedPublicKey: String) -> Void {
         let addressString = TWStringCreateWithNSString(address)
         defer {
             TWStringDelete(addressString)
@@ -143,7 +143,7 @@ public final class StoredKey {
         defer {
             TWStringDelete(extetndedPublicKeyString)
         }
-        return TWStoredKeyAddAccount(rawValue, addressString, derivationPathString, extetndedPublicKeyString)
+        return TWStoredKeyAddAccount(rawValue, addressString, TWCoinType(rawValue: coin.rawValue), derivationPathString, extetndedPublicKeyString)
     }
 
     public func store(path: String) -> Bool {
@@ -154,45 +154,45 @@ public final class StoredKey {
         return TWStoredKeyStore(rawValue, pathString)
     }
 
-    public func decryptPrivateKey(password: String) -> Data? {
-        let passwordString = TWStringCreateWithNSString(password)
+    public func decryptPrivateKey(password: Data) -> Data? {
+        let passwordData = TWDataCreateWithNSData(password)
         defer {
-            TWStringDelete(passwordString)
+            TWDataDelete(passwordData)
         }
-        guard let result = TWStoredKeyDecryptPrivateKey(rawValue, passwordString) else {
+        guard let result = TWStoredKeyDecryptPrivateKey(rawValue, passwordData) else {
             return nil
         }
         return TWDataNSData(result)
     }
 
-    public func decryptMnemonic(password: String) -> String? {
-        let passwordString = TWStringCreateWithNSString(password)
+    public func decryptMnemonic(password: Data) -> String? {
+        let passwordData = TWDataCreateWithNSData(password)
         defer {
-            TWStringDelete(passwordString)
+            TWDataDelete(passwordData)
         }
-        guard let result = TWStoredKeyDecryptMnemonic(rawValue, passwordString) else {
+        guard let result = TWStoredKeyDecryptMnemonic(rawValue, passwordData) else {
             return nil
         }
         return TWStringNSString(result)
     }
 
-    public func privateKey(coin: CoinType, password: String) -> PrivateKey? {
-        let passwordString = TWStringCreateWithNSString(password)
+    public func privateKey(coin: CoinType, password: Data) -> PrivateKey? {
+        let passwordData = TWDataCreateWithNSData(password)
         defer {
-            TWStringDelete(passwordString)
+            TWDataDelete(passwordData)
         }
-        guard let value = TWStoredKeyPrivateKey(rawValue, TWCoinType(rawValue: coin.rawValue), passwordString) else {
+        guard let value = TWStoredKeyPrivateKey(rawValue, TWCoinType(rawValue: coin.rawValue), passwordData) else {
             return nil
         }
         return PrivateKey(rawValue: value)
     }
 
-    public func wallet(password: String) -> HDWallet? {
-        let passwordString = TWStringCreateWithNSString(password)
+    public func wallet(password: Data) -> HDWallet? {
+        let passwordData = TWDataCreateWithNSData(password)
         defer {
-            TWStringDelete(passwordString)
+            TWDataDelete(passwordData)
         }
-        guard let value = TWStoredKeyWallet(rawValue, passwordString) else {
+        guard let value = TWStoredKeyWallet(rawValue, passwordData) else {
             return nil
         }
         return HDWallet(rawValue: value)
@@ -205,12 +205,12 @@ public final class StoredKey {
         return TWDataNSData(result)
     }
 
-    public func fixAddresses(password: String) -> Bool {
-        let passwordString = TWStringCreateWithNSString(password)
+    public func fixAddresses(password: Data) -> Bool {
+        let passwordData = TWDataCreateWithNSData(password)
         defer {
-            TWStringDelete(passwordString)
+            TWDataDelete(passwordData)
         }
-        return TWStoredKeyFixAddresses(rawValue, passwordString)
+        return TWStoredKeyFixAddresses(rawValue, passwordData)
     }
 
 }

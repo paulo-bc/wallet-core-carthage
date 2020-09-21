@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -33,7 +33,7 @@ public final class Account {
         self.rawValue = rawValue
     }
 
-    public init(address: String, derivationPath: String, extendedPublicKey: String) {
+    public init(address: String, coin: CoinType, derivationPath: String, extendedPublicKey: String) {
         let addressString = TWStringCreateWithNSString(address)
         defer {
             TWStringDelete(addressString)
@@ -46,7 +46,7 @@ public final class Account {
         defer {
             TWStringDelete(extendedPublicKeyString)
         }
-        rawValue = TWAccountCreate(addressString, derivationPathString, extendedPublicKeyString)
+        rawValue = TWAccountCreate(addressString, TWCoinType(rawValue: coin.rawValue), derivationPathString, extendedPublicKeyString)
     }
 
     deinit {

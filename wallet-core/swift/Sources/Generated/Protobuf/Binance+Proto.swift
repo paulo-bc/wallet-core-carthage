@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -18,5 +18,9 @@ public typealias BinanceHTLTOrder = TW_Binance_Proto_HTLTOrder;
 public typealias BinanceDepositHTLTOrder = TW_Binance_Proto_DepositHTLTOrder;
 public typealias BinanceClaimHTLOrder = TW_Binance_Proto_ClaimHTLOrder;
 public typealias BinanceRefundHTLTOrder = TW_Binance_Proto_RefundHTLTOrder;
+public typealias BinanceTransferOut = TW_Binance_Proto_TransferOut;
+public typealias BinanceSideChainDelegate = TW_Binance_Proto_SideChainDelegate;
+public typealias BinanceSideChainRedelegate = TW_Binance_Proto_SideChainRedelegate;
+public typealias BinanceSideChainUndelegate = TW_Binance_Proto_SideChainUndelegate;
 public typealias BinanceSigningInput = TW_Binance_Proto_SigningInput;
 public typealias BinanceSigningOutput = TW_Binance_Proto_SigningOutput;

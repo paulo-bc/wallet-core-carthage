@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -47,12 +47,16 @@ public final class BitcoinScript {
         return BitcoinScript(rawValue: TWBitcoinScriptBuildPayToWitnessScriptHash(scriptHashData))
     }
 
-    public static func buildForAddress(address: String, coin: CoinType) -> BitcoinScript {
+    public static func lockScriptForAddress(address: String, coin: CoinType) -> BitcoinScript {
         let addressString = TWStringCreateWithNSString(address)
         defer {
             TWStringDelete(addressString)
         }
-        return BitcoinScript(rawValue: TWBitcoinScriptBuildForAddress(addressString, TWCoinType(rawValue: coin.rawValue)))
+        return BitcoinScript(rawValue: TWBitcoinScriptLockScriptForAddress(addressString, TWCoinType(rawValue: coin.rawValue)))
+    }
+
+    public static func hashTypeForCoin(coinType: CoinType) -> UInt32 {
+        return TWBitcoinScriptHashTypeForCoin(TWCoinType(rawValue: coinType.rawValue))
     }
 
     public var size: Int {
@@ -73,6 +77,10 @@ public final class BitcoinScript {
 
     public var isPayToWitnessScriptHash: Bool {
         return TWBitcoinScriptIsPayToWitnessScriptHash(rawValue)
+    }
+
+    public var isPayToWitnessPublicKeyHash: Bool {
+        return TWBitcoinScriptIsPayToWitnessPublicKeyHash(rawValue)
     }
 
     public var isWitnessProgram: Bool {

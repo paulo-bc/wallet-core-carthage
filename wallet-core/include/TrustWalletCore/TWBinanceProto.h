@@ -1,8 +1,10 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
 // file LICENSE at the root of the source code distribution tree.
+//
+// This is a GENERATED FILE, changes made here WILL BE LOST.
 
 #pragma once
 
@@ -22,5 +24,9 @@ typedef TWData *_Nonnull TW_Binance_Proto_HTLTOrder;
 typedef TWData *_Nonnull TW_Binance_Proto_DepositHTLTOrder;
 typedef TWData *_Nonnull TW_Binance_Proto_ClaimHTLOrder;
 typedef TWData *_Nonnull TW_Binance_Proto_RefundHTLTOrder;
+typedef TWData *_Nonnull TW_Binance_Proto_TransferOut;
+typedef TWData *_Nonnull TW_Binance_Proto_SideChainDelegate;
+typedef TWData *_Nonnull TW_Binance_Proto_SideChainRedelegate;
+typedef TWData *_Nonnull TW_Binance_Proto_SideChainUndelegate;
 typedef TWData *_Nonnull TW_Binance_Proto_SigningInput;
 typedef TWData *_Nonnull TW_Binance_Proto_SigningOutput;

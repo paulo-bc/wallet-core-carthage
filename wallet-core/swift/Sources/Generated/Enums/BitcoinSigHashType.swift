@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -12,4 +12,5 @@ public enum BitcoinSigHashType: UInt32, CaseIterable {
     case none = 0x02
     case single = 0x03
     case fork = 0x40
+    case forkBTG = 0x4f40
 }

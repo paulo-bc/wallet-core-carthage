@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -9,38 +9,48 @@
 
 public enum HRP: UInt32, CaseIterable, CustomStringConvertible  {
     case unknown = 0
-    case binance = 1
-    case bitcoin = 2
-    case bitcoinCash = 3
-    case cosmos = 4
+    case bitcoin = 1
+    case litecoin = 2
+    case viacoin = 3
+    case groestlcoin = 4
     case digiByte = 5
-    case groestlcoin = 6
-    case harmony = 7
-    case ioTeX = 8
-    case litecoin = 9
-    case monacoin = 10
-    case qtum = 11
+    case monacoin = 6
+    case cosmos = 7
+    case bitcoinCash = 8
+    case bitcoinGold = 9
+    case ioTeX = 10
+    case zilliqa = 11
     case terra = 12
-    case viacoin = 13
-    case zilliqa = 14
+    case kava = 13
+    case bandChain = 14
+    case elrond = 15
+    case binance = 16
+    case harmony = 17
+    case cardano = 18
+    case qtum = 19
 
     public var description: String {
         switch self {
         case .unknown: return ""
-        case .binance: return "bnb"
         case .bitcoin: return "bc"
-        case .bitcoinCash: return "bitcoincash"
-        case .cosmos: return "cosmos"
-        case .digiByte: return "dgb"
-        case .groestlcoin: return "grs"
-        case .harmony: return "one"
-        case .ioTeX: return "io"
         case .litecoin: return "ltc"
-        case .monacoin: return "mona"
-        case .qtum: return "qc"
-        case .terra: return "terra"
         case .viacoin: return "via"
+        case .groestlcoin: return "grs"
+        case .digiByte: return "dgb"
+        case .monacoin: return "mona"
+        case .cosmos: return "cosmos"
+        case .bitcoinCash: return "bitcoincash"
+        case .bitcoinGold: return "btg"
+        case .ioTeX: return "io"
         case .zilliqa: return "zil"
+        case .terra: return "terra"
+        case .kava: return "kava"
+        case .bandChain: return "band"
+        case .elrond: return "erd"
+        case .binance: return "bnb"
+        case .harmony: return "one"
+        case .cardano: return "addr"
+        case .qtum: return "qc"
         }
     }
 }

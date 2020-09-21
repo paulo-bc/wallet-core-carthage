@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -13,8 +13,9 @@ public enum CoinType: UInt32, CaseIterable {
     case binance = 714
     case bitcoin = 0
     case bitcoinCash = 145
-    case bravoCoin = 282
+    case bitcoinGold = 156
     case callisto = 820
+    case cardano = 1815
     case cosmos = 118
     case dash = 5
     case decred = 42
@@ -28,6 +29,7 @@ public enum CoinType: UInt32, CaseIterable {
     case groestlcoin = 17
     case icon = 74
     case ioTeX = 304
+    case kava = 459
     case kin = 2017
     case litecoin = 2
     case monacoin = 22
@@ -46,6 +48,7 @@ public enum CoinType: UInt32, CaseIterable {
     case tezos = 1729
     case theta = 500
     case thunderToken = 1001
+    case neo = 888
     case tomoChain = 889
     case tron = 195
     case veChain = 818
@@ -62,4 +65,9 @@ public enum CoinType: UInt32, CaseIterable {
     case algorand = 283
     case kusama = 434
     case polkadot = 354
+    case filecoin = 461
+    case elrond = 508
+    case bandChain = 494
+    case smartChainLegacy = 10000714
+    case smartChain = 20000714
 }

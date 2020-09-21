@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -38,4 +38,8 @@ public enum Blockchain: UInt32, CaseIterable {
     case algorand = 27
     case ton = 28
     case polkadot = 29
+    case cardano = 30
+    case neo = 31
+    case filecoin = 32
+    case elrondNetwork = 33
 }

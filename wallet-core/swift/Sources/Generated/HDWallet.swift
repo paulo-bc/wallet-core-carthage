@@ -1,4 +1,4 @@
-// Copyright © 2017-2019 Trust Wallet.
+// Copyright © 2017-2020 Trust Wallet.
 //
 // This file is part of Trust. The full Trust copyright notice, including
 // terms governing use, modification, and redistribution, is contained in the
@@ -19,7 +19,7 @@ public final class HDWallet {
         return TWHDWalletIsValid(mnemonicString)
     }
 
-    public static func getPublicKeyFromExtended(extended: String, derivationPath: String) -> PublicKey? {
+    public static func getPublicKeyFromExtended(extended: String, coin: CoinType, derivationPath: String) -> PublicKey? {
         let extendedString = TWStringCreateWithNSString(extended)
         defer {
             TWStringDelete(extendedString)
@@ -28,7 +28,7 @@ public final class HDWallet {
         defer {
             TWStringDelete(derivationPathString)
         }
-        guard let value = TWHDWalletGetPublicKeyFromExtended(extendedString, derivationPathString) else {
+        guard let value = TWHDWalletGetPublicKeyFromExtended(extendedString, TWCoinType(rawValue: coin.rawValue), derivationPathString) else {
             return nil
         }
         return PublicKey(rawValue: value)
@@ -96,12 +96,12 @@ public final class HDWallet {
         return TWStringNSString(TWHDWalletGetAddressForCoin(rawValue, TWCoinType(rawValue: coin.rawValue)))
     }
 
-    public func getKey(derivationPath: String) -> PrivateKey {
+    public func getKey(coin: CoinType, derivationPath: String) -> PrivateKey {
         let derivationPathString = TWStringCreateWithNSString(derivationPath)
         defer {
             TWStringDelete(derivationPathString)
         }
-        return PrivateKey(rawValue: TWHDWalletGetKey(rawValue, derivationPathString))
+        return PrivateKey(rawValue: TWHDWalletGetKey(rawValue, TWCoinType(rawValue: coin.rawValue), derivationPathString))
     }
 
     public func getKeyBIP44(coin: CoinType, account: UInt32, change: UInt32, address: UInt32) -> PrivateKey {
