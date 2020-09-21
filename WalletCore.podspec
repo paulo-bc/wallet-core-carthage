@@ -17,25 +17,25 @@ Pod::Spec.new do |s|
   
     s.subspec 'Types' do |ss|
       ss.source_files = 
-        'swift/Sources/Generated/Enums/*.swift',
-        'swift/Sources/Generated/Protobuf/*.swift'
+        'wallet-core/swift/Sources/Generated/Enums/*.swift',
+        'wallet-core/swift/Sources/Generated/Protobuf/*.swift'
       ss.dependency 'SwiftProtobuf'
     end
   
     s.subspec 'Core' do |ss|
       ss.preserve_paths = 'build/ios/*.a'
       ss.vendored_libraries =
-        'build/ios/libprotobuf.a',
-        'build/ios/libTrezorCrypto.a',
-        'build/ios/libTrustWalletCore.a'
+        'wallet-core/build/ios/libprotobuf.a',
+        'wallet-core/build/ios/libTrezorCrypto.a',
+        'wallet-core/build/ios/libTrustWalletCore.a'
       s.source_files =
-        'include/**/*.h',
-        'swift/Sources/*.{swift,h,m,cpp}',
-        'swift/Sources/Extensions/*.swift',
-        'swift/Sources/Generated/*.{swift,h}'
+        'wallet-core/include/**/*.h',
+        'wallet-core/swift/Sources/*.{swift,h,m,cpp}',
+        'wallet-core/swift/Sources/Extensions/*.swift',
+        'wallet-core/swift/Sources/Generated/*.{swift,h}'
       ss.public_header_files =
-        'include/**/*.h',
-        'swift/Sources/*.h'
+        'wallet-core/include/**/*.h',
+        'wallet-core/swift/Sources/*.h'
       ss.libraries = 'c++'
       ss.xcconfig = {
           'SYSTEM_HEADER_SEARCH_PATHS' => '$(inherited) ${PODS_ROOT}/TrustWalletCore/include',
