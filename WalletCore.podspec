@@ -38,7 +38,6 @@ Pod::Spec.new do |s|
         'wallet-core/swift/Sources/*.h'
       ss.libraries = 'c++'
       ss.xcconfig = {
-          'PRODUCT_MODULE_NAME' => 'TrustWalletCore',
           'SYSTEM_HEADER_SEARCH_PATHS' => '$(inherited) ${PODS_ROOT}/WalletCore/include ${PODS_ROOT}/WalletCore/swift/Sources',
           'OTHER_LDFLAGS' => '$(inherited) -fprofile-instr-generate'
       }
@@ -48,3 +47,4 @@ Pod::Spec.new do |s|
       ss.dependency 'WalletCore/Types'
     end
   end
+  
