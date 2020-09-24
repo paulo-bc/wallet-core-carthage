@@ -1,17 +1,18 @@
 Pod::Spec.new do |s|
-    s.name         = 'WalletCore'
+    s.name         = 'TWalletCore'
     s.version      = '2.2.10'
     s.summary      = 'Trust Wallet core data structures and algorithms.'
     s.homepage     = 'https://github.com/trustwallet/wallet-core'
     s.license      = 'MIT'
     s.authors      = { 'Alejandro Isaza' => 'al@isaza.ca' }
+    s.module_name  = 'WalletCore'
   
     s.ios.deployment_target = '11.0'
     s.osx.deployment_target = '10.12'
     s.swift_version = '5.1'
   
     s.source = {
-      http: "https://github.com/trustwallet/wallet-core/releases/download/2.2.10/TrustWalletCore-iOS-2.2.10.zip"
+      git: 'git@github.com:hewigovens/wallet-core-carthage.git'
     }
     s.default_subspec = 'Core'
   
@@ -38,13 +39,12 @@ Pod::Spec.new do |s|
         'wallet-core/swift/Sources/*.h'
       ss.libraries = 'c++'
       ss.xcconfig = {
-          'SYSTEM_HEADER_SEARCH_PATHS' => '$(inherited) ${PODS_ROOT}/WalletCore/include ${PODS_ROOT}/WalletCore/swift/Sources',
           'OTHER_LDFLAGS' => '$(inherited) -fprofile-instr-generate'
       }
       ss.pod_target_xcconfig = {
           'ARCHS[sdk=iphonesimulator*]' => '$(ARCHS_STANDARD_64_BIT)'
       }
-      ss.dependency 'WalletCore/Types'
+      ss.dependency 'TWalletCore/Types'
     end
   end
   
