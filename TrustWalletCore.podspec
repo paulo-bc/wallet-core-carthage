@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name         = 'TWalletCore'
+    s.name         = 'TrustWalletCore'
     s.version      = '2.2.10'
     s.summary      = 'Trust Wallet core data structures and algorithms.'
     s.homepage     = 'https://github.com/trustwallet/wallet-core'
@@ -25,11 +25,9 @@ Pod::Spec.new do |s|
   
     s.subspec 'Core' do |ss|
       ss.preserve_paths = 'wallet-core/build/ios/*.a'
-      ss.vendored_libraries =
-        'wallet-core/build/ios/libprotobuf.a',
-        'wallet-core/build/ios/libTrezorCrypto.a',
-        'wallet-core/build/ios/libTrustWalletCore.a'
-      s.source_files =
+      ss.vendored_libraries = 'wallet-core/build/ios/*.a'
+      ss.exclude_files = 'wallet-core/swift/Sources/Generated/TrustWalletCore.h'
+      ss.source_files =
         'wallet-core/include/**/*.h',
         'wallet-core/swift/Sources/*.{swift,h,m,cpp}',
         'wallet-core/swift/Sources/Extensions/*.swift',
@@ -44,7 +42,6 @@ Pod::Spec.new do |s|
       ss.pod_target_xcconfig = {
           'ARCHS[sdk=iphonesimulator*]' => '$(ARCHS_STANDARD_64_BIT)'
       }
-      ss.dependency 'TWalletCore/Types'
+      ss.dependency 'TrustWalletCore/Types'
     end
   end
-  
