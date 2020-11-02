@@ -39,7 +39,7 @@ public struct TW_NEAR_Proto_FunctionCallPermission {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// uint128
+  /// uint128 / little endian byte order
   public var allowance: Data = SwiftProtobuf.Internal.emptyData
 
   public var receiverID: String = String()
@@ -137,7 +137,7 @@ public struct TW_NEAR_Proto_FunctionCall {
 
   public var gas: UInt64 = 0
 
-  /// uint128
+  /// uint128 / little endian byte order
   public var deposit: Data = SwiftProtobuf.Internal.emptyData
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -150,7 +150,7 @@ public struct TW_NEAR_Proto_Transfer {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// uint128
+  /// uint128 / little endian byte order
   public var deposit: Data = SwiftProtobuf.Internal.emptyData
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -163,7 +163,7 @@ public struct TW_NEAR_Proto_Stake {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// uint128
+  /// uint128 / little endian byte order
   public var stake: Data = SwiftProtobuf.Internal.emptyData
 
   public var publicKey: String = String()

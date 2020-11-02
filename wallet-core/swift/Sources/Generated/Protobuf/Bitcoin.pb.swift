@@ -108,11 +108,13 @@ public struct TW_Bitcoin_Proto_TransactionOutput {
   public init() {}
 }
 
+/// An unspent transaction output, that can serve as input to a transaction
 public struct TW_Bitcoin_Proto_UnspentTransaction {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  /// The unspent output
   public var outPoint: TW_Bitcoin_Proto_OutPoint {
     get {return _outPoint ?? TW_Bitcoin_Proto_OutPoint()}
     set {_outPoint = newValue}
@@ -122,8 +124,10 @@ public struct TW_Bitcoin_Proto_UnspentTransaction {
   /// Clears the value of `outPoint`. Subsequent reads from it will return its default value.
   public mutating func clearOutPoint() {self._outPoint = nil}
 
+  /// Script for claiming this UTXO
   public var script: Data = SwiftProtobuf.Internal.emptyData
 
+  /// Amount of the UTXO
   public var amount: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -464,12 +468,12 @@ extension TW_Bitcoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
     3: .standard(proto: "byte_fee"),
     4: .standard(proto: "to_address"),
     5: .standard(proto: "change_address"),
-    10: .standard(proto: "private_key"),
-    11: .same(proto: "scripts"),
-    12: .same(proto: "utxo"),
-    13: .standard(proto: "use_max_amount"),
-    14: .standard(proto: "coin_type"),
-    15: .same(proto: "plan"),
+    6: .standard(proto: "private_key"),
+    7: .same(proto: "scripts"),
+    8: .same(proto: "utxo"),
+    9: .standard(proto: "use_max_amount"),
+    10: .standard(proto: "coin_type"),
+    11: .same(proto: "plan"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -480,12 +484,12 @@ extension TW_Bitcoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
       case 3: try decoder.decodeSingularInt64Field(value: &self.byteFee)
       case 4: try decoder.decodeSingularStringField(value: &self.toAddress)
       case 5: try decoder.decodeSingularStringField(value: &self.changeAddress)
-      case 10: try decoder.decodeRepeatedBytesField(value: &self.privateKey)
-      case 11: try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufBytes>.self, value: &self.scripts)
-      case 12: try decoder.decodeRepeatedMessageField(value: &self.utxo)
-      case 13: try decoder.decodeSingularBoolField(value: &self.useMaxAmount)
-      case 14: try decoder.decodeSingularUInt32Field(value: &self.coinType)
-      case 15: try decoder.decodeSingularMessageField(value: &self._plan)
+      case 6: try decoder.decodeRepeatedBytesField(value: &self.privateKey)
+      case 7: try decoder.decodeMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufBytes>.self, value: &self.scripts)
+      case 8: try decoder.decodeRepeatedMessageField(value: &self.utxo)
+      case 9: try decoder.decodeSingularBoolField(value: &self.useMaxAmount)
+      case 10: try decoder.decodeSingularUInt32Field(value: &self.coinType)
+      case 11: try decoder.decodeSingularMessageField(value: &self._plan)
       default: break
       }
     }
@@ -508,22 +512,22 @@ extension TW_Bitcoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
       try visitor.visitSingularStringField(value: self.changeAddress, fieldNumber: 5)
     }
     if !self.privateKey.isEmpty {
-      try visitor.visitRepeatedBytesField(value: self.privateKey, fieldNumber: 10)
+      try visitor.visitRepeatedBytesField(value: self.privateKey, fieldNumber: 6)
     }
     if !self.scripts.isEmpty {
-      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufBytes>.self, value: self.scripts, fieldNumber: 11)
+      try visitor.visitMapField(fieldType: SwiftProtobuf._ProtobufMap<SwiftProtobuf.ProtobufString,SwiftProtobuf.ProtobufBytes>.self, value: self.scripts, fieldNumber: 7)
     }
     if !self.utxo.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.utxo, fieldNumber: 12)
+      try visitor.visitRepeatedMessageField(value: self.utxo, fieldNumber: 8)
     }
     if self.useMaxAmount != false {
-      try visitor.visitSingularBoolField(value: self.useMaxAmount, fieldNumber: 13)
+      try visitor.visitSingularBoolField(value: self.useMaxAmount, fieldNumber: 9)
     }
     if self.coinType != 0 {
-      try visitor.visitSingularUInt32Field(value: self.coinType, fieldNumber: 14)
+      try visitor.visitSingularUInt32Field(value: self.coinType, fieldNumber: 10)
     }
     if let v = self._plan {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
     }
     try unknownFields.traverse(visitor: &visitor)
   }

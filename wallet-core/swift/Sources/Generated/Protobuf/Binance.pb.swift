@@ -145,6 +145,7 @@ public struct TW_Binance_Proto_SendOrder {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   /// 0x2A2C87FA
+  /// A symbol-amount pair.  Could be moved out of SendOrder; kept here for backward compatibility.
   public struct Token {
     // SwiftProtobuf.Message conformance is added in an extension below. See the
     // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -484,6 +485,65 @@ public struct TW_Binance_Proto_SideChainUndelegate {
   fileprivate var _amount: TW_Binance_Proto_SendOrder.Token? = nil
 }
 
+public struct TW_Binance_Proto_TimeLockOrder {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// owner address
+  public var fromAddress: Data = SwiftProtobuf.Internal.emptyData
+
+  public var description_p: String = String()
+
+  /// Array of symbol/amount pairs. see SDK https://github.com/binance-chain/javascript-sdk/blob/master/docs/api-docs/classes/tokenmanagement.md#timelock
+  public var amount: [TW_Binance_Proto_SendOrder.Token] = []
+
+  public var lockTime: Int64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct TW_Binance_Proto_TimeRelockOrder {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// owner address
+  public var fromAddress: Data = SwiftProtobuf.Internal.emptyData
+
+  /// order ID
+  public var id: Int64 = 0
+
+  public var description_p: String = String()
+
+  /// Array of symbol/amount pairs.
+  public var amount: [TW_Binance_Proto_SendOrder.Token] = []
+
+  public var lockTime: Int64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct TW_Binance_Proto_TimeUnlockOrder {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// owner address
+  public var fromAddress: Data = SwiftProtobuf.Internal.emptyData
+
+  /// order ID
+  public var id: Int64 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 /// Input data necessary to create a signed order.
 public struct TW_Binance_Proto_SigningInput {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -653,6 +713,30 @@ public struct TW_Binance_Proto_SigningInput {
     set {_uniqueStorage()._orderOneof = .sideUndelegateOrder(newValue)}
   }
 
+  public var timeLockOrder: TW_Binance_Proto_TimeLockOrder {
+    get {
+      if case .timeLockOrder(let v)? = _storage._orderOneof {return v}
+      return TW_Binance_Proto_TimeLockOrder()
+    }
+    set {_uniqueStorage()._orderOneof = .timeLockOrder(newValue)}
+  }
+
+  public var timeRelockOrder: TW_Binance_Proto_TimeRelockOrder {
+    get {
+      if case .timeRelockOrder(let v)? = _storage._orderOneof {return v}
+      return TW_Binance_Proto_TimeRelockOrder()
+    }
+    set {_uniqueStorage()._orderOneof = .timeRelockOrder(newValue)}
+  }
+
+  public var timeUnlockOrder: TW_Binance_Proto_TimeUnlockOrder {
+    get {
+      if case .timeUnlockOrder(let v)? = _storage._orderOneof {return v}
+      return TW_Binance_Proto_TimeUnlockOrder()
+    }
+    set {_uniqueStorage()._orderOneof = .timeUnlockOrder(newValue)}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public enum OneOf_OrderOneof: Equatable {
@@ -672,6 +756,9 @@ public struct TW_Binance_Proto_SigningInput {
     case sideDelegateOrder(TW_Binance_Proto_SideChainDelegate)
     case sideRedelegateOrder(TW_Binance_Proto_SideChainRedelegate)
     case sideUndelegateOrder(TW_Binance_Proto_SideChainUndelegate)
+    case timeLockOrder(TW_Binance_Proto_TimeLockOrder)
+    case timeRelockOrder(TW_Binance_Proto_TimeRelockOrder)
+    case timeUnlockOrder(TW_Binance_Proto_TimeUnlockOrder)
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Binance_Proto_SigningInput.OneOf_OrderOneof, rhs: TW_Binance_Proto_SigningInput.OneOf_OrderOneof) -> Bool {
@@ -692,6 +779,9 @@ public struct TW_Binance_Proto_SigningInput {
       case (.sideDelegateOrder(let l), .sideDelegateOrder(let r)): return l == r
       case (.sideRedelegateOrder(let l), .sideRedelegateOrder(let r)): return l == r
       case (.sideUndelegateOrder(let l), .sideUndelegateOrder(let r)): return l == r
+      case (.timeLockOrder(let l), .timeLockOrder(let r)): return l == r
+      case (.timeRelockOrder(let l), .timeRelockOrder(let r)): return l == r
+      case (.timeUnlockOrder(let l), .timeUnlockOrder(let r)): return l == r
       default: return false
       }
     }
@@ -1703,6 +1793,141 @@ extension TW_Binance_Proto_SideChainUndelegate: SwiftProtobuf.Message, SwiftProt
   }
 }
 
+extension TW_Binance_Proto_TimeLockOrder: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".TimeLockOrder"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "from_address"),
+    2: .same(proto: "description"),
+    3: .same(proto: "amount"),
+    4: .standard(proto: "lock_time"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.fromAddress)
+      case 2: try decoder.decodeSingularStringField(value: &self.description_p)
+      case 3: try decoder.decodeRepeatedMessageField(value: &self.amount)
+      case 4: try decoder.decodeSingularInt64Field(value: &self.lockTime)
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.fromAddress.isEmpty {
+      try visitor.visitSingularBytesField(value: self.fromAddress, fieldNumber: 1)
+    }
+    if !self.description_p.isEmpty {
+      try visitor.visitSingularStringField(value: self.description_p, fieldNumber: 2)
+    }
+    if !self.amount.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.amount, fieldNumber: 3)
+    }
+    if self.lockTime != 0 {
+      try visitor.visitSingularInt64Field(value: self.lockTime, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Binance_Proto_TimeLockOrder, rhs: TW_Binance_Proto_TimeLockOrder) -> Bool {
+    if lhs.fromAddress != rhs.fromAddress {return false}
+    if lhs.description_p != rhs.description_p {return false}
+    if lhs.amount != rhs.amount {return false}
+    if lhs.lockTime != rhs.lockTime {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension TW_Binance_Proto_TimeRelockOrder: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".TimeRelockOrder"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "from_address"),
+    2: .same(proto: "id"),
+    3: .same(proto: "description"),
+    4: .same(proto: "amount"),
+    5: .standard(proto: "lock_time"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.fromAddress)
+      case 2: try decoder.decodeSingularInt64Field(value: &self.id)
+      case 3: try decoder.decodeSingularStringField(value: &self.description_p)
+      case 4: try decoder.decodeRepeatedMessageField(value: &self.amount)
+      case 5: try decoder.decodeSingularInt64Field(value: &self.lockTime)
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.fromAddress.isEmpty {
+      try visitor.visitSingularBytesField(value: self.fromAddress, fieldNumber: 1)
+    }
+    if self.id != 0 {
+      try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 2)
+    }
+    if !self.description_p.isEmpty {
+      try visitor.visitSingularStringField(value: self.description_p, fieldNumber: 3)
+    }
+    if !self.amount.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.amount, fieldNumber: 4)
+    }
+    if self.lockTime != 0 {
+      try visitor.visitSingularInt64Field(value: self.lockTime, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Binance_Proto_TimeRelockOrder, rhs: TW_Binance_Proto_TimeRelockOrder) -> Bool {
+    if lhs.fromAddress != rhs.fromAddress {return false}
+    if lhs.id != rhs.id {return false}
+    if lhs.description_p != rhs.description_p {return false}
+    if lhs.amount != rhs.amount {return false}
+    if lhs.lockTime != rhs.lockTime {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension TW_Binance_Proto_TimeUnlockOrder: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".TimeUnlockOrder"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "from_address"),
+    2: .same(proto: "id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.fromAddress)
+      case 2: try decoder.decodeSingularInt64Field(value: &self.id)
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.fromAddress.isEmpty {
+      try visitor.visitSingularBytesField(value: self.fromAddress, fieldNumber: 1)
+    }
+    if self.id != 0 {
+      try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Binance_Proto_TimeUnlockOrder, rhs: TW_Binance_Proto_TimeUnlockOrder) -> Bool {
+    if lhs.fromAddress != rhs.fromAddress {return false}
+    if lhs.id != rhs.id {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension TW_Binance_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SigningInput"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -1728,6 +1953,9 @@ extension TW_Binance_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
     21: .standard(proto: "side_delegate_order"),
     22: .standard(proto: "side_redelegate_order"),
     23: .standard(proto: "side_undelegate_order"),
+    24: .standard(proto: "time_lock_order"),
+    25: .standard(proto: "time_relock_order"),
+    26: .standard(proto: "time_unlock_order"),
   ]
 
   fileprivate class _StorageClass {
@@ -1900,6 +2128,30 @@ extension TW_Binance_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
           }
           try decoder.decodeSingularMessageField(value: &v)
           if let v = v {_storage._orderOneof = .sideUndelegateOrder(v)}
+        case 24:
+          var v: TW_Binance_Proto_TimeLockOrder?
+          if let current = _storage._orderOneof {
+            try decoder.handleConflictingOneOf()
+            if case .timeLockOrder(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._orderOneof = .timeLockOrder(v)}
+        case 25:
+          var v: TW_Binance_Proto_TimeRelockOrder?
+          if let current = _storage._orderOneof {
+            try decoder.handleConflictingOneOf()
+            if case .timeRelockOrder(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._orderOneof = .timeRelockOrder(v)}
+        case 26:
+          var v: TW_Binance_Proto_TimeUnlockOrder?
+          if let current = _storage._orderOneof {
+            try decoder.handleConflictingOneOf()
+            if case .timeUnlockOrder(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._orderOneof = .timeUnlockOrder(v)}
         default: break
         }
       }
@@ -1959,6 +2211,12 @@ extension TW_Binance_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
         try visitor.visitSingularMessageField(value: v, fieldNumber: 22)
       case .sideUndelegateOrder(let v)?:
         try visitor.visitSingularMessageField(value: v, fieldNumber: 23)
+      case .timeLockOrder(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 24)
+      case .timeRelockOrder(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 25)
+      case .timeUnlockOrder(let v)?:
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 26)
       case nil: break
       }
     }

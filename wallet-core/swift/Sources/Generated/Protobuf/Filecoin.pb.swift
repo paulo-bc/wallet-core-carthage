@@ -30,7 +30,7 @@ public struct TW_Filecoin_Proto_SigningInput {
   public var privateKey: Data = SwiftProtobuf.Internal.emptyData
 
   /// Recipient's address.
-  public var toAddress: String = String()
+  public var to: String = String()
 
   /// Transaction nonce.
   public var nonce: UInt64 = 0
@@ -38,11 +38,14 @@ public struct TW_Filecoin_Proto_SigningInput {
   /// Transfer value.
   public var value: Data = SwiftProtobuf.Internal.emptyData
 
-  /// Gas price.
-  public var gasPrice: Data = SwiftProtobuf.Internal.emptyData
-
   /// Gas limit.
-  public var gasLimit: UInt64 = 0
+  public var gasLimit: Int64 = 0
+
+  /// Gas fee cap.
+  public var gasFeeCap: Data = SwiftProtobuf.Internal.emptyData
+
+  /// Gas premium.
+  public var gasPremium: Data = SwiftProtobuf.Internal.emptyData
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -55,7 +58,7 @@ public struct TW_Filecoin_Proto_SigningOutput {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var encoded: Data = SwiftProtobuf.Internal.emptyData
+  public var json: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -70,22 +73,24 @@ extension TW_Filecoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._
   public static let protoMessageName: String = _protobuf_package + ".SigningInput"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "private_key"),
-    2: .standard(proto: "to_address"),
+    2: .same(proto: "to"),
     3: .same(proto: "nonce"),
     4: .same(proto: "value"),
-    5: .standard(proto: "gas_price"),
-    6: .standard(proto: "gas_limit"),
+    5: .standard(proto: "gas_limit"),
+    6: .standard(proto: "gas_fee_cap"),
+    7: .standard(proto: "gas_premium"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
       case 1: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 2: try decoder.decodeSingularStringField(value: &self.toAddress)
+      case 2: try decoder.decodeSingularStringField(value: &self.to)
       case 3: try decoder.decodeSingularUInt64Field(value: &self.nonce)
       case 4: try decoder.decodeSingularBytesField(value: &self.value)
-      case 5: try decoder.decodeSingularBytesField(value: &self.gasPrice)
-      case 6: try decoder.decodeSingularUInt64Field(value: &self.gasLimit)
+      case 5: try decoder.decodeSingularInt64Field(value: &self.gasLimit)
+      case 6: try decoder.decodeSingularBytesField(value: &self.gasFeeCap)
+      case 7: try decoder.decodeSingularBytesField(value: &self.gasPremium)
       default: break
       }
     }
@@ -95,8 +100,8 @@ extension TW_Filecoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._
     if !self.privateKey.isEmpty {
       try visitor.visitSingularBytesField(value: self.privateKey, fieldNumber: 1)
     }
-    if !self.toAddress.isEmpty {
-      try visitor.visitSingularStringField(value: self.toAddress, fieldNumber: 2)
+    if !self.to.isEmpty {
+      try visitor.visitSingularStringField(value: self.to, fieldNumber: 2)
     }
     if self.nonce != 0 {
       try visitor.visitSingularUInt64Field(value: self.nonce, fieldNumber: 3)
@@ -104,22 +109,26 @@ extension TW_Filecoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._
     if !self.value.isEmpty {
       try visitor.visitSingularBytesField(value: self.value, fieldNumber: 4)
     }
-    if !self.gasPrice.isEmpty {
-      try visitor.visitSingularBytesField(value: self.gasPrice, fieldNumber: 5)
-    }
     if self.gasLimit != 0 {
-      try visitor.visitSingularUInt64Field(value: self.gasLimit, fieldNumber: 6)
+      try visitor.visitSingularInt64Field(value: self.gasLimit, fieldNumber: 5)
+    }
+    if !self.gasFeeCap.isEmpty {
+      try visitor.visitSingularBytesField(value: self.gasFeeCap, fieldNumber: 6)
+    }
+    if !self.gasPremium.isEmpty {
+      try visitor.visitSingularBytesField(value: self.gasPremium, fieldNumber: 7)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: TW_Filecoin_Proto_SigningInput, rhs: TW_Filecoin_Proto_SigningInput) -> Bool {
     if lhs.privateKey != rhs.privateKey {return false}
-    if lhs.toAddress != rhs.toAddress {return false}
+    if lhs.to != rhs.to {return false}
     if lhs.nonce != rhs.nonce {return false}
     if lhs.value != rhs.value {return false}
-    if lhs.gasPrice != rhs.gasPrice {return false}
     if lhs.gasLimit != rhs.gasLimit {return false}
+    if lhs.gasFeeCap != rhs.gasFeeCap {return false}
+    if lhs.gasPremium != rhs.gasPremium {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -128,27 +137,27 @@ extension TW_Filecoin_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._
 extension TW_Filecoin_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".SigningOutput"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "encoded"),
+    1: .same(proto: "json"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.encoded)
+      case 1: try decoder.decodeSingularStringField(value: &self.json)
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.encoded.isEmpty {
-      try visitor.visitSingularBytesField(value: self.encoded, fieldNumber: 1)
+    if !self.json.isEmpty {
+      try visitor.visitSingularStringField(value: self.json, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: TW_Filecoin_Proto_SigningOutput, rhs: TW_Filecoin_Proto_SigningOutput) -> Bool {
-    if lhs.encoded != rhs.encoded {return false}
+    if lhs.json != rhs.json {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

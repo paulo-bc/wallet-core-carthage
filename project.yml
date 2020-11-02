@@ -13,7 +13,7 @@ settings:
       SWIFT_OPTIMIZATION_LEVEL: -Owholemodule
       SWIFT_COMPILATION_MODE: wholemodule
 targets:
-  TrustWalletCore:
+  WalletCore:
     type: framework
     platform: [iOS, macOS]
     deploymentTarget: 
@@ -28,7 +28,7 @@ targets:
       - carthage: SwiftProtobuf
       - framework: libprotobuf.a
       - framework: libTrezorCrypto.a
-      - framework: libTrustWalletCore.a
+      - framework: libCore.a
       - sdk: libc++.tbd
     settings:
       SKIP_INSTALL: NO
