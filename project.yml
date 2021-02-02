@@ -6,7 +6,10 @@ settings:
   base:
     BUILD_LIBRARY_FOR_DISTRIBUTION: true
     CLANG_CXX_LANGUAGE_STANDARD: c++17
+    CODE_SIGN_STYLE: Manual
+    ENABLE_BITCODE: false
     LIBRARY_SEARCH_PATHS: wallet-core/build/ios
+    SUPPORTS_MACCATALYST: false
     SWIFT_VERSION: 5.0
   configs:
     release:

@@ -74,11 +74,81 @@ public struct TW_Solana_Proto_WithdrawStake {
   public init() {}
 }
 
+/// Create a token account under a main account for a token type
+public struct TW_Solana_Proto_CreateTokenAccount {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// main account -- can be same as signer, or other main account (if done on some other account's behalf)
+  public var mainAddress: String = String()
+
+  public var tokenMintAddress: String = String()
+
+  public var tokenAddress: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+/// Transfer tokens
+public struct TW_Solana_Proto_TokenTransfer {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var tokenMintAddress: String = String()
+
+  public var senderTokenAddress: String = String()
+
+  public var recipientTokenAddress: String = String()
+
+  public var amount: UInt64 = 0
+
+  /// Note: 8-bit value
+  public var decimals: UInt32 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+/// CreateTokenAccount and TokenTransfer combined
+public struct TW_Solana_Proto_CreateAndTransferToken {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// main account -- can be same as signer, or other main account (if done on some other account's behalf)
+  public var recipientMainAddress: String = String()
+
+  public var tokenMintAddress: String = String()
+
+  /// Token address for the recipient, will be created first
+  public var recipientTokenAddress: String = String()
+
+  public var senderTokenAddress: String = String()
+
+  public var amount: UInt64 = 0
+
+  /// Note: 8-bit value
+  public var decimals: UInt32 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 /// Input data necessary to create a signed transaction.
 public struct TW_Solana_Proto_SigningInput {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
+
+  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+
+  public var recentBlockhash: String = String()
 
   public var transactionType: TW_Solana_Proto_SigningInput.OneOf_TransactionType? = nil
 
@@ -114,9 +184,29 @@ public struct TW_Solana_Proto_SigningInput {
     set {transactionType = .withdrawTransaction(newValue)}
   }
 
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var createTokenAccountTransaction: TW_Solana_Proto_CreateTokenAccount {
+    get {
+      if case .createTokenAccountTransaction(let v)? = transactionType {return v}
+      return TW_Solana_Proto_CreateTokenAccount()
+    }
+    set {transactionType = .createTokenAccountTransaction(newValue)}
+  }
 
-  public var recentBlockhash: String = String()
+  public var tokenTransferTransaction: TW_Solana_Proto_TokenTransfer {
+    get {
+      if case .tokenTransferTransaction(let v)? = transactionType {return v}
+      return TW_Solana_Proto_TokenTransfer()
+    }
+    set {transactionType = .tokenTransferTransaction(newValue)}
+  }
+
+  public var createAndTransferTokenTransaction: TW_Solana_Proto_CreateAndTransferToken {
+    get {
+      if case .createAndTransferTokenTransaction(let v)? = transactionType {return v}
+      return TW_Solana_Proto_CreateAndTransferToken()
+    }
+    set {transactionType = .createAndTransferTokenTransaction(newValue)}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -125,6 +215,9 @@ public struct TW_Solana_Proto_SigningInput {
     case stakeTransaction(TW_Solana_Proto_Stake)
     case deactivateStakeTransaction(TW_Solana_Proto_DeactivateStake)
     case withdrawTransaction(TW_Solana_Proto_WithdrawStake)
+    case createTokenAccountTransaction(TW_Solana_Proto_CreateTokenAccount)
+    case tokenTransferTransaction(TW_Solana_Proto_TokenTransfer)
+    case createAndTransferTokenTransaction(TW_Solana_Proto_CreateAndTransferToken)
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Solana_Proto_SigningInput.OneOf_TransactionType, rhs: TW_Solana_Proto_SigningInput.OneOf_TransactionType) -> Bool {
@@ -133,6 +226,9 @@ public struct TW_Solana_Proto_SigningInput {
       case (.stakeTransaction(let l), .stakeTransaction(let r)): return l == r
       case (.deactivateStakeTransaction(let l), .deactivateStakeTransaction(let r)): return l == r
       case (.withdrawTransaction(let l), .withdrawTransaction(let r)): return l == r
+      case (.createTokenAccountTransaction(let l), .createTokenAccountTransaction(let r)): return l == r
+      case (.tokenTransferTransaction(let l), .tokenTransferTransaction(let r)): return l == r
+      case (.createAndTransferTokenTransaction(let l), .createAndTransferTokenTransaction(let r)): return l == r
       default: return false
       }
     }
@@ -293,21 +389,179 @@ extension TW_Solana_Proto_WithdrawStake: SwiftProtobuf.Message, SwiftProtobuf._M
   }
 }
 
-extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  public static let protoMessageName: String = _protobuf_package + ".SigningInput"
+extension TW_Solana_Proto_CreateTokenAccount: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateTokenAccount"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "transfer_transaction"),
-    2: .standard(proto: "stake_transaction"),
-    3: .standard(proto: "deactivate_stake_transaction"),
-    4: .standard(proto: "withdraw_transaction"),
-    5: .standard(proto: "private_key"),
-    6: .standard(proto: "recent_blockhash"),
+    1: .standard(proto: "main_address"),
+    2: .standard(proto: "token_mint_address"),
+    3: .standard(proto: "token_address"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1:
+      case 1: try decoder.decodeSingularStringField(value: &self.mainAddress)
+      case 2: try decoder.decodeSingularStringField(value: &self.tokenMintAddress)
+      case 3: try decoder.decodeSingularStringField(value: &self.tokenAddress)
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.mainAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.mainAddress, fieldNumber: 1)
+    }
+    if !self.tokenMintAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.tokenMintAddress, fieldNumber: 2)
+    }
+    if !self.tokenAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.tokenAddress, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Solana_Proto_CreateTokenAccount, rhs: TW_Solana_Proto_CreateTokenAccount) -> Bool {
+    if lhs.mainAddress != rhs.mainAddress {return false}
+    if lhs.tokenMintAddress != rhs.tokenMintAddress {return false}
+    if lhs.tokenAddress != rhs.tokenAddress {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension TW_Solana_Proto_TokenTransfer: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".TokenTransfer"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "token_mint_address"),
+    2: .standard(proto: "sender_token_address"),
+    3: .standard(proto: "recipient_token_address"),
+    4: .same(proto: "amount"),
+    5: .same(proto: "decimals"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.tokenMintAddress)
+      case 2: try decoder.decodeSingularStringField(value: &self.senderTokenAddress)
+      case 3: try decoder.decodeSingularStringField(value: &self.recipientTokenAddress)
+      case 4: try decoder.decodeSingularUInt64Field(value: &self.amount)
+      case 5: try decoder.decodeSingularUInt32Field(value: &self.decimals)
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.tokenMintAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.tokenMintAddress, fieldNumber: 1)
+    }
+    if !self.senderTokenAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.senderTokenAddress, fieldNumber: 2)
+    }
+    if !self.recipientTokenAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.recipientTokenAddress, fieldNumber: 3)
+    }
+    if self.amount != 0 {
+      try visitor.visitSingularUInt64Field(value: self.amount, fieldNumber: 4)
+    }
+    if self.decimals != 0 {
+      try visitor.visitSingularUInt32Field(value: self.decimals, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Solana_Proto_TokenTransfer, rhs: TW_Solana_Proto_TokenTransfer) -> Bool {
+    if lhs.tokenMintAddress != rhs.tokenMintAddress {return false}
+    if lhs.senderTokenAddress != rhs.senderTokenAddress {return false}
+    if lhs.recipientTokenAddress != rhs.recipientTokenAddress {return false}
+    if lhs.amount != rhs.amount {return false}
+    if lhs.decimals != rhs.decimals {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension TW_Solana_Proto_CreateAndTransferToken: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".CreateAndTransferToken"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "recipient_main_address"),
+    2: .standard(proto: "token_mint_address"),
+    3: .standard(proto: "recipient_token_address"),
+    4: .standard(proto: "sender_token_address"),
+    5: .same(proto: "amount"),
+    6: .same(proto: "decimals"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.recipientMainAddress)
+      case 2: try decoder.decodeSingularStringField(value: &self.tokenMintAddress)
+      case 3: try decoder.decodeSingularStringField(value: &self.recipientTokenAddress)
+      case 4: try decoder.decodeSingularStringField(value: &self.senderTokenAddress)
+      case 5: try decoder.decodeSingularUInt64Field(value: &self.amount)
+      case 6: try decoder.decodeSingularUInt32Field(value: &self.decimals)
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.recipientMainAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.recipientMainAddress, fieldNumber: 1)
+    }
+    if !self.tokenMintAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.tokenMintAddress, fieldNumber: 2)
+    }
+    if !self.recipientTokenAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.recipientTokenAddress, fieldNumber: 3)
+    }
+    if !self.senderTokenAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.senderTokenAddress, fieldNumber: 4)
+    }
+    if self.amount != 0 {
+      try visitor.visitSingularUInt64Field(value: self.amount, fieldNumber: 5)
+    }
+    if self.decimals != 0 {
+      try visitor.visitSingularUInt32Field(value: self.decimals, fieldNumber: 6)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Solana_Proto_CreateAndTransferToken, rhs: TW_Solana_Proto_CreateAndTransferToken) -> Bool {
+    if lhs.recipientMainAddress != rhs.recipientMainAddress {return false}
+    if lhs.tokenMintAddress != rhs.tokenMintAddress {return false}
+    if lhs.recipientTokenAddress != rhs.recipientTokenAddress {return false}
+    if lhs.senderTokenAddress != rhs.senderTokenAddress {return false}
+    if lhs.amount != rhs.amount {return false}
+    if lhs.decimals != rhs.decimals {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".SigningInput"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "private_key"),
+    2: .standard(proto: "recent_blockhash"),
+    3: .standard(proto: "transfer_transaction"),
+    4: .standard(proto: "stake_transaction"),
+    5: .standard(proto: "deactivate_stake_transaction"),
+    6: .standard(proto: "withdraw_transaction"),
+    7: .standard(proto: "create_token_account_transaction"),
+    8: .standard(proto: "token_transfer_transaction"),
+    9: .standard(proto: "create_and_transfer_token_transaction"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularBytesField(value: &self.privateKey)
+      case 2: try decoder.decodeSingularStringField(value: &self.recentBlockhash)
+      case 3:
         var v: TW_Solana_Proto_Transfer?
         if let current = self.transactionType {
           try decoder.handleConflictingOneOf()
@@ -315,7 +569,7 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionType = .transferTransaction(v)}
-      case 2:
+      case 4:
         var v: TW_Solana_Proto_Stake?
         if let current = self.transactionType {
           try decoder.handleConflictingOneOf()
@@ -323,7 +577,7 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionType = .stakeTransaction(v)}
-      case 3:
+      case 5:
         var v: TW_Solana_Proto_DeactivateStake?
         if let current = self.transactionType {
           try decoder.handleConflictingOneOf()
@@ -331,7 +585,7 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionType = .deactivateStakeTransaction(v)}
-      case 4:
+      case 6:
         var v: TW_Solana_Proto_WithdrawStake?
         if let current = self.transactionType {
           try decoder.handleConflictingOneOf()
@@ -339,38 +593,66 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionType = .withdrawTransaction(v)}
-      case 5: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 6: try decoder.decodeSingularStringField(value: &self.recentBlockhash)
+      case 7:
+        var v: TW_Solana_Proto_CreateTokenAccount?
+        if let current = self.transactionType {
+          try decoder.handleConflictingOneOf()
+          if case .createTokenAccountTransaction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.transactionType = .createTokenAccountTransaction(v)}
+      case 8:
+        var v: TW_Solana_Proto_TokenTransfer?
+        if let current = self.transactionType {
+          try decoder.handleConflictingOneOf()
+          if case .tokenTransferTransaction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.transactionType = .tokenTransferTransaction(v)}
+      case 9:
+        var v: TW_Solana_Proto_CreateAndTransferToken?
+        if let current = self.transactionType {
+          try decoder.handleConflictingOneOf()
+          if case .createAndTransferTokenTransaction(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.transactionType = .createAndTransferTokenTransaction(v)}
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    switch self.transactionType {
-    case .transferTransaction(let v)?:
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    case .stakeTransaction(let v)?:
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    case .deactivateStakeTransaction(let v)?:
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    case .withdrawTransaction(let v)?:
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    case nil: break
-    }
     if !self.privateKey.isEmpty {
-      try visitor.visitSingularBytesField(value: self.privateKey, fieldNumber: 5)
+      try visitor.visitSingularBytesField(value: self.privateKey, fieldNumber: 1)
     }
     if !self.recentBlockhash.isEmpty {
-      try visitor.visitSingularStringField(value: self.recentBlockhash, fieldNumber: 6)
+      try visitor.visitSingularStringField(value: self.recentBlockhash, fieldNumber: 2)
+    }
+    switch self.transactionType {
+    case .transferTransaction(let v)?:
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    case .stakeTransaction(let v)?:
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    case .deactivateStakeTransaction(let v)?:
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    case .withdrawTransaction(let v)?:
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    case .createTokenAccountTransaction(let v)?:
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+    case .tokenTransferTransaction(let v)?:
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    case .createAndTransferTokenTransaction(let v)?:
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+    case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: TW_Solana_Proto_SigningInput, rhs: TW_Solana_Proto_SigningInput) -> Bool {
-    if lhs.transactionType != rhs.transactionType {return false}
     if lhs.privateKey != rhs.privateKey {return false}
     if lhs.recentBlockhash != rhs.recentBlockhash {return false}
+    if lhs.transactionType != rhs.transactionType {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -10,5 +10,6 @@
 
 #include "TWData.h"
 
+typedef TWData *_Nonnull TW_Ethereum_Proto_Transaction;
 typedef TWData *_Nonnull TW_Ethereum_Proto_SigningInput;
 typedef TWData *_Nonnull TW_Ethereum_Proto_SigningOutput;
