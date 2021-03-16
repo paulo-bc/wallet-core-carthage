@@ -79,6 +79,30 @@ public final class EthereumAbiValue {
         return TWStringNSString(TWEthereumAbiValueDecodeUInt256(inputData))
     }
 
+    public static func decodeValue(input: Data, type: String) -> String {
+        let inputData = TWDataCreateWithNSData(input)
+        defer {
+            TWDataDelete(inputData)
+        }
+        let typeString = TWStringCreateWithNSString(type)
+        defer {
+            TWStringDelete(typeString)
+        }
+        return TWStringNSString(TWEthereumAbiValueDecodeValue(inputData, typeString))
+    }
+
+    public static func decodeArray(input: Data, type: String) -> String {
+        let inputData = TWDataCreateWithNSData(input)
+        defer {
+            TWDataDelete(inputData)
+        }
+        let typeString = TWStringCreateWithNSString(type)
+        defer {
+            TWStringDelete(typeString)
+        }
+        return TWStringNSString(TWEthereumAbiValueDecodeArray(inputData, typeString))
+    }
+
     let rawValue: OpaquePointer
 
     init(rawValue: OpaquePointer) {

@@ -4,6 +4,10 @@
 // terms governing use, modification, and redistribution, is contained in the
 // file LICENSE at the root of the source code distribution tree.
 
+public typealias StellarAsset = TW_Stellar_Proto_Asset;
+public typealias StellarOperationCreateAccount = TW_Stellar_Proto_OperationCreateAccount;
+public typealias StellarOperationPayment = TW_Stellar_Proto_OperationPayment;
+public typealias StellarOperationChangeTrust = TW_Stellar_Proto_OperationChangeTrust;
 public typealias StellarMemoVoid = TW_Stellar_Proto_MemoVoid;
 public typealias StellarMemoText = TW_Stellar_Proto_MemoText;
 public typealias StellarMemoId = TW_Stellar_Proto_MemoId;

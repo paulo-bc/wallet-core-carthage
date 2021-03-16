@@ -214,6 +214,9 @@ public struct TW_Bitcoin_Proto_TransactionPlan {
   /// Zcash branch id
   public var branchID: Data = SwiftProtobuf.Internal.emptyData
 
+  /// Optional error message
+  public var error: String = String()
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -558,6 +561,7 @@ extension TW_Bitcoin_Proto_TransactionPlan: SwiftProtobuf.Message, SwiftProtobuf
     4: .same(proto: "change"),
     5: .same(proto: "utxos"),
     6: .standard(proto: "branch_id"),
+    7: .same(proto: "error"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -569,6 +573,7 @@ extension TW_Bitcoin_Proto_TransactionPlan: SwiftProtobuf.Message, SwiftProtobuf
       case 4: try decoder.decodeSingularInt64Field(value: &self.change)
       case 5: try decoder.decodeRepeatedMessageField(value: &self.utxos)
       case 6: try decoder.decodeSingularBytesField(value: &self.branchID)
+      case 7: try decoder.decodeSingularStringField(value: &self.error)
       default: break
       }
     }
@@ -593,6 +598,9 @@ extension TW_Bitcoin_Proto_TransactionPlan: SwiftProtobuf.Message, SwiftProtobuf
     if !self.branchID.isEmpty {
       try visitor.visitSingularBytesField(value: self.branchID, fieldNumber: 6)
     }
+    if !self.error.isEmpty {
+      try visitor.visitSingularStringField(value: self.error, fieldNumber: 7)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -603,6 +611,7 @@ extension TW_Bitcoin_Proto_TransactionPlan: SwiftProtobuf.Message, SwiftProtobuf
     if lhs.change != rhs.change {return false}
     if lhs.utxos != rhs.utxos {return false}
     if lhs.branchID != rhs.branchID {return false}
+    if lhs.error != rhs.error {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
