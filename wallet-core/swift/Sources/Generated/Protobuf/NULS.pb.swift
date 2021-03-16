@@ -32,10 +32,10 @@ public struct TW_NULS_Proto_TransactionCoinFrom {
   public var assetsID: UInt32 = 0
 
   ///tranaction out amount (256-bit number)
-  public var idAmount: Data = SwiftProtobuf.Internal.emptyData
+  public var idAmount: Data = Data()
 
   ///8 bytes
-  public var nonce: Data = SwiftProtobuf.Internal.emptyData
+  public var nonce: Data = Data()
 
   ///lock status: 1 locked; 0 unlocked
   public var locked: UInt32 = 0
@@ -57,7 +57,7 @@ public struct TW_NULS_Proto_TransactionCoinTo {
   public var assetsID: UInt32 = 0
 
   /// tranaction amount (256-bit number)
-  public var idAmount: Data = SwiftProtobuf.Internal.emptyData
+  public var idAmount: Data = Data()
 
   public var lockTime: UInt32 = 0
 
@@ -73,11 +73,11 @@ public struct TW_NULS_Proto_Signature {
 
   public var pkeyLen: UInt32 = 0
 
-  public var publicKey: Data = SwiftProtobuf.Internal.emptyData
+  public var publicKey: Data = Data()
 
   public var sigLen: UInt32 = 0
 
-  public var signature: Data = SwiftProtobuf.Internal.emptyData
+  public var signature: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -89,52 +89,65 @@ public struct TW_NULS_Proto_Transaction {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var type: UInt32 = 0
+  public var type: UInt32 {
+    get {return _storage._type}
+    set {_uniqueStorage()._type = newValue}
+  }
 
-  public var timestamp: UInt32 = 0
+  public var timestamp: UInt32 {
+    get {return _storage._timestamp}
+    set {_uniqueStorage()._timestamp = newValue}
+  }
 
-  public var remark: String = String()
+  public var remark: String {
+    get {return _storage._remark}
+    set {_uniqueStorage()._remark = newValue}
+  }
 
-  public var txData: Data = SwiftProtobuf.Internal.emptyData
+  public var txData: Data {
+    get {return _storage._txData}
+    set {_uniqueStorage()._txData = newValue}
+  }
 
   ///CoinFrom
   public var input: TW_NULS_Proto_TransactionCoinFrom {
-    get {return _input ?? TW_NULS_Proto_TransactionCoinFrom()}
-    set {_input = newValue}
+    get {return _storage._input ?? TW_NULS_Proto_TransactionCoinFrom()}
+    set {_uniqueStorage()._input = newValue}
   }
   /// Returns true if `input` has been explicitly set.
-  public var hasInput: Bool {return self._input != nil}
+  public var hasInput: Bool {return _storage._input != nil}
   /// Clears the value of `input`. Subsequent reads from it will return its default value.
-  public mutating func clearInput() {self._input = nil}
+  public mutating func clearInput() {_uniqueStorage()._input = nil}
 
   ///CoinTo
   public var output: TW_NULS_Proto_TransactionCoinTo {
-    get {return _output ?? TW_NULS_Proto_TransactionCoinTo()}
-    set {_output = newValue}
+    get {return _storage._output ?? TW_NULS_Proto_TransactionCoinTo()}
+    set {_uniqueStorage()._output = newValue}
   }
   /// Returns true if `output` has been explicitly set.
-  public var hasOutput: Bool {return self._output != nil}
+  public var hasOutput: Bool {return _storage._output != nil}
   /// Clears the value of `output`. Subsequent reads from it will return its default value.
-  public mutating func clearOutput() {self._output = nil}
+  public mutating func clearOutput() {_uniqueStorage()._output = nil}
 
   public var txSigs: TW_NULS_Proto_Signature {
-    get {return _txSigs ?? TW_NULS_Proto_Signature()}
-    set {_txSigs = newValue}
+    get {return _storage._txSigs ?? TW_NULS_Proto_Signature()}
+    set {_uniqueStorage()._txSigs = newValue}
   }
   /// Returns true if `txSigs` has been explicitly set.
-  public var hasTxSigs: Bool {return self._txSigs != nil}
+  public var hasTxSigs: Bool {return _storage._txSigs != nil}
   /// Clears the value of `txSigs`. Subsequent reads from it will return its default value.
-  public mutating func clearTxSigs() {self._txSigs = nil}
+  public mutating func clearTxSigs() {_uniqueStorage()._txSigs = nil}
 
-  public var hash: UInt32 = 0
+  public var hash: UInt32 {
+    get {return _storage._hash}
+    set {_uniqueStorage()._hash = newValue}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _input: TW_NULS_Proto_TransactionCoinFrom? = nil
-  fileprivate var _output: TW_NULS_Proto_TransactionCoinTo? = nil
-  fileprivate var _txSigs: TW_NULS_Proto_Signature? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 /// Input data necessary to create a signed order.
@@ -143,25 +156,25 @@ public struct TW_NULS_Proto_SigningInput {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var from: String = String()
 
   public var to: String = String()
 
-  public var amount: Data = SwiftProtobuf.Internal.emptyData
+  public var amount: Data = Data()
 
   public var chainID: UInt32 = 0
 
   public var idassetsID: UInt32 = 0
 
   ///The last 8 bytes of latest transaction hash 
-  public var nonce: Data = SwiftProtobuf.Internal.emptyData
+  public var nonce: Data = Data()
 
   public var remark: String = String()
 
   /// Account balance 
-  public var balance: Data = SwiftProtobuf.Internal.emptyData
+  public var balance: Data = Data()
 
   /// time, accurate to the second
   public var timestamp: UInt32 = 0
@@ -176,7 +189,7 @@ public struct TW_NULS_Proto_SigningOutput {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var encoded: Data = SwiftProtobuf.Internal.emptyData
+  public var encoded: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -200,13 +213,16 @@ extension TW_NULS_Proto_TransactionCoinFrom: SwiftProtobuf.Message, SwiftProtobu
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.fromAddress)
-      case 2: try decoder.decodeSingularUInt32Field(value: &self.assetsChainid)
-      case 3: try decoder.decodeSingularUInt32Field(value: &self.assetsID)
-      case 4: try decoder.decodeSingularBytesField(value: &self.idAmount)
-      case 5: try decoder.decodeSingularBytesField(value: &self.nonce)
-      case 6: try decoder.decodeSingularUInt32Field(value: &self.locked)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.fromAddress) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self.assetsChainid) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self.assetsID) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.idAmount) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.nonce) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self.locked) }()
       default: break
       }
     }
@@ -258,12 +274,15 @@ extension TW_NULS_Proto_TransactionCoinTo: SwiftProtobuf.Message, SwiftProtobuf.
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.toAddress)
-      case 2: try decoder.decodeSingularUInt32Field(value: &self.assetsChainid)
-      case 3: try decoder.decodeSingularUInt32Field(value: &self.assetsID)
-      case 4: try decoder.decodeSingularBytesField(value: &self.idAmount)
-      case 5: try decoder.decodeSingularUInt32Field(value: &self.lockTime)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.toAddress) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self.assetsChainid) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self.assetsID) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.idAmount) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self.lockTime) }()
       default: break
       }
     }
@@ -310,11 +329,14 @@ extension TW_NULS_Proto_Signature: SwiftProtobuf.Message, SwiftProtobuf._Message
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt32Field(value: &self.pkeyLen)
-      case 2: try decoder.decodeSingularBytesField(value: &self.publicKey)
-      case 3: try decoder.decodeSingularUInt32Field(value: &self.sigLen)
-      case 4: try decoder.decodeSingularBytesField(value: &self.signature)
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self.pkeyLen) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.publicKey) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self.sigLen) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.signature) }()
       default: break
       }
     }
@@ -359,59 +381,108 @@ extension TW_NULS_Proto_Transaction: SwiftProtobuf.Message, SwiftProtobuf._Messa
     8: .same(proto: "hash"),
   ]
 
+  fileprivate class _StorageClass {
+    var _type: UInt32 = 0
+    var _timestamp: UInt32 = 0
+    var _remark: String = String()
+    var _txData: Data = Data()
+    var _input: TW_NULS_Proto_TransactionCoinFrom? = nil
+    var _output: TW_NULS_Proto_TransactionCoinTo? = nil
+    var _txSigs: TW_NULS_Proto_Signature? = nil
+    var _hash: UInt32 = 0
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _type = source._type
+      _timestamp = source._timestamp
+      _remark = source._remark
+      _txData = source._txData
+      _input = source._input
+      _output = source._output
+      _txSigs = source._txSigs
+      _hash = source._hash
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt32Field(value: &self.type)
-      case 2: try decoder.decodeSingularUInt32Field(value: &self.timestamp)
-      case 3: try decoder.decodeSingularStringField(value: &self.remark)
-      case 4: try decoder.decodeSingularBytesField(value: &self.txData)
-      case 5: try decoder.decodeSingularMessageField(value: &self._input)
-      case 6: try decoder.decodeSingularMessageField(value: &self._output)
-      case 7: try decoder.decodeSingularMessageField(value: &self._txSigs)
-      case 8: try decoder.decodeSingularUInt32Field(value: &self.hash)
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularUInt32Field(value: &_storage._type) }()
+        case 2: try { try decoder.decodeSingularUInt32Field(value: &_storage._timestamp) }()
+        case 3: try { try decoder.decodeSingularStringField(value: &_storage._remark) }()
+        case 4: try { try decoder.decodeSingularBytesField(value: &_storage._txData) }()
+        case 5: try { try decoder.decodeSingularMessageField(value: &_storage._input) }()
+        case 6: try { try decoder.decodeSingularMessageField(value: &_storage._output) }()
+        case 7: try { try decoder.decodeSingularMessageField(value: &_storage._txSigs) }()
+        case 8: try { try decoder.decodeSingularUInt32Field(value: &_storage._hash) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.type != 0 {
-      try visitor.visitSingularUInt32Field(value: self.type, fieldNumber: 1)
-    }
-    if self.timestamp != 0 {
-      try visitor.visitSingularUInt32Field(value: self.timestamp, fieldNumber: 2)
-    }
-    if !self.remark.isEmpty {
-      try visitor.visitSingularStringField(value: self.remark, fieldNumber: 3)
-    }
-    if !self.txData.isEmpty {
-      try visitor.visitSingularBytesField(value: self.txData, fieldNumber: 4)
-    }
-    if let v = self._input {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-    }
-    if let v = self._output {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    }
-    if let v = self._txSigs {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
-    }
-    if self.hash != 0 {
-      try visitor.visitSingularUInt32Field(value: self.hash, fieldNumber: 8)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if _storage._type != 0 {
+        try visitor.visitSingularUInt32Field(value: _storage._type, fieldNumber: 1)
+      }
+      if _storage._timestamp != 0 {
+        try visitor.visitSingularUInt32Field(value: _storage._timestamp, fieldNumber: 2)
+      }
+      if !_storage._remark.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._remark, fieldNumber: 3)
+      }
+      if !_storage._txData.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._txData, fieldNumber: 4)
+      }
+      if let v = _storage._input {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      }
+      if let v = _storage._output {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      }
+      if let v = _storage._txSigs {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      }
+      if _storage._hash != 0 {
+        try visitor.visitSingularUInt32Field(value: _storage._hash, fieldNumber: 8)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: TW_NULS_Proto_Transaction, rhs: TW_NULS_Proto_Transaction) -> Bool {
-    if lhs.type != rhs.type {return false}
-    if lhs.timestamp != rhs.timestamp {return false}
-    if lhs.remark != rhs.remark {return false}
-    if lhs.txData != rhs.txData {return false}
-    if lhs._input != rhs._input {return false}
-    if lhs._output != rhs._output {return false}
-    if lhs._txSigs != rhs._txSigs {return false}
-    if lhs.hash != rhs.hash {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._type != rhs_storage._type {return false}
+        if _storage._timestamp != rhs_storage._timestamp {return false}
+        if _storage._remark != rhs_storage._remark {return false}
+        if _storage._txData != rhs_storage._txData {return false}
+        if _storage._input != rhs_storage._input {return false}
+        if _storage._output != rhs_storage._output {return false}
+        if _storage._txSigs != rhs_storage._txSigs {return false}
+        if _storage._hash != rhs_storage._hash {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -434,17 +505,20 @@ extension TW_NULS_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 2: try decoder.decodeSingularStringField(value: &self.from)
-      case 3: try decoder.decodeSingularStringField(value: &self.to)
-      case 4: try decoder.decodeSingularBytesField(value: &self.amount)
-      case 5: try decoder.decodeSingularUInt32Field(value: &self.chainID)
-      case 6: try decoder.decodeSingularUInt32Field(value: &self.idassetsID)
-      case 7: try decoder.decodeSingularBytesField(value: &self.nonce)
-      case 8: try decoder.decodeSingularStringField(value: &self.remark)
-      case 9: try decoder.decodeSingularBytesField(value: &self.balance)
-      case 10: try decoder.decodeSingularUInt32Field(value: &self.timestamp)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.from) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.to) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.amount) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self.chainID) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self.idassetsID) }()
+      case 7: try { try decoder.decodeSingularBytesField(value: &self.nonce) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.remark) }()
+      case 9: try { try decoder.decodeSingularBytesField(value: &self.balance) }()
+      case 10: try { try decoder.decodeSingularUInt32Field(value: &self.timestamp) }()
       default: break
       }
     }
@@ -508,8 +582,11 @@ extension TW_NULS_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.encoded)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
       default: break
       }
     }

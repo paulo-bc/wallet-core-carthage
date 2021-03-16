@@ -74,7 +74,7 @@ public struct TW_Decred_Proto_TransactionInput {
   public var blockIndex: UInt32 = 0
 
   /// Computational script for confirming transaction authorization.
-  public var script: Data = SwiftProtobuf.Internal.emptyData
+  public var script: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -96,7 +96,7 @@ public struct TW_Decred_Proto_TransactionOutput {
   public var version: UInt32 = 0
 
   /// Usually contains the public key as a Decred script setting up conditions to claim this output.
-  public var script: Data = SwiftProtobuf.Internal.emptyData
+  public var script: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -120,7 +120,7 @@ public struct TW_Decred_Proto_SigningOutput {
   public mutating func clearTransaction() {self._transaction = nil}
 
   /// Signed and encoded transaction bytes.
-  public var encoded: Data = SwiftProtobuf.Internal.emptyData
+  public var encoded: Data = Data()
 
   /// Transaction id
   public var transactionID: String = String()
@@ -152,13 +152,16 @@ extension TW_Decred_Proto_Transaction: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt32Field(value: &self.serializeType)
-      case 2: try decoder.decodeSingularUInt32Field(value: &self.version)
-      case 3: try decoder.decodeRepeatedMessageField(value: &self.inputs)
-      case 4: try decoder.decodeRepeatedMessageField(value: &self.outputs)
-      case 5: try decoder.decodeSingularUInt32Field(value: &self.lockTime)
-      case 6: try decoder.decodeSingularUInt32Field(value: &self.expiry)
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self.serializeType) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self.version) }()
+      case 3: try { try decoder.decodeRepeatedMessageField(value: &self.inputs) }()
+      case 4: try { try decoder.decodeRepeatedMessageField(value: &self.outputs) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self.lockTime) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self.expiry) }()
       default: break
       }
     }
@@ -211,13 +214,16 @@ extension TW_Decred_Proto_TransactionInput: SwiftProtobuf.Message, SwiftProtobuf
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularMessageField(value: &self._previousOutput)
-      case 2: try decoder.decodeSingularUInt32Field(value: &self.sequence)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.valueIn)
-      case 4: try decoder.decodeSingularUInt32Field(value: &self.blockHeight)
-      case 5: try decoder.decodeSingularUInt32Field(value: &self.blockIndex)
-      case 6: try decoder.decodeSingularBytesField(value: &self.script)
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._previousOutput) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self.sequence) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.valueIn) }()
+      case 4: try { try decoder.decodeSingularUInt32Field(value: &self.blockHeight) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self.blockIndex) }()
+      case 6: try { try decoder.decodeSingularBytesField(value: &self.script) }()
       default: break
       }
     }
@@ -267,10 +273,13 @@ extension TW_Decred_Proto_TransactionOutput: SwiftProtobuf.Message, SwiftProtobu
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularInt64Field(value: &self.value)
-      case 2: try decoder.decodeSingularUInt32Field(value: &self.version)
-      case 3: try decoder.decodeSingularBytesField(value: &self.script)
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.value) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self.version) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.script) }()
       default: break
       }
     }
@@ -309,11 +318,14 @@ extension TW_Decred_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularMessageField(value: &self._transaction)
-      case 2: try decoder.decodeSingularBytesField(value: &self.encoded)
-      case 3: try decoder.decodeSingularStringField(value: &self.transactionID)
-      case 4: try decoder.decodeSingularStringField(value: &self.error)
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._transaction) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.transactionID) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.error) }()
       default: break
       }
     }

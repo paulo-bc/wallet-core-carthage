@@ -60,6 +60,14 @@ public struct TW_Ethereum_Proto_Transaction {
     set {transactionOneof = .erc721Transfer(newValue)}
   }
 
+  public var erc1155Transfer: TW_Ethereum_Proto_Transaction.ERC1155Transfer {
+    get {
+      if case .erc1155Transfer(let v)? = transactionOneof {return v}
+      return TW_Ethereum_Proto_Transaction.ERC1155Transfer()
+    }
+    set {transactionOneof = .erc1155Transfer(newValue)}
+  }
+
   public var contractGeneric: TW_Ethereum_Proto_Transaction.ContractGeneric {
     get {
       if case .contractGeneric(let v)? = transactionOneof {return v}
@@ -75,16 +83,39 @@ public struct TW_Ethereum_Proto_Transaction {
     case erc20Transfer(TW_Ethereum_Proto_Transaction.ERC20Transfer)
     case erc20Approve(TW_Ethereum_Proto_Transaction.ERC20Approve)
     case erc721Transfer(TW_Ethereum_Proto_Transaction.ERC721Transfer)
+    case erc1155Transfer(TW_Ethereum_Proto_Transaction.ERC1155Transfer)
     case contractGeneric(TW_Ethereum_Proto_Transaction.ContractGeneric)
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Ethereum_Proto_Transaction.OneOf_TransactionOneof, rhs: TW_Ethereum_Proto_Transaction.OneOf_TransactionOneof) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.transfer(let l), .transfer(let r)): return l == r
-      case (.erc20Transfer(let l), .erc20Transfer(let r)): return l == r
-      case (.erc20Approve(let l), .erc20Approve(let r)): return l == r
-      case (.erc721Transfer(let l), .erc721Transfer(let r)): return l == r
-      case (.contractGeneric(let l), .contractGeneric(let r)): return l == r
+      case (.transfer, .transfer): return {
+        guard case .transfer(let l) = lhs, case .transfer(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.erc20Transfer, .erc20Transfer): return {
+        guard case .erc20Transfer(let l) = lhs, case .erc20Transfer(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.erc20Approve, .erc20Approve): return {
+        guard case .erc20Approve(let l) = lhs, case .erc20Approve(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.erc721Transfer, .erc721Transfer): return {
+        guard case .erc721Transfer(let l) = lhs, case .erc721Transfer(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.erc1155Transfer, .erc1155Transfer): return {
+        guard case .erc1155Transfer(let l) = lhs, case .erc1155Transfer(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.contractGeneric, .contractGeneric): return {
+        guard case .contractGeneric(let l) = lhs, case .contractGeneric(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -98,10 +129,10 @@ public struct TW_Ethereum_Proto_Transaction {
     // methods supported on all messages.
 
     /// Amount to send in wei (256-bit number)
-    public var amount: Data = SwiftProtobuf.Internal.emptyData
+    public var amount: Data = Data()
 
     /// Optional payload data
-    public var data: Data = SwiftProtobuf.Internal.emptyData
+    public var data: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -117,7 +148,7 @@ public struct TW_Ethereum_Proto_Transaction {
     public var to: String = String()
 
     /// Amount to send (256-bit number)
-    public var amount: Data = SwiftProtobuf.Internal.emptyData
+    public var amount: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -133,7 +164,7 @@ public struct TW_Ethereum_Proto_Transaction {
     public var spender: String = String()
 
     /// Amount to send (256-bit number)
-    public var amount: Data = SwiftProtobuf.Internal.emptyData
+    public var amount: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -151,7 +182,30 @@ public struct TW_Ethereum_Proto_Transaction {
     public var to: String = String()
 
     /// ID of the token (256-bit number)
-    public var tokenID: Data = SwiftProtobuf.Internal.emptyData
+    public var tokenID: Data = Data()
+
+    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public init() {}
+  }
+
+  /// ERC1155 NFT transfer transaction
+  public struct ERC1155Transfer {
+    // SwiftProtobuf.Message conformance is added in an extension below. See the
+    // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+    // methods supported on all messages.
+
+    public var from: String = String()
+
+    public var to: String = String()
+
+    /// ID of the token (256-bit number)
+    public var tokenID: Data = Data()
+
+    /// The amount of tokens being transferred
+    public var value: Data = Data()
+
+    public var data: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -165,10 +219,10 @@ public struct TW_Ethereum_Proto_Transaction {
     // methods supported on all messages.
 
     /// Amount to send in wei (256-bit number)
-    public var amount: Data = SwiftProtobuf.Internal.emptyData
+    public var amount: Data = Data()
 
     /// Contract call payload data
-    public var data: Data = SwiftProtobuf.Internal.emptyData
+    public var data: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -185,22 +239,22 @@ public struct TW_Ethereum_Proto_SigningInput {
   // methods supported on all messages.
 
   /// Chain identifier (256-bit number)
-  public var chainID: Data = SwiftProtobuf.Internal.emptyData
+  public var chainID: Data = Data()
 
   /// Nonce (256-bit number)
-  public var nonce: Data = SwiftProtobuf.Internal.emptyData
+  public var nonce: Data = Data()
 
   /// Gas price (256-bit number)
-  public var gasPrice: Data = SwiftProtobuf.Internal.emptyData
+  public var gasPrice: Data = Data()
 
   /// Gas limit (256-bit number)
-  public var gasLimit: Data = SwiftProtobuf.Internal.emptyData
+  public var gasLimit: Data = Data()
 
   /// Recipient's address.
   public var toAddress: String = String()
 
   /// Private key.
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var transaction: TW_Ethereum_Proto_Transaction {
     get {return _transaction ?? TW_Ethereum_Proto_Transaction()}
@@ -225,13 +279,16 @@ public struct TW_Ethereum_Proto_SigningOutput {
   // methods supported on all messages.
 
   /// Signed and encoded transaction bytes.
-  public var encoded: Data = SwiftProtobuf.Internal.emptyData
+  public var encoded: Data = Data()
 
-  public var v: Data = SwiftProtobuf.Internal.emptyData
+  public var v: Data = Data()
 
-  public var r: Data = SwiftProtobuf.Internal.emptyData
+  public var r: Data = Data()
 
-  public var s: Data = SwiftProtobuf.Internal.emptyData
+  public var s: Data = Data()
+
+  /// The payload part, supplied in the input or assembled from input parameters
+  public var data: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -249,13 +306,17 @@ extension TW_Ethereum_Proto_Transaction: SwiftProtobuf.Message, SwiftProtobuf._M
     2: .standard(proto: "erc20_transfer"),
     3: .standard(proto: "erc20_approve"),
     4: .standard(proto: "erc721_transfer"),
-    5: .standard(proto: "contract_generic"),
+    5: .standard(proto: "erc1155_transfer"),
+    6: .standard(proto: "contract_generic"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1:
+      case 1: try {
         var v: TW_Ethereum_Proto_Transaction.Transfer?
         if let current = self.transactionOneof {
           try decoder.handleConflictingOneOf()
@@ -263,7 +324,8 @@ extension TW_Ethereum_Proto_Transaction: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionOneof = .transfer(v)}
-      case 2:
+      }()
+      case 2: try {
         var v: TW_Ethereum_Proto_Transaction.ERC20Transfer?
         if let current = self.transactionOneof {
           try decoder.handleConflictingOneOf()
@@ -271,7 +333,8 @@ extension TW_Ethereum_Proto_Transaction: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionOneof = .erc20Transfer(v)}
-      case 3:
+      }()
+      case 3: try {
         var v: TW_Ethereum_Proto_Transaction.ERC20Approve?
         if let current = self.transactionOneof {
           try decoder.handleConflictingOneOf()
@@ -279,7 +342,8 @@ extension TW_Ethereum_Proto_Transaction: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionOneof = .erc20Approve(v)}
-      case 4:
+      }()
+      case 4: try {
         var v: TW_Ethereum_Proto_Transaction.ERC721Transfer?
         if let current = self.transactionOneof {
           try decoder.handleConflictingOneOf()
@@ -287,7 +351,17 @@ extension TW_Ethereum_Proto_Transaction: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionOneof = .erc721Transfer(v)}
-      case 5:
+      }()
+      case 5: try {
+        var v: TW_Ethereum_Proto_Transaction.ERC1155Transfer?
+        if let current = self.transactionOneof {
+          try decoder.handleConflictingOneOf()
+          if case .erc1155Transfer(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.transactionOneof = .erc1155Transfer(v)}
+      }()
+      case 6: try {
         var v: TW_Ethereum_Proto_Transaction.ContractGeneric?
         if let current = self.transactionOneof {
           try decoder.handleConflictingOneOf()
@@ -295,23 +369,41 @@ extension TW_Ethereum_Proto_Transaction: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionOneof = .contractGeneric(v)}
+      }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.transactionOneof {
-    case .transfer(let v)?:
+    case .transfer?: try {
+      guard case .transfer(let v)? = self.transactionOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    case .erc20Transfer(let v)?:
+    }()
+    case .erc20Transfer?: try {
+      guard case .erc20Transfer(let v)? = self.transactionOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    case .erc20Approve(let v)?:
+    }()
+    case .erc20Approve?: try {
+      guard case .erc20Approve(let v)? = self.transactionOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    case .erc721Transfer(let v)?:
+    }()
+    case .erc721Transfer?: try {
+      guard case .erc721Transfer(let v)? = self.transactionOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    case .contractGeneric(let v)?:
+    }()
+    case .erc1155Transfer?: try {
+      guard case .erc1155Transfer(let v)? = self.transactionOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    }()
+    case .contractGeneric?: try {
+      guard case .contractGeneric(let v)? = self.transactionOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -333,9 +425,12 @@ extension TW_Ethereum_Proto_Transaction.Transfer: SwiftProtobuf.Message, SwiftPr
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.amount)
-      case 2: try decoder.decodeSingularBytesField(value: &self.data)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.amount) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.data) }()
       default: break
       }
     }
@@ -368,9 +463,12 @@ extension TW_Ethereum_Proto_Transaction.ERC20Transfer: SwiftProtobuf.Message, Sw
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.to)
-      case 2: try decoder.decodeSingularBytesField(value: &self.amount)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.to) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.amount) }()
       default: break
       }
     }
@@ -403,9 +501,12 @@ extension TW_Ethereum_Proto_Transaction.ERC20Approve: SwiftProtobuf.Message, Swi
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.spender)
-      case 2: try decoder.decodeSingularBytesField(value: &self.amount)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.spender) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.amount) }()
       default: break
       }
     }
@@ -439,10 +540,13 @@ extension TW_Ethereum_Proto_Transaction.ERC721Transfer: SwiftProtobuf.Message, S
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.from)
-      case 2: try decoder.decodeSingularStringField(value: &self.to)
-      case 3: try decoder.decodeSingularBytesField(value: &self.tokenID)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.from) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.to) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.tokenID) }()
       default: break
       }
     }
@@ -470,6 +574,62 @@ extension TW_Ethereum_Proto_Transaction.ERC721Transfer: SwiftProtobuf.Message, S
   }
 }
 
+extension TW_Ethereum_Proto_Transaction.ERC1155Transfer: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = TW_Ethereum_Proto_Transaction.protoMessageName + ".ERC1155Transfer"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "from"),
+    2: .same(proto: "to"),
+    3: .standard(proto: "token_id"),
+    4: .same(proto: "value"),
+    5: .same(proto: "data"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.from) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.to) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.tokenID) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.value) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.data) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.from.isEmpty {
+      try visitor.visitSingularStringField(value: self.from, fieldNumber: 1)
+    }
+    if !self.to.isEmpty {
+      try visitor.visitSingularStringField(value: self.to, fieldNumber: 2)
+    }
+    if !self.tokenID.isEmpty {
+      try visitor.visitSingularBytesField(value: self.tokenID, fieldNumber: 3)
+    }
+    if !self.value.isEmpty {
+      try visitor.visitSingularBytesField(value: self.value, fieldNumber: 4)
+    }
+    if !self.data.isEmpty {
+      try visitor.visitSingularBytesField(value: self.data, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: TW_Ethereum_Proto_Transaction.ERC1155Transfer, rhs: TW_Ethereum_Proto_Transaction.ERC1155Transfer) -> Bool {
+    if lhs.from != rhs.from {return false}
+    if lhs.to != rhs.to {return false}
+    if lhs.tokenID != rhs.tokenID {return false}
+    if lhs.value != rhs.value {return false}
+    if lhs.data != rhs.data {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension TW_Ethereum_Proto_Transaction.ContractGeneric: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = TW_Ethereum_Proto_Transaction.protoMessageName + ".ContractGeneric"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -479,9 +639,12 @@ extension TW_Ethereum_Proto_Transaction.ContractGeneric: SwiftProtobuf.Message, 
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.amount)
-      case 2: try decoder.decodeSingularBytesField(value: &self.data)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.amount) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.data) }()
       default: break
       }
     }
@@ -519,14 +682,17 @@ extension TW_Ethereum_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.chainID)
-      case 2: try decoder.decodeSingularBytesField(value: &self.nonce)
-      case 3: try decoder.decodeSingularBytesField(value: &self.gasPrice)
-      case 4: try decoder.decodeSingularBytesField(value: &self.gasLimit)
-      case 5: try decoder.decodeSingularStringField(value: &self.toAddress)
-      case 6: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 7: try decoder.decodeSingularMessageField(value: &self._transaction)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.chainID) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.nonce) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.gasPrice) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.gasLimit) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.toAddress) }()
+      case 6: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
+      case 7: try { try decoder.decodeSingularMessageField(value: &self._transaction) }()
       default: break
       }
     }
@@ -577,15 +743,20 @@ extension TW_Ethereum_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf.
     2: .same(proto: "v"),
     3: .same(proto: "r"),
     4: .same(proto: "s"),
+    5: .same(proto: "data"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.encoded)
-      case 2: try decoder.decodeSingularBytesField(value: &self.v)
-      case 3: try decoder.decodeSingularBytesField(value: &self.r)
-      case 4: try decoder.decodeSingularBytesField(value: &self.s)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.v) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.r) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.s) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.data) }()
       default: break
       }
     }
@@ -604,6 +775,9 @@ extension TW_Ethereum_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf.
     if !self.s.isEmpty {
       try visitor.visitSingularBytesField(value: self.s, fieldNumber: 4)
     }
+    if !self.data.isEmpty {
+      try visitor.visitSingularBytesField(value: self.data, fieldNumber: 5)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -612,6 +786,7 @@ extension TW_Ethereum_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf.
     if lhs.v != rhs.v {return false}
     if lhs.r != rhs.r {return false}
     if lhs.s != rhs.s {return false}
+    if lhs.data != rhs.data {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

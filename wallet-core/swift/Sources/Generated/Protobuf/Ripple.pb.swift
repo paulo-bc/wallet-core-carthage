@@ -42,7 +42,7 @@ public struct TW_Ripple_Proto_SigningInput {
 
   public var flags: Int64 = 0
 
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -55,7 +55,7 @@ public struct TW_Ripple_Proto_SigningOutput {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var encoded: Data = SwiftProtobuf.Internal.emptyData
+  public var encoded: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -82,16 +82,19 @@ extension TW_Ripple_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularInt64Field(value: &self.amount)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.fee)
-      case 3: try decoder.decodeSingularInt32Field(value: &self.sequence)
-      case 4: try decoder.decodeSingularInt32Field(value: &self.lastLedgerSequence)
-      case 5: try decoder.decodeSingularStringField(value: &self.account)
-      case 6: try decoder.decodeSingularStringField(value: &self.destination)
-      case 7: try decoder.decodeSingularInt64Field(value: &self.destinationTag)
-      case 8: try decoder.decodeSingularInt64Field(value: &self.flags)
-      case 9: try decoder.decodeSingularBytesField(value: &self.privateKey)
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.amount) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.fee) }()
+      case 3: try { try decoder.decodeSingularInt32Field(value: &self.sequence) }()
+      case 4: try { try decoder.decodeSingularInt32Field(value: &self.lastLedgerSequence) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.account) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.destination) }()
+      case 7: try { try decoder.decodeSingularInt64Field(value: &self.destinationTag) }()
+      case 8: try { try decoder.decodeSingularInt64Field(value: &self.flags) }()
+      case 9: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
       default: break
       }
     }
@@ -151,8 +154,11 @@ extension TW_Ripple_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.encoded)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
       default: break
       }
     }

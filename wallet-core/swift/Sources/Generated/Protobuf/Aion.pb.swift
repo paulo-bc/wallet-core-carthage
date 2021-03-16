@@ -27,25 +27,25 @@ public struct TW_Aion_Proto_SigningInput {
   // methods supported on all messages.
 
   /// Nonce (256-bit number)
-  public var nonce: Data = SwiftProtobuf.Internal.emptyData
+  public var nonce: Data = Data()
 
   /// Gas price (256-bit number)
-  public var gasPrice: Data = SwiftProtobuf.Internal.emptyData
+  public var gasPrice: Data = Data()
 
   /// Gas limit (256-bit number)
-  public var gasLimit: Data = SwiftProtobuf.Internal.emptyData
+  public var gasLimit: Data = Data()
 
   /// Recipient's address.
   public var toAddress: String = String()
 
   /// Amount to send in wei (256-bit number)
-  public var amount: Data = SwiftProtobuf.Internal.emptyData
+  public var amount: Data = Data()
 
   /// Optional payload
-  public var payload: Data = SwiftProtobuf.Internal.emptyData
+  public var payload: Data = Data()
 
   /// Private key.
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   /// Timestamp
   public var timestamp: UInt64 = 0
@@ -62,10 +62,10 @@ public struct TW_Aion_Proto_SigningOutput {
   // methods supported on all messages.
 
   /// Signed and encoded transaction bytes.
-  public var encoded: Data = SwiftProtobuf.Internal.emptyData
+  public var encoded: Data = Data()
 
   /// Signature.
-  public var signature: Data = SwiftProtobuf.Internal.emptyData
+  public var signature: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -91,15 +91,18 @@ extension TW_Aion_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.nonce)
-      case 2: try decoder.decodeSingularBytesField(value: &self.gasPrice)
-      case 3: try decoder.decodeSingularBytesField(value: &self.gasLimit)
-      case 4: try decoder.decodeSingularStringField(value: &self.toAddress)
-      case 5: try decoder.decodeSingularBytesField(value: &self.amount)
-      case 6: try decoder.decodeSingularBytesField(value: &self.payload)
-      case 7: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 8: try decoder.decodeSingularUInt64Field(value: &self.timestamp)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.nonce) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.gasPrice) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.gasLimit) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.toAddress) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.amount) }()
+      case 6: try { try decoder.decodeSingularBytesField(value: &self.payload) }()
+      case 7: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
+      case 8: try { try decoder.decodeSingularUInt64Field(value: &self.timestamp) }()
       default: break
       }
     }
@@ -156,9 +159,12 @@ extension TW_Aion_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.encoded)
-      case 2: try decoder.decodeSingularBytesField(value: &self.signature)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.signature) }()
       default: break
       }
     }

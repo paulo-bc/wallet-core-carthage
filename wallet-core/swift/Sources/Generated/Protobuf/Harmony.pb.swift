@@ -27,10 +27,10 @@ public struct TW_Harmony_Proto_SigningInput {
   // methods supported on all messages.
 
   /// Chain identifier (256-bit number)
-  public var chainID: Data = SwiftProtobuf.Internal.emptyData
+  public var chainID: Data = Data()
 
   /// Private key.
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var messageOneof: TW_Harmony_Proto_SigningInput.OneOf_MessageOneof? = nil
 
@@ -58,9 +58,18 @@ public struct TW_Harmony_Proto_SigningInput {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Harmony_Proto_SigningInput.OneOf_MessageOneof, rhs: TW_Harmony_Proto_SigningInput.OneOf_MessageOneof) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.transactionMessage(let l), .transactionMessage(let r)): return l == r
-      case (.stakingMessage(let l), .stakingMessage(let r)): return l == r
+      case (.transactionMessage, .transactionMessage): return {
+        guard case .transactionMessage(let l) = lhs, case .transactionMessage(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakingMessage, .stakingMessage): return {
+        guard case .stakingMessage(let l) = lhs, case .stakingMessage(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -77,13 +86,13 @@ public struct TW_Harmony_Proto_SigningOutput {
   // methods supported on all messages.
 
   /// Signed and encoded transaction bytes.
-  public var encoded: Data = SwiftProtobuf.Internal.emptyData
+  public var encoded: Data = Data()
 
-  public var v: Data = SwiftProtobuf.Internal.emptyData
+  public var v: Data = Data()
 
-  public var r: Data = SwiftProtobuf.Internal.emptyData
+  public var r: Data = Data()
 
-  public var s: Data = SwiftProtobuf.Internal.emptyData
+  public var s: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -96,28 +105,28 @@ public struct TW_Harmony_Proto_TransactionMessage {
   // methods supported on all messages.
 
   /// Nonce (256-bit number)
-  public var nonce: Data = SwiftProtobuf.Internal.emptyData
+  public var nonce: Data = Data()
 
   /// Gas price (256-bit number)
-  public var gasPrice: Data = SwiftProtobuf.Internal.emptyData
+  public var gasPrice: Data = Data()
 
   /// Gas limit (256-bit number)
-  public var gasLimit: Data = SwiftProtobuf.Internal.emptyData
+  public var gasLimit: Data = Data()
 
   /// Recipient's address.
   public var toAddress: String = String()
 
   /// Amount to send in wei (256-bit number)
-  public var amount: Data = SwiftProtobuf.Internal.emptyData
+  public var amount: Data = Data()
 
   /// Optional payload
-  public var payload: Data = SwiftProtobuf.Internal.emptyData
+  public var payload: Data = Data()
 
   /// From shard ID (256-bit number)
-  public var fromShardID: Data = SwiftProtobuf.Internal.emptyData
+  public var fromShardID: Data = Data()
 
   /// To Shard ID (256-bit number)
-  public var toShardID: Data = SwiftProtobuf.Internal.emptyData
+  public var toShardID: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -130,56 +139,68 @@ public struct TW_Harmony_Proto_StakingMessage {
   // methods supported on all messages.
 
   /// StakeMsg 
-  public var stakeMsg: TW_Harmony_Proto_StakingMessage.OneOf_StakeMsg? = nil
+  public var stakeMsg: OneOf_StakeMsg? {
+    get {return _storage._stakeMsg}
+    set {_uniqueStorage()._stakeMsg = newValue}
+  }
 
   public var createValidatorMessage: TW_Harmony_Proto_DirectiveCreateValidator {
     get {
-      if case .createValidatorMessage(let v)? = stakeMsg {return v}
+      if case .createValidatorMessage(let v)? = _storage._stakeMsg {return v}
       return TW_Harmony_Proto_DirectiveCreateValidator()
     }
-    set {stakeMsg = .createValidatorMessage(newValue)}
+    set {_uniqueStorage()._stakeMsg = .createValidatorMessage(newValue)}
   }
 
   public var editValidatorMessage: TW_Harmony_Proto_DirectiveEditValidator {
     get {
-      if case .editValidatorMessage(let v)? = stakeMsg {return v}
+      if case .editValidatorMessage(let v)? = _storage._stakeMsg {return v}
       return TW_Harmony_Proto_DirectiveEditValidator()
     }
-    set {stakeMsg = .editValidatorMessage(newValue)}
+    set {_uniqueStorage()._stakeMsg = .editValidatorMessage(newValue)}
   }
 
   public var delegateMessage: TW_Harmony_Proto_DirectiveDelegate {
     get {
-      if case .delegateMessage(let v)? = stakeMsg {return v}
+      if case .delegateMessage(let v)? = _storage._stakeMsg {return v}
       return TW_Harmony_Proto_DirectiveDelegate()
     }
-    set {stakeMsg = .delegateMessage(newValue)}
+    set {_uniqueStorage()._stakeMsg = .delegateMessage(newValue)}
   }
 
   public var undelegateMessage: TW_Harmony_Proto_DirectiveUndelegate {
     get {
-      if case .undelegateMessage(let v)? = stakeMsg {return v}
+      if case .undelegateMessage(let v)? = _storage._stakeMsg {return v}
       return TW_Harmony_Proto_DirectiveUndelegate()
     }
-    set {stakeMsg = .undelegateMessage(newValue)}
+    set {_uniqueStorage()._stakeMsg = .undelegateMessage(newValue)}
   }
 
   public var collectRewards: TW_Harmony_Proto_DirectiveCollectRewards {
     get {
-      if case .collectRewards(let v)? = stakeMsg {return v}
+      if case .collectRewards(let v)? = _storage._stakeMsg {return v}
       return TW_Harmony_Proto_DirectiveCollectRewards()
     }
-    set {stakeMsg = .collectRewards(newValue)}
+    set {_uniqueStorage()._stakeMsg = .collectRewards(newValue)}
   }
 
   /// Nonce (256-bit number)
-  public var nonce: Data = SwiftProtobuf.Internal.emptyData
+  public var nonce: Data {
+    get {return _storage._nonce}
+    set {_uniqueStorage()._nonce = newValue}
+  }
 
   /// Gas price (256-bit number)
-  public var gasPrice: Data = SwiftProtobuf.Internal.emptyData
+  public var gasPrice: Data {
+    get {return _storage._gasPrice}
+    set {_uniqueStorage()._gasPrice = newValue}
+  }
 
   /// Gas limit (256-bit number)
-  public var gasLimit: Data = SwiftProtobuf.Internal.emptyData
+  public var gasLimit: Data {
+    get {return _storage._gasLimit}
+    set {_uniqueStorage()._gasLimit = newValue}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -193,12 +214,30 @@ public struct TW_Harmony_Proto_StakingMessage {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Harmony_Proto_StakingMessage.OneOf_StakeMsg, rhs: TW_Harmony_Proto_StakingMessage.OneOf_StakeMsg) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.createValidatorMessage(let l), .createValidatorMessage(let r)): return l == r
-      case (.editValidatorMessage(let l), .editValidatorMessage(let r)): return l == r
-      case (.delegateMessage(let l), .delegateMessage(let r)): return l == r
-      case (.undelegateMessage(let l), .undelegateMessage(let r)): return l == r
-      case (.collectRewards(let l), .collectRewards(let r)): return l == r
+      case (.createValidatorMessage, .createValidatorMessage): return {
+        guard case .createValidatorMessage(let l) = lhs, case .createValidatorMessage(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.editValidatorMessage, .editValidatorMessage): return {
+        guard case .editValidatorMessage(let l) = lhs, case .editValidatorMessage(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.delegateMessage, .delegateMessage): return {
+        guard case .delegateMessage(let l) = lhs, case .delegateMessage(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.undelegateMessage, .undelegateMessage): return {
+        guard case .undelegateMessage(let l) = lhs, case .undelegateMessage(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.collectRewards, .collectRewards): return {
+        guard case .collectRewards(let l) = lhs, case .collectRewards(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -206,6 +245,8 @@ public struct TW_Harmony_Proto_StakingMessage {
   }
 
   public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 public struct TW_Harmony_Proto_Description {
@@ -233,9 +274,9 @@ public struct TW_Harmony_Proto_Decimal {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var value: Data = SwiftProtobuf.Internal.emptyData
+  public var value: Data = Data()
 
-  public var precision: Data = SwiftProtobuf.Internal.emptyData
+  public var precision: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -288,42 +329,59 @@ public struct TW_Harmony_Proto_DirectiveCreateValidator {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var validatorAddress: String = String()
+  public var validatorAddress: String {
+    get {return _storage._validatorAddress}
+    set {_uniqueStorage()._validatorAddress = newValue}
+  }
 
   public var description_p: TW_Harmony_Proto_Description {
-    get {return _description_p ?? TW_Harmony_Proto_Description()}
-    set {_description_p = newValue}
+    get {return _storage._description_p ?? TW_Harmony_Proto_Description()}
+    set {_uniqueStorage()._description_p = newValue}
   }
   /// Returns true if `description_p` has been explicitly set.
-  public var hasDescription_p: Bool {return self._description_p != nil}
+  public var hasDescription_p: Bool {return _storage._description_p != nil}
   /// Clears the value of `description_p`. Subsequent reads from it will return its default value.
-  public mutating func clearDescription_p() {self._description_p = nil}
+  public mutating func clearDescription_p() {_uniqueStorage()._description_p = nil}
 
   public var commissionRates: TW_Harmony_Proto_CommissionRate {
-    get {return _commissionRates ?? TW_Harmony_Proto_CommissionRate()}
-    set {_commissionRates = newValue}
+    get {return _storage._commissionRates ?? TW_Harmony_Proto_CommissionRate()}
+    set {_uniqueStorage()._commissionRates = newValue}
   }
   /// Returns true if `commissionRates` has been explicitly set.
-  public var hasCommissionRates: Bool {return self._commissionRates != nil}
+  public var hasCommissionRates: Bool {return _storage._commissionRates != nil}
   /// Clears the value of `commissionRates`. Subsequent reads from it will return its default value.
-  public mutating func clearCommissionRates() {self._commissionRates = nil}
+  public mutating func clearCommissionRates() {_uniqueStorage()._commissionRates = nil}
 
-  public var minSelfDelegation: Data = SwiftProtobuf.Internal.emptyData
+  public var minSelfDelegation: Data {
+    get {return _storage._minSelfDelegation}
+    set {_uniqueStorage()._minSelfDelegation = newValue}
+  }
 
-  public var maxTotalDelegation: Data = SwiftProtobuf.Internal.emptyData
+  public var maxTotalDelegation: Data {
+    get {return _storage._maxTotalDelegation}
+    set {_uniqueStorage()._maxTotalDelegation = newValue}
+  }
 
-  public var slotPubKeys: [Data] = []
+  public var slotPubKeys: [Data] {
+    get {return _storage._slotPubKeys}
+    set {_uniqueStorage()._slotPubKeys = newValue}
+  }
 
-  public var slotKeySigs: [Data] = []
+  public var slotKeySigs: [Data] {
+    get {return _storage._slotKeySigs}
+    set {_uniqueStorage()._slotKeySigs = newValue}
+  }
 
-  public var amount: Data = SwiftProtobuf.Internal.emptyData
+  public var amount: Data {
+    get {return _storage._amount}
+    set {_uniqueStorage()._amount = newValue}
+  }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _description_p: TW_Harmony_Proto_Description? = nil
-  fileprivate var _commissionRates: TW_Harmony_Proto_CommissionRate? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 public struct TW_Harmony_Proto_DirectiveEditValidator {
@@ -351,17 +409,17 @@ public struct TW_Harmony_Proto_DirectiveEditValidator {
   /// Clears the value of `commissionRate`. Subsequent reads from it will return its default value.
   public mutating func clearCommissionRate() {self._commissionRate = nil}
 
-  public var minSelfDelegation: Data = SwiftProtobuf.Internal.emptyData
+  public var minSelfDelegation: Data = Data()
 
-  public var maxTotalDelegation: Data = SwiftProtobuf.Internal.emptyData
+  public var maxTotalDelegation: Data = Data()
 
-  public var slotKeyToRemove: Data = SwiftProtobuf.Internal.emptyData
+  public var slotKeyToRemove: Data = Data()
 
-  public var slotKeyToAdd: Data = SwiftProtobuf.Internal.emptyData
+  public var slotKeyToAdd: Data = Data()
 
-  public var slotKeyToAddSig: Data = SwiftProtobuf.Internal.emptyData
+  public var slotKeyToAddSig: Data = Data()
 
-  public var active: Data = SwiftProtobuf.Internal.emptyData
+  public var active: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -380,7 +438,7 @@ public struct TW_Harmony_Proto_DirectiveDelegate {
 
   public var validatorAddress: String = String()
 
-  public var amount: Data = SwiftProtobuf.Internal.emptyData
+  public var amount: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -396,7 +454,7 @@ public struct TW_Harmony_Proto_DirectiveUndelegate {
 
   public var validatorAddress: String = String()
 
-  public var amount: Data = SwiftProtobuf.Internal.emptyData
+  public var amount: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -430,10 +488,13 @@ extension TW_Harmony_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.chainID)
-      case 2: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 3:
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.chainID) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
+      case 3: try {
         var v: TW_Harmony_Proto_TransactionMessage?
         if let current = self.messageOneof {
           try decoder.handleConflictingOneOf()
@@ -441,7 +502,8 @@ extension TW_Harmony_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.messageOneof = .transactionMessage(v)}
-      case 4:
+      }()
+      case 4: try {
         var v: TW_Harmony_Proto_StakingMessage?
         if let current = self.messageOneof {
           try decoder.handleConflictingOneOf()
@@ -449,6 +511,7 @@ extension TW_Harmony_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.messageOneof = .stakingMessage(v)}
+      }()
       default: break
       }
     }
@@ -461,11 +524,18 @@ extension TW_Harmony_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
     if !self.privateKey.isEmpty {
       try visitor.visitSingularBytesField(value: self.privateKey, fieldNumber: 2)
     }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.messageOneof {
-    case .transactionMessage(let v)?:
+    case .transactionMessage?: try {
+      guard case .transactionMessage(let v)? = self.messageOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    case .stakingMessage(let v)?:
+    }()
+    case .stakingMessage?: try {
+      guard case .stakingMessage(let v)? = self.messageOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -491,11 +561,14 @@ extension TW_Harmony_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.encoded)
-      case 2: try decoder.decodeSingularBytesField(value: &self.v)
-      case 3: try decoder.decodeSingularBytesField(value: &self.r)
-      case 4: try decoder.decodeSingularBytesField(value: &self.s)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.v) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.r) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.s) }()
       default: break
       }
     }
@@ -542,15 +615,18 @@ extension TW_Harmony_Proto_TransactionMessage: SwiftProtobuf.Message, SwiftProto
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.nonce)
-      case 2: try decoder.decodeSingularBytesField(value: &self.gasPrice)
-      case 3: try decoder.decodeSingularBytesField(value: &self.gasLimit)
-      case 4: try decoder.decodeSingularStringField(value: &self.toAddress)
-      case 5: try decoder.decodeSingularBytesField(value: &self.amount)
-      case 6: try decoder.decodeSingularBytesField(value: &self.payload)
-      case 7: try decoder.decodeSingularBytesField(value: &self.fromShardID)
-      case 8: try decoder.decodeSingularBytesField(value: &self.toShardID)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.nonce) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.gasPrice) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.gasLimit) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.toAddress) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.amount) }()
+      case 6: try { try decoder.decodeSingularBytesField(value: &self.payload) }()
+      case 7: try { try decoder.decodeSingularBytesField(value: &self.fromShardID) }()
+      case 8: try { try decoder.decodeSingularBytesField(value: &self.toShardID) }()
       default: break
       }
     }
@@ -611,88 +687,147 @@ extension TW_Harmony_Proto_StakingMessage: SwiftProtobuf.Message, SwiftProtobuf.
     8: .standard(proto: "gas_limit"),
   ]
 
+  fileprivate class _StorageClass {
+    var _stakeMsg: TW_Harmony_Proto_StakingMessage.OneOf_StakeMsg?
+    var _nonce: Data = Data()
+    var _gasPrice: Data = Data()
+    var _gasLimit: Data = Data()
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _stakeMsg = source._stakeMsg
+      _nonce = source._nonce
+      _gasPrice = source._gasPrice
+      _gasLimit = source._gasLimit
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1:
-        var v: TW_Harmony_Proto_DirectiveCreateValidator?
-        if let current = self.stakeMsg {
-          try decoder.handleConflictingOneOf()
-          if case .createValidatorMessage(let m) = current {v = m}
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try {
+          var v: TW_Harmony_Proto_DirectiveCreateValidator?
+          if let current = _storage._stakeMsg {
+            try decoder.handleConflictingOneOf()
+            if case .createValidatorMessage(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._stakeMsg = .createValidatorMessage(v)}
+        }()
+        case 2: try {
+          var v: TW_Harmony_Proto_DirectiveEditValidator?
+          if let current = _storage._stakeMsg {
+            try decoder.handleConflictingOneOf()
+            if case .editValidatorMessage(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._stakeMsg = .editValidatorMessage(v)}
+        }()
+        case 3: try {
+          var v: TW_Harmony_Proto_DirectiveDelegate?
+          if let current = _storage._stakeMsg {
+            try decoder.handleConflictingOneOf()
+            if case .delegateMessage(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._stakeMsg = .delegateMessage(v)}
+        }()
+        case 4: try {
+          var v: TW_Harmony_Proto_DirectiveUndelegate?
+          if let current = _storage._stakeMsg {
+            try decoder.handleConflictingOneOf()
+            if case .undelegateMessage(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._stakeMsg = .undelegateMessage(v)}
+        }()
+        case 5: try {
+          var v: TW_Harmony_Proto_DirectiveCollectRewards?
+          if let current = _storage._stakeMsg {
+            try decoder.handleConflictingOneOf()
+            if case .collectRewards(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {_storage._stakeMsg = .collectRewards(v)}
+        }()
+        case 6: try { try decoder.decodeSingularBytesField(value: &_storage._nonce) }()
+        case 7: try { try decoder.decodeSingularBytesField(value: &_storage._gasPrice) }()
+        case 8: try { try decoder.decodeSingularBytesField(value: &_storage._gasLimit) }()
+        default: break
         }
-        try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.stakeMsg = .createValidatorMessage(v)}
-      case 2:
-        var v: TW_Harmony_Proto_DirectiveEditValidator?
-        if let current = self.stakeMsg {
-          try decoder.handleConflictingOneOf()
-          if case .editValidatorMessage(let m) = current {v = m}
-        }
-        try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.stakeMsg = .editValidatorMessage(v)}
-      case 3:
-        var v: TW_Harmony_Proto_DirectiveDelegate?
-        if let current = self.stakeMsg {
-          try decoder.handleConflictingOneOf()
-          if case .delegateMessage(let m) = current {v = m}
-        }
-        try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.stakeMsg = .delegateMessage(v)}
-      case 4:
-        var v: TW_Harmony_Proto_DirectiveUndelegate?
-        if let current = self.stakeMsg {
-          try decoder.handleConflictingOneOf()
-          if case .undelegateMessage(let m) = current {v = m}
-        }
-        try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.stakeMsg = .undelegateMessage(v)}
-      case 5:
-        var v: TW_Harmony_Proto_DirectiveCollectRewards?
-        if let current = self.stakeMsg {
-          try decoder.handleConflictingOneOf()
-          if case .collectRewards(let m) = current {v = m}
-        }
-        try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {self.stakeMsg = .collectRewards(v)}
-      case 6: try decoder.decodeSingularBytesField(value: &self.nonce)
-      case 7: try decoder.decodeSingularBytesField(value: &self.gasPrice)
-      case 8: try decoder.decodeSingularBytesField(value: &self.gasLimit)
-      default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    switch self.stakeMsg {
-    case .createValidatorMessage(let v)?:
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    case .editValidatorMessage(let v)?:
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    case .delegateMessage(let v)?:
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    case .undelegateMessage(let v)?:
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    case .collectRewards(let v)?:
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-    case nil: break
-    }
-    if !self.nonce.isEmpty {
-      try visitor.visitSingularBytesField(value: self.nonce, fieldNumber: 6)
-    }
-    if !self.gasPrice.isEmpty {
-      try visitor.visitSingularBytesField(value: self.gasPrice, fieldNumber: 7)
-    }
-    if !self.gasLimit.isEmpty {
-      try visitor.visitSingularBytesField(value: self.gasLimit, fieldNumber: 8)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch _storage._stakeMsg {
+      case .createValidatorMessage?: try {
+        guard case .createValidatorMessage(let v)? = _storage._stakeMsg else { preconditionFailure() }
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      }()
+      case .editValidatorMessage?: try {
+        guard case .editValidatorMessage(let v)? = _storage._stakeMsg else { preconditionFailure() }
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }()
+      case .delegateMessage?: try {
+        guard case .delegateMessage(let v)? = _storage._stakeMsg else { preconditionFailure() }
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      }()
+      case .undelegateMessage?: try {
+        guard case .undelegateMessage(let v)? = _storage._stakeMsg else { preconditionFailure() }
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      }()
+      case .collectRewards?: try {
+        guard case .collectRewards(let v)? = _storage._stakeMsg else { preconditionFailure() }
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      }()
+      case nil: break
+      }
+      if !_storage._nonce.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._nonce, fieldNumber: 6)
+      }
+      if !_storage._gasPrice.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._gasPrice, fieldNumber: 7)
+      }
+      if !_storage._gasLimit.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._gasLimit, fieldNumber: 8)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: TW_Harmony_Proto_StakingMessage, rhs: TW_Harmony_Proto_StakingMessage) -> Bool {
-    if lhs.stakeMsg != rhs.stakeMsg {return false}
-    if lhs.nonce != rhs.nonce {return false}
-    if lhs.gasPrice != rhs.gasPrice {return false}
-    if lhs.gasLimit != rhs.gasLimit {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._stakeMsg != rhs_storage._stakeMsg {return false}
+        if _storage._nonce != rhs_storage._nonce {return false}
+        if _storage._gasPrice != rhs_storage._gasPrice {return false}
+        if _storage._gasLimit != rhs_storage._gasLimit {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -710,12 +845,15 @@ extension TW_Harmony_Proto_Description: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.name)
-      case 2: try decoder.decodeSingularStringField(value: &self.identity)
-      case 3: try decoder.decodeSingularStringField(value: &self.website)
-      case 4: try decoder.decodeSingularStringField(value: &self.securityContact)
-      case 5: try decoder.decodeSingularStringField(value: &self.details)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.identity) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.website) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.securityContact) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.details) }()
       default: break
       }
     }
@@ -760,9 +898,12 @@ extension TW_Harmony_Proto_Decimal: SwiftProtobuf.Message, SwiftProtobuf._Messag
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.value)
-      case 2: try decoder.decodeSingularBytesField(value: &self.precision)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.value) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.precision) }()
       default: break
       }
     }
@@ -796,10 +937,13 @@ extension TW_Harmony_Proto_CommissionRate: SwiftProtobuf.Message, SwiftProtobuf.
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularMessageField(value: &self._rate)
-      case 2: try decoder.decodeSingularMessageField(value: &self._maxRate)
-      case 3: try decoder.decodeSingularMessageField(value: &self._maxChangeRate)
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._rate) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._maxRate) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._maxChangeRate) }()
       default: break
       }
     }
@@ -840,59 +984,108 @@ extension TW_Harmony_Proto_DirectiveCreateValidator: SwiftProtobuf.Message, Swif
     8: .same(proto: "amount"),
   ]
 
+  fileprivate class _StorageClass {
+    var _validatorAddress: String = String()
+    var _description_p: TW_Harmony_Proto_Description? = nil
+    var _commissionRates: TW_Harmony_Proto_CommissionRate? = nil
+    var _minSelfDelegation: Data = Data()
+    var _maxTotalDelegation: Data = Data()
+    var _slotPubKeys: [Data] = []
+    var _slotKeySigs: [Data] = []
+    var _amount: Data = Data()
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _validatorAddress = source._validatorAddress
+      _description_p = source._description_p
+      _commissionRates = source._commissionRates
+      _minSelfDelegation = source._minSelfDelegation
+      _maxTotalDelegation = source._maxTotalDelegation
+      _slotPubKeys = source._slotPubKeys
+      _slotKeySigs = source._slotKeySigs
+      _amount = source._amount
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.validatorAddress)
-      case 2: try decoder.decodeSingularMessageField(value: &self._description_p)
-      case 3: try decoder.decodeSingularMessageField(value: &self._commissionRates)
-      case 4: try decoder.decodeSingularBytesField(value: &self.minSelfDelegation)
-      case 5: try decoder.decodeSingularBytesField(value: &self.maxTotalDelegation)
-      case 6: try decoder.decodeRepeatedBytesField(value: &self.slotPubKeys)
-      case 7: try decoder.decodeRepeatedBytesField(value: &self.slotKeySigs)
-      case 8: try decoder.decodeSingularBytesField(value: &self.amount)
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularStringField(value: &_storage._validatorAddress) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._description_p) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._commissionRates) }()
+        case 4: try { try decoder.decodeSingularBytesField(value: &_storage._minSelfDelegation) }()
+        case 5: try { try decoder.decodeSingularBytesField(value: &_storage._maxTotalDelegation) }()
+        case 6: try { try decoder.decodeRepeatedBytesField(value: &_storage._slotPubKeys) }()
+        case 7: try { try decoder.decodeRepeatedBytesField(value: &_storage._slotKeySigs) }()
+        case 8: try { try decoder.decodeSingularBytesField(value: &_storage._amount) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.validatorAddress.isEmpty {
-      try visitor.visitSingularStringField(value: self.validatorAddress, fieldNumber: 1)
-    }
-    if let v = self._description_p {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    }
-    if let v = self._commissionRates {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    }
-    if !self.minSelfDelegation.isEmpty {
-      try visitor.visitSingularBytesField(value: self.minSelfDelegation, fieldNumber: 4)
-    }
-    if !self.maxTotalDelegation.isEmpty {
-      try visitor.visitSingularBytesField(value: self.maxTotalDelegation, fieldNumber: 5)
-    }
-    if !self.slotPubKeys.isEmpty {
-      try visitor.visitRepeatedBytesField(value: self.slotPubKeys, fieldNumber: 6)
-    }
-    if !self.slotKeySigs.isEmpty {
-      try visitor.visitRepeatedBytesField(value: self.slotKeySigs, fieldNumber: 7)
-    }
-    if !self.amount.isEmpty {
-      try visitor.visitSingularBytesField(value: self.amount, fieldNumber: 8)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._validatorAddress.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._validatorAddress, fieldNumber: 1)
+      }
+      if let v = _storage._description_p {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+      if let v = _storage._commissionRates {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      }
+      if !_storage._minSelfDelegation.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._minSelfDelegation, fieldNumber: 4)
+      }
+      if !_storage._maxTotalDelegation.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._maxTotalDelegation, fieldNumber: 5)
+      }
+      if !_storage._slotPubKeys.isEmpty {
+        try visitor.visitRepeatedBytesField(value: _storage._slotPubKeys, fieldNumber: 6)
+      }
+      if !_storage._slotKeySigs.isEmpty {
+        try visitor.visitRepeatedBytesField(value: _storage._slotKeySigs, fieldNumber: 7)
+      }
+      if !_storage._amount.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._amount, fieldNumber: 8)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: TW_Harmony_Proto_DirectiveCreateValidator, rhs: TW_Harmony_Proto_DirectiveCreateValidator) -> Bool {
-    if lhs.validatorAddress != rhs.validatorAddress {return false}
-    if lhs._description_p != rhs._description_p {return false}
-    if lhs._commissionRates != rhs._commissionRates {return false}
-    if lhs.minSelfDelegation != rhs.minSelfDelegation {return false}
-    if lhs.maxTotalDelegation != rhs.maxTotalDelegation {return false}
-    if lhs.slotPubKeys != rhs.slotPubKeys {return false}
-    if lhs.slotKeySigs != rhs.slotKeySigs {return false}
-    if lhs.amount != rhs.amount {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._validatorAddress != rhs_storage._validatorAddress {return false}
+        if _storage._description_p != rhs_storage._description_p {return false}
+        if _storage._commissionRates != rhs_storage._commissionRates {return false}
+        if _storage._minSelfDelegation != rhs_storage._minSelfDelegation {return false}
+        if _storage._maxTotalDelegation != rhs_storage._maxTotalDelegation {return false}
+        if _storage._slotPubKeys != rhs_storage._slotPubKeys {return false}
+        if _storage._slotKeySigs != rhs_storage._slotKeySigs {return false}
+        if _storage._amount != rhs_storage._amount {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -914,16 +1107,19 @@ extension TW_Harmony_Proto_DirectiveEditValidator: SwiftProtobuf.Message, SwiftP
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.validatorAddress)
-      case 2: try decoder.decodeSingularMessageField(value: &self._description_p)
-      case 3: try decoder.decodeSingularMessageField(value: &self._commissionRate)
-      case 4: try decoder.decodeSingularBytesField(value: &self.minSelfDelegation)
-      case 5: try decoder.decodeSingularBytesField(value: &self.maxTotalDelegation)
-      case 6: try decoder.decodeSingularBytesField(value: &self.slotKeyToRemove)
-      case 7: try decoder.decodeSingularBytesField(value: &self.slotKeyToAdd)
-      case 8: try decoder.decodeSingularBytesField(value: &self.slotKeyToAddSig)
-      case 9: try decoder.decodeSingularBytesField(value: &self.active)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.validatorAddress) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._description_p) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._commissionRate) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.minSelfDelegation) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.maxTotalDelegation) }()
+      case 6: try { try decoder.decodeSingularBytesField(value: &self.slotKeyToRemove) }()
+      case 7: try { try decoder.decodeSingularBytesField(value: &self.slotKeyToAdd) }()
+      case 8: try { try decoder.decodeSingularBytesField(value: &self.slotKeyToAddSig) }()
+      case 9: try { try decoder.decodeSingularBytesField(value: &self.active) }()
       default: break
       }
     }
@@ -985,10 +1181,13 @@ extension TW_Harmony_Proto_DirectiveDelegate: SwiftProtobuf.Message, SwiftProtob
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.delegatorAddress)
-      case 2: try decoder.decodeSingularStringField(value: &self.validatorAddress)
-      case 3: try decoder.decodeSingularBytesField(value: &self.amount)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.delegatorAddress) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.validatorAddress) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.amount) }()
       default: break
       }
     }
@@ -1026,10 +1225,13 @@ extension TW_Harmony_Proto_DirectiveUndelegate: SwiftProtobuf.Message, SwiftProt
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.delegatorAddress)
-      case 2: try decoder.decodeSingularStringField(value: &self.validatorAddress)
-      case 3: try decoder.decodeSingularBytesField(value: &self.amount)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.delegatorAddress) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.validatorAddress) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.amount) }()
       default: break
       }
     }
@@ -1065,8 +1267,11 @@ extension TW_Harmony_Proto_DirectiveCollectRewards: SwiftProtobuf.Message, Swift
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.delegatorAddress)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.delegatorAddress) }()
       default: break
       }
     }

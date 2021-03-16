@@ -36,7 +36,7 @@ public struct TW_Tezos_Proto_SigningInput {
   /// Clears the value of `operationList`. Subsequent reads from it will return its default value.
   public mutating func clearOperationList() {self._operationList = nil}
 
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -52,7 +52,7 @@ public struct TW_Tezos_Proto_SigningOutput {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var encoded: Data = SwiftProtobuf.Internal.emptyData
+  public var encoded: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -131,10 +131,22 @@ public struct TW_Tezos_Proto_Operation {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Tezos_Proto_Operation.OneOf_OperationData, rhs: TW_Tezos_Proto_Operation.OneOf_OperationData) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.revealOperationData(let l), .revealOperationData(let r)): return l == r
-      case (.transactionOperationData(let l), .transactionOperationData(let r)): return l == r
-      case (.delegationOperationData(let l), .delegationOperationData(let r)): return l == r
+      case (.revealOperationData, .revealOperationData): return {
+        guard case .revealOperationData(let l) = lhs, case .revealOperationData(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.transactionOperationData, .transactionOperationData): return {
+        guard case .transactionOperationData(let l) = lhs, case .transactionOperationData(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.delegationOperationData, .delegationOperationData): return {
+        guard case .delegationOperationData(let l) = lhs, case .delegationOperationData(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -217,7 +229,7 @@ public struct TW_Tezos_Proto_RevealOperationData {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var publicKey: Data = SwiftProtobuf.Internal.emptyData
+  public var publicKey: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -251,9 +263,12 @@ extension TW_Tezos_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularMessageField(value: &self._operationList)
-      case 2: try decoder.decodeSingularBytesField(value: &self.privateKey)
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._operationList) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
       default: break
       }
     }
@@ -285,8 +300,11 @@ extension TW_Tezos_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.encoded)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
       default: break
       }
     }
@@ -315,9 +333,12 @@ extension TW_Tezos_Proto_OperationList: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.branch)
-      case 2: try decoder.decodeRepeatedMessageField(value: &self.operations)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.branch) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.operations) }()
       default: break
       }
     }
@@ -357,14 +378,17 @@ extension TW_Tezos_Proto_Operation: SwiftProtobuf.Message, SwiftProtobuf._Messag
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularInt64Field(value: &self.counter)
-      case 2: try decoder.decodeSingularStringField(value: &self.source)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.fee)
-      case 4: try decoder.decodeSingularInt64Field(value: &self.gasLimit)
-      case 5: try decoder.decodeSingularInt64Field(value: &self.storageLimit)
-      case 7: try decoder.decodeSingularEnumField(value: &self.kind)
-      case 8:
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.counter) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.source) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.fee) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.gasLimit) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.storageLimit) }()
+      case 7: try { try decoder.decodeSingularEnumField(value: &self.kind) }()
+      case 8: try {
         var v: TW_Tezos_Proto_RevealOperationData?
         if let current = self.operationData {
           try decoder.handleConflictingOneOf()
@@ -372,7 +396,8 @@ extension TW_Tezos_Proto_Operation: SwiftProtobuf.Message, SwiftProtobuf._Messag
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.operationData = .revealOperationData(v)}
-      case 9:
+      }()
+      case 9: try {
         var v: TW_Tezos_Proto_TransactionOperationData?
         if let current = self.operationData {
           try decoder.handleConflictingOneOf()
@@ -380,7 +405,8 @@ extension TW_Tezos_Proto_Operation: SwiftProtobuf.Message, SwiftProtobuf._Messag
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.operationData = .transactionOperationData(v)}
-      case 11:
+      }()
+      case 11: try {
         var v: TW_Tezos_Proto_DelegationOperationData?
         if let current = self.operationData {
           try decoder.handleConflictingOneOf()
@@ -388,6 +414,7 @@ extension TW_Tezos_Proto_Operation: SwiftProtobuf.Message, SwiftProtobuf._Messag
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.operationData = .delegationOperationData(v)}
+      }()
       default: break
       }
     }
@@ -412,13 +439,22 @@ extension TW_Tezos_Proto_Operation: SwiftProtobuf.Message, SwiftProtobuf._Messag
     if self.kind != .endorsement {
       try visitor.visitSingularEnumField(value: self.kind, fieldNumber: 7)
     }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.operationData {
-    case .revealOperationData(let v)?:
+    case .revealOperationData?: try {
+      guard case .revealOperationData(let v)? = self.operationData else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
-    case .transactionOperationData(let v)?:
+    }()
+    case .transactionOperationData?: try {
+      guard case .transactionOperationData(let v)? = self.operationData else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
-    case .delegationOperationData(let v)?:
+    }()
+    case .delegationOperationData?: try {
+      guard case .delegationOperationData(let v)? = self.operationData else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -455,9 +491,12 @@ extension TW_Tezos_Proto_TransactionOperationData: SwiftProtobuf.Message, SwiftP
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.destination)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.amount)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.destination) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.amount) }()
       default: break
       }
     }
@@ -489,8 +528,11 @@ extension TW_Tezos_Proto_RevealOperationData: SwiftProtobuf.Message, SwiftProtob
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.publicKey)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.publicKey) }()
       default: break
       }
     }
@@ -518,8 +560,11 @@ extension TW_Tezos_Proto_DelegationOperationData: SwiftProtobuf.Message, SwiftPr
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.delegate)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.delegate) }()
       default: break
       }
     }

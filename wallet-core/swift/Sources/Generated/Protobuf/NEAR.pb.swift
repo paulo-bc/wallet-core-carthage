@@ -27,7 +27,7 @@ public struct TW_NEAR_Proto_PublicKey {
 
   public var keyType: UInt32 = 0
 
-  public var data: Data = SwiftProtobuf.Internal.emptyData
+  public var data: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -40,7 +40,7 @@ public struct TW_NEAR_Proto_FunctionCallPermission {
   // methods supported on all messages.
 
   /// uint128 / little endian byte order
-  public var allowance: Data = SwiftProtobuf.Internal.emptyData
+  public var allowance: Data = Data()
 
   public var receiverID: String = String()
 
@@ -92,9 +92,18 @@ public struct TW_NEAR_Proto_AccessKey {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_NEAR_Proto_AccessKey.OneOf_Permission, rhs: TW_NEAR_Proto_AccessKey.OneOf_Permission) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.functionCall(let l), .functionCall(let r)): return l == r
-      case (.fullAccess(let l), .fullAccess(let r)): return l == r
+      case (.functionCall, .functionCall): return {
+        guard case .functionCall(let l) = lhs, case .functionCall(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.fullAccess, .fullAccess): return {
+        guard case .fullAccess(let l) = lhs, case .fullAccess(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -119,7 +128,7 @@ public struct TW_NEAR_Proto_DeployContract {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var code: Data = SwiftProtobuf.Internal.emptyData
+  public var code: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -131,14 +140,14 @@ public struct TW_NEAR_Proto_FunctionCall {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var methodName: Data = SwiftProtobuf.Internal.emptyData
+  public var methodName: Data = Data()
 
-  public var args: Data = SwiftProtobuf.Internal.emptyData
+  public var args: Data = Data()
 
   public var gas: UInt64 = 0
 
   /// uint128 / little endian byte order
-  public var deposit: Data = SwiftProtobuf.Internal.emptyData
+  public var deposit: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -151,7 +160,7 @@ public struct TW_NEAR_Proto_Transfer {
   // methods supported on all messages.
 
   /// uint128 / little endian byte order
-  public var deposit: Data = SwiftProtobuf.Internal.emptyData
+  public var deposit: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -164,7 +173,7 @@ public struct TW_NEAR_Proto_Stake {
   // methods supported on all messages.
 
   /// uint128 / little endian byte order
-  public var stake: Data = SwiftProtobuf.Internal.emptyData
+  public var stake: Data = Data()
 
   public var publicKey: String = String()
 
@@ -322,15 +331,42 @@ public struct TW_NEAR_Proto_Action {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_NEAR_Proto_Action.OneOf_Payload, rhs: TW_NEAR_Proto_Action.OneOf_Payload) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.createAccount(let l), .createAccount(let r)): return l == r
-      case (.deployContract(let l), .deployContract(let r)): return l == r
-      case (.functionCall(let l), .functionCall(let r)): return l == r
-      case (.transfer(let l), .transfer(let r)): return l == r
-      case (.stake(let l), .stake(let r)): return l == r
-      case (.addKey(let l), .addKey(let r)): return l == r
-      case (.deleteKey(let l), .deleteKey(let r)): return l == r
-      case (.deleteAccount(let l), .deleteAccount(let r)): return l == r
+      case (.createAccount, .createAccount): return {
+        guard case .createAccount(let l) = lhs, case .createAccount(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.deployContract, .deployContract): return {
+        guard case .deployContract(let l) = lhs, case .deployContract(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.functionCall, .functionCall): return {
+        guard case .functionCall(let l) = lhs, case .functionCall(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.transfer, .transfer): return {
+        guard case .transfer(let l) = lhs, case .transfer(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stake, .stake): return {
+        guard case .stake(let l) = lhs, case .stake(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.addKey, .addKey): return {
+        guard case .addKey(let l) = lhs, case .addKey(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.deleteKey, .deleteKey): return {
+        guard case .deleteKey(let l) = lhs, case .deleteKey(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.deleteAccount, .deleteAccount): return {
+        guard case .deleteAccount(let l) = lhs, case .deleteAccount(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -352,11 +388,11 @@ public struct TW_NEAR_Proto_SigningInput {
 
   public var receiverID: String = String()
 
-  public var blockHash: Data = SwiftProtobuf.Internal.emptyData
+  public var blockHash: Data = Data()
 
   public var actions: [TW_NEAR_Proto_Action] = []
 
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -370,7 +406,7 @@ public struct TW_NEAR_Proto_SigningOutput {
   // methods supported on all messages.
 
   /// Signed transaction blob
-  public var signedTransaction: Data = SwiftProtobuf.Internal.emptyData
+  public var signedTransaction: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -390,9 +426,12 @@ extension TW_NEAR_Proto_PublicKey: SwiftProtobuf.Message, SwiftProtobuf._Message
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt32Field(value: &self.keyType)
-      case 2: try decoder.decodeSingularBytesField(value: &self.data)
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self.keyType) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.data) }()
       default: break
       }
     }
@@ -425,9 +464,12 @@ extension TW_NEAR_Proto_FunctionCallPermission: SwiftProtobuf.Message, SwiftProt
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.allowance)
-      case 2: try decoder.decodeSingularStringField(value: &self.receiverID)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.allowance) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.receiverID) }()
       default: break
       }
     }
@@ -480,9 +522,12 @@ extension TW_NEAR_Proto_AccessKey: SwiftProtobuf.Message, SwiftProtobuf._Message
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt64Field(value: &self.nonce)
-      case 2:
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.nonce) }()
+      case 2: try {
         var v: TW_NEAR_Proto_FunctionCallPermission?
         if let current = self.permission {
           try decoder.handleConflictingOneOf()
@@ -490,7 +535,8 @@ extension TW_NEAR_Proto_AccessKey: SwiftProtobuf.Message, SwiftProtobuf._Message
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.permission = .functionCall(v)}
-      case 3:
+      }()
+      case 3: try {
         var v: TW_NEAR_Proto_FullAccessPermission?
         if let current = self.permission {
           try decoder.handleConflictingOneOf()
@@ -498,6 +544,7 @@ extension TW_NEAR_Proto_AccessKey: SwiftProtobuf.Message, SwiftProtobuf._Message
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.permission = .fullAccess(v)}
+      }()
       default: break
       }
     }
@@ -507,11 +554,18 @@ extension TW_NEAR_Proto_AccessKey: SwiftProtobuf.Message, SwiftProtobuf._Message
     if self.nonce != 0 {
       try visitor.visitSingularUInt64Field(value: self.nonce, fieldNumber: 1)
     }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.permission {
-    case .functionCall(let v)?:
+    case .functionCall?: try {
+      guard case .functionCall(let v)? = self.permission else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    case .fullAccess(let v)?:
+    }()
+    case .fullAccess?: try {
+      guard case .fullAccess(let v)? = self.permission else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -552,8 +606,11 @@ extension TW_NEAR_Proto_DeployContract: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.code)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.code) }()
       default: break
       }
     }
@@ -584,11 +641,14 @@ extension TW_NEAR_Proto_FunctionCall: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.methodName)
-      case 2: try decoder.decodeSingularBytesField(value: &self.args)
-      case 3: try decoder.decodeSingularUInt64Field(value: &self.gas)
-      case 4: try decoder.decodeSingularBytesField(value: &self.deposit)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.methodName) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.args) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.gas) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.deposit) }()
       default: break
       }
     }
@@ -628,8 +688,11 @@ extension TW_NEAR_Proto_Transfer: SwiftProtobuf.Message, SwiftProtobuf._MessageI
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.deposit)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.deposit) }()
       default: break
       }
     }
@@ -658,9 +721,12 @@ extension TW_NEAR_Proto_Stake: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.stake)
-      case 2: try decoder.decodeSingularStringField(value: &self.publicKey)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.stake) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.publicKey) }()
       default: break
       }
     }
@@ -693,9 +759,12 @@ extension TW_NEAR_Proto_AddKey: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularMessageField(value: &self._publicKey)
-      case 2: try decoder.decodeSingularMessageField(value: &self._accessKey)
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._publicKey) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._accessKey) }()
       default: break
       }
     }
@@ -727,8 +796,11 @@ extension TW_NEAR_Proto_DeleteKey: SwiftProtobuf.Message, SwiftProtobuf._Message
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularMessageField(value: &self._publicKey)
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._publicKey) }()
       default: break
       }
     }
@@ -756,8 +828,11 @@ extension TW_NEAR_Proto_DeleteAccount: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.beneficiaryID)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.beneficiaryID) }()
       default: break
       }
     }
@@ -792,8 +867,11 @@ extension TW_NEAR_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1:
+      case 1: try {
         var v: TW_NEAR_Proto_CreateAccount?
         if let current = self.payload {
           try decoder.handleConflictingOneOf()
@@ -801,7 +879,8 @@ extension TW_NEAR_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.payload = .createAccount(v)}
-      case 2:
+      }()
+      case 2: try {
         var v: TW_NEAR_Proto_DeployContract?
         if let current = self.payload {
           try decoder.handleConflictingOneOf()
@@ -809,7 +888,8 @@ extension TW_NEAR_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.payload = .deployContract(v)}
-      case 3:
+      }()
+      case 3: try {
         var v: TW_NEAR_Proto_FunctionCall?
         if let current = self.payload {
           try decoder.handleConflictingOneOf()
@@ -817,7 +897,8 @@ extension TW_NEAR_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.payload = .functionCall(v)}
-      case 4:
+      }()
+      case 4: try {
         var v: TW_NEAR_Proto_Transfer?
         if let current = self.payload {
           try decoder.handleConflictingOneOf()
@@ -825,7 +906,8 @@ extension TW_NEAR_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.payload = .transfer(v)}
-      case 5:
+      }()
+      case 5: try {
         var v: TW_NEAR_Proto_Stake?
         if let current = self.payload {
           try decoder.handleConflictingOneOf()
@@ -833,7 +915,8 @@ extension TW_NEAR_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.payload = .stake(v)}
-      case 6:
+      }()
+      case 6: try {
         var v: TW_NEAR_Proto_AddKey?
         if let current = self.payload {
           try decoder.handleConflictingOneOf()
@@ -841,7 +924,8 @@ extension TW_NEAR_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.payload = .addKey(v)}
-      case 7:
+      }()
+      case 7: try {
         var v: TW_NEAR_Proto_DeleteKey?
         if let current = self.payload {
           try decoder.handleConflictingOneOf()
@@ -849,7 +933,8 @@ extension TW_NEAR_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.payload = .deleteKey(v)}
-      case 8:
+      }()
+      case 8: try {
         var v: TW_NEAR_Proto_DeleteAccount?
         if let current = self.payload {
           try decoder.handleConflictingOneOf()
@@ -857,29 +942,49 @@ extension TW_NEAR_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImp
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.payload = .deleteAccount(v)}
+      }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.payload {
-    case .createAccount(let v)?:
+    case .createAccount?: try {
+      guard case .createAccount(let v)? = self.payload else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    case .deployContract(let v)?:
+    }()
+    case .deployContract?: try {
+      guard case .deployContract(let v)? = self.payload else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    case .functionCall(let v)?:
+    }()
+    case .functionCall?: try {
+      guard case .functionCall(let v)? = self.payload else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    case .transfer(let v)?:
+    }()
+    case .transfer?: try {
+      guard case .transfer(let v)? = self.payload else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    case .stake(let v)?:
+    }()
+    case .stake?: try {
+      guard case .stake(let v)? = self.payload else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-    case .addKey(let v)?:
+    }()
+    case .addKey?: try {
+      guard case .addKey(let v)? = self.payload else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    case .deleteKey(let v)?:
+    }()
+    case .deleteKey?: try {
+      guard case .deleteKey(let v)? = self.payload else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
-    case .deleteAccount(let v)?:
+    }()
+    case .deleteAccount?: try {
+      guard case .deleteAccount(let v)? = self.payload else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -905,13 +1010,16 @@ extension TW_NEAR_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.signerID)
-      case 2: try decoder.decodeSingularUInt64Field(value: &self.nonce)
-      case 3: try decoder.decodeSingularStringField(value: &self.receiverID)
-      case 4: try decoder.decodeSingularBytesField(value: &self.blockHash)
-      case 5: try decoder.decodeRepeatedMessageField(value: &self.actions)
-      case 6: try decoder.decodeSingularBytesField(value: &self.privateKey)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signerID) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.nonce) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.receiverID) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.blockHash) }()
+      case 5: try { try decoder.decodeRepeatedMessageField(value: &self.actions) }()
+      case 6: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
       default: break
       }
     }
@@ -959,8 +1067,11 @@ extension TW_NEAR_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.signedTransaction)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.signedTransaction) }()
       default: break
       }
     }

@@ -125,12 +125,30 @@ public struct TW_FIO_Proto_Action {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_FIO_Proto_Action.OneOf_MessageOneof, rhs: TW_FIO_Proto_Action.OneOf_MessageOneof) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.registerFioAddressMessage(let l), .registerFioAddressMessage(let r)): return l == r
-      case (.addPubAddressMessage(let l), .addPubAddressMessage(let r)): return l == r
-      case (.transferMessage(let l), .transferMessage(let r)): return l == r
-      case (.renewFioAddressMessage(let l), .renewFioAddressMessage(let r)): return l == r
-      case (.newFundsRequestMessage(let l), .newFundsRequestMessage(let r)): return l == r
+      case (.registerFioAddressMessage, .registerFioAddressMessage): return {
+        guard case .registerFioAddressMessage(let l) = lhs, case .registerFioAddressMessage(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.addPubAddressMessage, .addPubAddressMessage): return {
+        guard case .addPubAddressMessage(let l) = lhs, case .addPubAddressMessage(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.transferMessage, .transferMessage): return {
+        guard case .transferMessage(let l) = lhs, case .transferMessage(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.renewFioAddressMessage, .renewFioAddressMessage): return {
+        guard case .renewFioAddressMessage(let l) = lhs, case .renewFioAddressMessage(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.newFundsRequestMessage, .newFundsRequestMessage): return {
+        guard case .newFundsRequestMessage(let l) = lhs, case .newFundsRequestMessage(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -262,7 +280,7 @@ public struct TW_FIO_Proto_ChainParams {
   // methods supported on all messages.
 
   /// Constant chainId (32 bytes), obtained from get_info API
-  public var chainID: Data = SwiftProtobuf.Internal.emptyData
+  public var chainID: Data = Data()
 
   /// The last block number, obtained from get_info API
   public var headBlockNumber: UInt64 = 0
@@ -295,7 +313,7 @@ public struct TW_FIO_Proto_SigningInput {
   public mutating func clearChainParams() {self._chainParams = nil}
 
   /// The private key matching the address, needed for signing
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   /// The FIO name of the originating wallet (project-wide constant)
   public var tpid: String = String()
@@ -348,9 +366,12 @@ extension TW_FIO_Proto_PublicAddress: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.coinSymbol)
-      case 2: try decoder.decodeSingularStringField(value: &self.address)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.coinSymbol) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.address) }()
       default: break
       }
     }
@@ -387,13 +408,16 @@ extension TW_FIO_Proto_NewFundsContent: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.payeePublicAddress)
-      case 2: try decoder.decodeSingularStringField(value: &self.amount)
-      case 3: try decoder.decodeSingularStringField(value: &self.coinSymbol)
-      case 4: try decoder.decodeSingularStringField(value: &self.memo)
-      case 5: try decoder.decodeSingularStringField(value: &self.hash)
-      case 6: try decoder.decodeSingularStringField(value: &self.offlineURL)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.payeePublicAddress) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.amount) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.coinSymbol) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.memo) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.hash) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.offlineURL) }()
       default: break
       }
     }
@@ -445,8 +469,11 @@ extension TW_FIO_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1:
+      case 1: try {
         var v: TW_FIO_Proto_Action.RegisterFioAddress?
         if let current = self.messageOneof {
           try decoder.handleConflictingOneOf()
@@ -454,7 +481,8 @@ extension TW_FIO_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.messageOneof = .registerFioAddressMessage(v)}
-      case 2:
+      }()
+      case 2: try {
         var v: TW_FIO_Proto_Action.AddPubAddress?
         if let current = self.messageOneof {
           try decoder.handleConflictingOneOf()
@@ -462,7 +490,8 @@ extension TW_FIO_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.messageOneof = .addPubAddressMessage(v)}
-      case 3:
+      }()
+      case 3: try {
         var v: TW_FIO_Proto_Action.Transfer?
         if let current = self.messageOneof {
           try decoder.handleConflictingOneOf()
@@ -470,7 +499,8 @@ extension TW_FIO_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.messageOneof = .transferMessage(v)}
-      case 4:
+      }()
+      case 4: try {
         var v: TW_FIO_Proto_Action.RenewFioAddress?
         if let current = self.messageOneof {
           try decoder.handleConflictingOneOf()
@@ -478,7 +508,8 @@ extension TW_FIO_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.messageOneof = .renewFioAddressMessage(v)}
-      case 5:
+      }()
+      case 5: try {
         var v: TW_FIO_Proto_Action.NewFundsRequest?
         if let current = self.messageOneof {
           try decoder.handleConflictingOneOf()
@@ -486,23 +517,37 @@ extension TW_FIO_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.messageOneof = .newFundsRequestMessage(v)}
+      }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.messageOneof {
-    case .registerFioAddressMessage(let v)?:
+    case .registerFioAddressMessage?: try {
+      guard case .registerFioAddressMessage(let v)? = self.messageOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    case .addPubAddressMessage(let v)?:
+    }()
+    case .addPubAddressMessage?: try {
+      guard case .addPubAddressMessage(let v)? = self.messageOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    case .transferMessage(let v)?:
+    }()
+    case .transferMessage?: try {
+      guard case .transferMessage(let v)? = self.messageOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    case .renewFioAddressMessage(let v)?:
+    }()
+    case .renewFioAddressMessage?: try {
+      guard case .renewFioAddressMessage(let v)? = self.messageOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    case .newFundsRequestMessage(let v)?:
+    }()
+    case .newFundsRequestMessage?: try {
+      guard case .newFundsRequestMessage(let v)? = self.messageOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -525,10 +570,13 @@ extension TW_FIO_Proto_Action.RegisterFioAddress: SwiftProtobuf.Message, SwiftPr
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.fioAddress)
-      case 2: try decoder.decodeSingularStringField(value: &self.ownerFioPublicKey)
-      case 3: try decoder.decodeSingularUInt64Field(value: &self.fee)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.fioAddress) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.ownerFioPublicKey) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.fee) }()
       default: break
       }
     }
@@ -566,10 +614,13 @@ extension TW_FIO_Proto_Action.AddPubAddress: SwiftProtobuf.Message, SwiftProtobu
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.fioAddress)
-      case 2: try decoder.decodeRepeatedMessageField(value: &self.publicAddresses)
-      case 3: try decoder.decodeSingularUInt64Field(value: &self.fee)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.fioAddress) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.publicAddresses) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.fee) }()
       default: break
       }
     }
@@ -607,10 +658,13 @@ extension TW_FIO_Proto_Action.Transfer: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.payeePublicKey)
-      case 2: try decoder.decodeSingularUInt64Field(value: &self.amount)
-      case 3: try decoder.decodeSingularUInt64Field(value: &self.fee)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.payeePublicKey) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.amount) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.fee) }()
       default: break
       }
     }
@@ -648,10 +702,13 @@ extension TW_FIO_Proto_Action.RenewFioAddress: SwiftProtobuf.Message, SwiftProto
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.fioAddress)
-      case 2: try decoder.decodeSingularStringField(value: &self.ownerFioPublicKey)
-      case 3: try decoder.decodeSingularUInt64Field(value: &self.fee)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.fioAddress) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.ownerFioPublicKey) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.fee) }()
       default: break
       }
     }
@@ -691,12 +748,15 @@ extension TW_FIO_Proto_Action.NewFundsRequest: SwiftProtobuf.Message, SwiftProto
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.payerFioName)
-      case 2: try decoder.decodeSingularStringField(value: &self.payerFioAddress)
-      case 3: try decoder.decodeSingularStringField(value: &self.payeeFioName)
-      case 4: try decoder.decodeSingularMessageField(value: &self._content)
-      case 5: try decoder.decodeSingularUInt64Field(value: &self.fee)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.payerFioName) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.payerFioAddress) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.payeeFioName) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._content) }()
+      case 5: try { try decoder.decodeSingularUInt64Field(value: &self.fee) }()
       default: break
       }
     }
@@ -742,10 +802,13 @@ extension TW_FIO_Proto_ChainParams: SwiftProtobuf.Message, SwiftProtobuf._Messag
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.chainID)
-      case 2: try decoder.decodeSingularUInt64Field(value: &self.headBlockNumber)
-      case 3: try decoder.decodeSingularUInt64Field(value: &self.refBlockPrefix)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.chainID) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.headBlockNumber) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.refBlockPrefix) }()
       default: break
       }
     }
@@ -785,12 +848,15 @@ extension TW_FIO_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Messa
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt32Field(value: &self.expiry)
-      case 2: try decoder.decodeSingularMessageField(value: &self._chainParams)
-      case 3: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 4: try decoder.decodeSingularStringField(value: &self.tpid)
-      case 5: try decoder.decodeSingularMessageField(value: &self._action)
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self.expiry) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._chainParams) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.tpid) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._action) }()
       default: break
       }
     }
@@ -835,9 +901,12 @@ extension TW_FIO_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.json)
-      case 2: try decoder.decodeSingularStringField(value: &self.error)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.json) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.error) }()
       default: break
       }
     }

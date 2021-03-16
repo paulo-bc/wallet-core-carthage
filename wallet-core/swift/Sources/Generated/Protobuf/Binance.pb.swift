@@ -39,7 +39,7 @@ public struct TW_Binance_Proto_Transaction {
   public var source: Int64 = 0
 
   /// reserved for future use
-  public var data: Data = SwiftProtobuf.Internal.emptyData
+  public var data: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -52,10 +52,10 @@ public struct TW_Binance_Proto_Signature {
   // methods supported on all messages.
 
   /// public key bytes of the signer address
-  public var pubKey: Data = SwiftProtobuf.Internal.emptyData
+  public var pubKey: Data = Data()
 
   /// signature bytes, please check chain access section for signature generation
-  public var signature: Data = SwiftProtobuf.Internal.emptyData
+  public var signature: Data = Data()
 
   /// another identifier of signer, which can be read from chain by account REST API or RPC
   public var accountNumber: Int64 = 0
@@ -86,7 +86,7 @@ public struct TW_Binance_Proto_TradeOrder {
   // methods supported on all messages.
 
   /// 0xCE6DC043           // prefix
-  public var sender: Data = SwiftProtobuf.Internal.emptyData
+  public var sender: Data = Data()
 
   /// order id, optional
   public var id: String = String()
@@ -120,7 +120,7 @@ public struct TW_Binance_Proto_CancelTradeOrder {
   // methods supported on all messages.
 
   /// 0x166E681B      // prefix
-  public var sender: Data = SwiftProtobuf.Internal.emptyData
+  public var sender: Data = Data()
 
   /// symbol for trading pair in full name of the tokens
   public var symbol: String = String()
@@ -165,7 +165,7 @@ public struct TW_Binance_Proto_SendOrder {
     // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
     // methods supported on all messages.
 
-    public var address: Data = SwiftProtobuf.Internal.emptyData
+    public var address: Data = Data()
 
     public var coins: [TW_Binance_Proto_SendOrder.Token] = []
 
@@ -179,7 +179,7 @@ public struct TW_Binance_Proto_SendOrder {
     // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
     // methods supported on all messages.
 
-    public var address: Data = SwiftProtobuf.Internal.emptyData
+    public var address: Data = Data()
 
     public var coins: [TW_Binance_Proto_SendOrder.Token] = []
 
@@ -197,7 +197,7 @@ public struct TW_Binance_Proto_TokenIssueOrder {
   // methods supported on all messages.
 
   /// 0x17EFAB80      // prefix
-  public var from: Data = SwiftProtobuf.Internal.emptyData
+  public var from: Data = Data()
 
   /// token name
   public var name: String = String()
@@ -222,7 +222,7 @@ public struct TW_Binance_Proto_TokenMintOrder {
   // methods supported on all messages.
 
   /// 0x467E0829      // prefix
-  public var from: Data = SwiftProtobuf.Internal.emptyData
+  public var from: Data = Data()
 
   /// token symbol, in full name with "-" suffix
   public var symbol: String = String()
@@ -241,7 +241,7 @@ public struct TW_Binance_Proto_TokenBurnOrder {
   // methods supported on all messages.
 
   /// 0x7ED2D2A0      // prefix
-  public var from: Data = SwiftProtobuf.Internal.emptyData
+  public var from: Data = Data()
 
   /// token symbol, in full name with "-" suffix
   public var symbol: String = String()
@@ -260,7 +260,7 @@ public struct TW_Binance_Proto_TokenFreezeOrder {
   // methods supported on all messages.
 
   /// 0xE774B32D      // prefix
-  public var from: Data = SwiftProtobuf.Internal.emptyData
+  public var from: Data = Data()
 
   /// token symbol, in full name with "-" suffix
   public var symbol: String = String()
@@ -279,7 +279,7 @@ public struct TW_Binance_Proto_TokenUnfreezeOrder {
   // methods supported on all messages.
 
   /// 0x6515FF0D      // prefix
-  public var from: Data = SwiftProtobuf.Internal.emptyData
+  public var from: Data = Data()
 
   /// token symbol, in full name with "-" suffix
   public var symbol: String = String()
@@ -298,17 +298,17 @@ public struct TW_Binance_Proto_HTLTOrder {
   // methods supported on all messages.
 
   /// 0xB33F9A24      // prefix
-  public var from: Data = SwiftProtobuf.Internal.emptyData
+  public var from: Data = Data()
 
   /// recipient address
-  public var to: Data = SwiftProtobuf.Internal.emptyData
+  public var to: Data = Data()
 
   public var recipientOtherChain: String = String()
 
   public var senderOtherChain: String = String()
 
   ///hash of a random number and timestamp, based on SHA256
-  public var randomNumberHash: Data = SwiftProtobuf.Internal.emptyData
+  public var randomNumberHash: Data = Data()
 
   public var timestamp: Int64 = 0
 
@@ -332,11 +332,11 @@ public struct TW_Binance_Proto_DepositHTLTOrder {
   // methods supported on all messages.
 
   /// 0xB33F9A24      // prefix
-  public var from: Data = SwiftProtobuf.Internal.emptyData
+  public var from: Data = Data()
 
   public var amount: [TW_Binance_Proto_SendOrder.Token] = []
 
-  public var swapID: Data = SwiftProtobuf.Internal.emptyData
+  public var swapID: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -349,11 +349,11 @@ public struct TW_Binance_Proto_ClaimHTLOrder {
   // methods supported on all messages.
 
   /// 0xC1665300      // prefix
-  public var from: Data = SwiftProtobuf.Internal.emptyData
+  public var from: Data = Data()
 
-  public var swapID: Data = SwiftProtobuf.Internal.emptyData
+  public var swapID: Data = Data()
 
-  public var randomNumber: Data = SwiftProtobuf.Internal.emptyData
+  public var randomNumber: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -366,9 +366,9 @@ public struct TW_Binance_Proto_RefundHTLTOrder {
   // methods supported on all messages.
 
   /// 0x3454A27C      // prefix
-  public var from: Data = SwiftProtobuf.Internal.emptyData
+  public var from: Data = Data()
 
-  public var swapID: Data = SwiftProtobuf.Internal.emptyData
+  public var swapID: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -380,9 +380,9 @@ public struct TW_Binance_Proto_TransferOut {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var from: Data = SwiftProtobuf.Internal.emptyData
+  public var from: Data = Data()
 
-  public var to: Data = SwiftProtobuf.Internal.emptyData
+  public var to: Data = Data()
 
   public var amount: TW_Binance_Proto_SendOrder.Token {
     get {return _amount ?? TW_Binance_Proto_SendOrder.Token()}
@@ -407,9 +407,9 @@ public struct TW_Binance_Proto_SideChainDelegate {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var delegatorAddr: Data = SwiftProtobuf.Internal.emptyData
+  public var delegatorAddr: Data = Data()
 
-  public var validatorAddr: Data = SwiftProtobuf.Internal.emptyData
+  public var validatorAddr: Data = Data()
 
   public var delegation: TW_Binance_Proto_SendOrder.Token {
     get {return _delegation ?? TW_Binance_Proto_SendOrder.Token()}
@@ -434,11 +434,11 @@ public struct TW_Binance_Proto_SideChainRedelegate {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var delegatorAddr: Data = SwiftProtobuf.Internal.emptyData
+  public var delegatorAddr: Data = Data()
 
-  public var validatorSrcAddr: Data = SwiftProtobuf.Internal.emptyData
+  public var validatorSrcAddr: Data = Data()
 
-  public var validatorDstAddr: Data = SwiftProtobuf.Internal.emptyData
+  public var validatorDstAddr: Data = Data()
 
   public var amount: TW_Binance_Proto_SendOrder.Token {
     get {return _amount ?? TW_Binance_Proto_SendOrder.Token()}
@@ -463,9 +463,9 @@ public struct TW_Binance_Proto_SideChainUndelegate {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var delegatorAddr: Data = SwiftProtobuf.Internal.emptyData
+  public var delegatorAddr: Data = Data()
 
-  public var validatorAddr: Data = SwiftProtobuf.Internal.emptyData
+  public var validatorAddr: Data = Data()
 
   public var amount: TW_Binance_Proto_SendOrder.Token {
     get {return _amount ?? TW_Binance_Proto_SendOrder.Token()}
@@ -491,7 +491,7 @@ public struct TW_Binance_Proto_TimeLockOrder {
   // methods supported on all messages.
 
   /// owner address
-  public var fromAddress: Data = SwiftProtobuf.Internal.emptyData
+  public var fromAddress: Data = Data()
 
   public var description_p: String = String()
 
@@ -511,7 +511,7 @@ public struct TW_Binance_Proto_TimeRelockOrder {
   // methods supported on all messages.
 
   /// owner address
-  public var fromAddress: Data = SwiftProtobuf.Internal.emptyData
+  public var fromAddress: Data = Data()
 
   /// order ID
   public var id: Int64 = 0
@@ -534,7 +534,7 @@ public struct TW_Binance_Proto_TimeUnlockOrder {
   // methods supported on all messages.
 
   /// owner address
-  public var fromAddress: Data = SwiftProtobuf.Internal.emptyData
+  public var fromAddress: Data = Data()
 
   /// order ID
   public var id: Int64 = 0
@@ -550,191 +550,170 @@ public struct TW_Binance_Proto_SigningInput {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var chainID: String {
-    get {return _storage._chainID}
-    set {_uniqueStorage()._chainID = newValue}
-  }
+  public var chainID: String = String()
 
-  public var accountNumber: Int64 {
-    get {return _storage._accountNumber}
-    set {_uniqueStorage()._accountNumber = newValue}
-  }
+  public var accountNumber: Int64 = 0
 
-  public var sequence: Int64 {
-    get {return _storage._sequence}
-    set {_uniqueStorage()._sequence = newValue}
-  }
+  public var sequence: Int64 = 0
 
-  public var source: Int64 {
-    get {return _storage._source}
-    set {_uniqueStorage()._source = newValue}
-  }
+  public var source: Int64 = 0
 
-  public var memo: String {
-    get {return _storage._memo}
-    set {_uniqueStorage()._memo = newValue}
-  }
+  public var memo: String = String()
 
-  public var privateKey: Data {
-    get {return _storage._privateKey}
-    set {_uniqueStorage()._privateKey = newValue}
-  }
+  public var privateKey: Data = Data()
 
-  public var orderOneof: OneOf_OrderOneof? {
-    get {return _storage._orderOneof}
-    set {_uniqueStorage()._orderOneof = newValue}
-  }
+  public var orderOneof: TW_Binance_Proto_SigningInput.OneOf_OrderOneof? = nil
 
   public var tradeOrder: TW_Binance_Proto_TradeOrder {
     get {
-      if case .tradeOrder(let v)? = _storage._orderOneof {return v}
+      if case .tradeOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_TradeOrder()
     }
-    set {_uniqueStorage()._orderOneof = .tradeOrder(newValue)}
+    set {orderOneof = .tradeOrder(newValue)}
   }
 
   public var cancelTradeOrder: TW_Binance_Proto_CancelTradeOrder {
     get {
-      if case .cancelTradeOrder(let v)? = _storage._orderOneof {return v}
+      if case .cancelTradeOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_CancelTradeOrder()
     }
-    set {_uniqueStorage()._orderOneof = .cancelTradeOrder(newValue)}
+    set {orderOneof = .cancelTradeOrder(newValue)}
   }
 
   public var sendOrder: TW_Binance_Proto_SendOrder {
     get {
-      if case .sendOrder(let v)? = _storage._orderOneof {return v}
+      if case .sendOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_SendOrder()
     }
-    set {_uniqueStorage()._orderOneof = .sendOrder(newValue)}
+    set {orderOneof = .sendOrder(newValue)}
   }
 
   public var freezeOrder: TW_Binance_Proto_TokenFreezeOrder {
     get {
-      if case .freezeOrder(let v)? = _storage._orderOneof {return v}
+      if case .freezeOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_TokenFreezeOrder()
     }
-    set {_uniqueStorage()._orderOneof = .freezeOrder(newValue)}
+    set {orderOneof = .freezeOrder(newValue)}
   }
 
   public var unfreezeOrder: TW_Binance_Proto_TokenUnfreezeOrder {
     get {
-      if case .unfreezeOrder(let v)? = _storage._orderOneof {return v}
+      if case .unfreezeOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_TokenUnfreezeOrder()
     }
-    set {_uniqueStorage()._orderOneof = .unfreezeOrder(newValue)}
+    set {orderOneof = .unfreezeOrder(newValue)}
   }
 
   public var htltOrder: TW_Binance_Proto_HTLTOrder {
     get {
-      if case .htltOrder(let v)? = _storage._orderOneof {return v}
+      if case .htltOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_HTLTOrder()
     }
-    set {_uniqueStorage()._orderOneof = .htltOrder(newValue)}
+    set {orderOneof = .htltOrder(newValue)}
   }
 
   public var depositHtltOrder: TW_Binance_Proto_DepositHTLTOrder {
     get {
-      if case .depositHtltOrder(let v)? = _storage._orderOneof {return v}
+      if case .depositHtltOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_DepositHTLTOrder()
     }
-    set {_uniqueStorage()._orderOneof = .depositHtltOrder(newValue)}
+    set {orderOneof = .depositHtltOrder(newValue)}
   }
 
   public var claimHtltOrder: TW_Binance_Proto_ClaimHTLOrder {
     get {
-      if case .claimHtltOrder(let v)? = _storage._orderOneof {return v}
+      if case .claimHtltOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_ClaimHTLOrder()
     }
-    set {_uniqueStorage()._orderOneof = .claimHtltOrder(newValue)}
+    set {orderOneof = .claimHtltOrder(newValue)}
   }
 
   public var refundHtltOrder: TW_Binance_Proto_RefundHTLTOrder {
     get {
-      if case .refundHtltOrder(let v)? = _storage._orderOneof {return v}
+      if case .refundHtltOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_RefundHTLTOrder()
     }
-    set {_uniqueStorage()._orderOneof = .refundHtltOrder(newValue)}
+    set {orderOneof = .refundHtltOrder(newValue)}
   }
 
   public var issueOrder: TW_Binance_Proto_TokenIssueOrder {
     get {
-      if case .issueOrder(let v)? = _storage._orderOneof {return v}
+      if case .issueOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_TokenIssueOrder()
     }
-    set {_uniqueStorage()._orderOneof = .issueOrder(newValue)}
+    set {orderOneof = .issueOrder(newValue)}
   }
 
   public var mintOrder: TW_Binance_Proto_TokenMintOrder {
     get {
-      if case .mintOrder(let v)? = _storage._orderOneof {return v}
+      if case .mintOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_TokenMintOrder()
     }
-    set {_uniqueStorage()._orderOneof = .mintOrder(newValue)}
+    set {orderOneof = .mintOrder(newValue)}
   }
 
   public var burnOrder: TW_Binance_Proto_TokenBurnOrder {
     get {
-      if case .burnOrder(let v)? = _storage._orderOneof {return v}
+      if case .burnOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_TokenBurnOrder()
     }
-    set {_uniqueStorage()._orderOneof = .burnOrder(newValue)}
+    set {orderOneof = .burnOrder(newValue)}
   }
 
   public var transferOutOrder: TW_Binance_Proto_TransferOut {
     get {
-      if case .transferOutOrder(let v)? = _storage._orderOneof {return v}
+      if case .transferOutOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_TransferOut()
     }
-    set {_uniqueStorage()._orderOneof = .transferOutOrder(newValue)}
+    set {orderOneof = .transferOutOrder(newValue)}
   }
 
   public var sideDelegateOrder: TW_Binance_Proto_SideChainDelegate {
     get {
-      if case .sideDelegateOrder(let v)? = _storage._orderOneof {return v}
+      if case .sideDelegateOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_SideChainDelegate()
     }
-    set {_uniqueStorage()._orderOneof = .sideDelegateOrder(newValue)}
+    set {orderOneof = .sideDelegateOrder(newValue)}
   }
 
   public var sideRedelegateOrder: TW_Binance_Proto_SideChainRedelegate {
     get {
-      if case .sideRedelegateOrder(let v)? = _storage._orderOneof {return v}
+      if case .sideRedelegateOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_SideChainRedelegate()
     }
-    set {_uniqueStorage()._orderOneof = .sideRedelegateOrder(newValue)}
+    set {orderOneof = .sideRedelegateOrder(newValue)}
   }
 
   public var sideUndelegateOrder: TW_Binance_Proto_SideChainUndelegate {
     get {
-      if case .sideUndelegateOrder(let v)? = _storage._orderOneof {return v}
+      if case .sideUndelegateOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_SideChainUndelegate()
     }
-    set {_uniqueStorage()._orderOneof = .sideUndelegateOrder(newValue)}
+    set {orderOneof = .sideUndelegateOrder(newValue)}
   }
 
   public var timeLockOrder: TW_Binance_Proto_TimeLockOrder {
     get {
-      if case .timeLockOrder(let v)? = _storage._orderOneof {return v}
+      if case .timeLockOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_TimeLockOrder()
     }
-    set {_uniqueStorage()._orderOneof = .timeLockOrder(newValue)}
+    set {orderOneof = .timeLockOrder(newValue)}
   }
 
   public var timeRelockOrder: TW_Binance_Proto_TimeRelockOrder {
     get {
-      if case .timeRelockOrder(let v)? = _storage._orderOneof {return v}
+      if case .timeRelockOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_TimeRelockOrder()
     }
-    set {_uniqueStorage()._orderOneof = .timeRelockOrder(newValue)}
+    set {orderOneof = .timeRelockOrder(newValue)}
   }
 
   public var timeUnlockOrder: TW_Binance_Proto_TimeUnlockOrder {
     get {
-      if case .timeUnlockOrder(let v)? = _storage._orderOneof {return v}
+      if case .timeUnlockOrder(let v)? = orderOneof {return v}
       return TW_Binance_Proto_TimeUnlockOrder()
     }
-    set {_uniqueStorage()._orderOneof = .timeUnlockOrder(newValue)}
+    set {orderOneof = .timeUnlockOrder(newValue)}
   }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -762,26 +741,86 @@ public struct TW_Binance_Proto_SigningInput {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Binance_Proto_SigningInput.OneOf_OrderOneof, rhs: TW_Binance_Proto_SigningInput.OneOf_OrderOneof) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.tradeOrder(let l), .tradeOrder(let r)): return l == r
-      case (.cancelTradeOrder(let l), .cancelTradeOrder(let r)): return l == r
-      case (.sendOrder(let l), .sendOrder(let r)): return l == r
-      case (.freezeOrder(let l), .freezeOrder(let r)): return l == r
-      case (.unfreezeOrder(let l), .unfreezeOrder(let r)): return l == r
-      case (.htltOrder(let l), .htltOrder(let r)): return l == r
-      case (.depositHtltOrder(let l), .depositHtltOrder(let r)): return l == r
-      case (.claimHtltOrder(let l), .claimHtltOrder(let r)): return l == r
-      case (.refundHtltOrder(let l), .refundHtltOrder(let r)): return l == r
-      case (.issueOrder(let l), .issueOrder(let r)): return l == r
-      case (.mintOrder(let l), .mintOrder(let r)): return l == r
-      case (.burnOrder(let l), .burnOrder(let r)): return l == r
-      case (.transferOutOrder(let l), .transferOutOrder(let r)): return l == r
-      case (.sideDelegateOrder(let l), .sideDelegateOrder(let r)): return l == r
-      case (.sideRedelegateOrder(let l), .sideRedelegateOrder(let r)): return l == r
-      case (.sideUndelegateOrder(let l), .sideUndelegateOrder(let r)): return l == r
-      case (.timeLockOrder(let l), .timeLockOrder(let r)): return l == r
-      case (.timeRelockOrder(let l), .timeRelockOrder(let r)): return l == r
-      case (.timeUnlockOrder(let l), .timeUnlockOrder(let r)): return l == r
+      case (.tradeOrder, .tradeOrder): return {
+        guard case .tradeOrder(let l) = lhs, case .tradeOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.cancelTradeOrder, .cancelTradeOrder): return {
+        guard case .cancelTradeOrder(let l) = lhs, case .cancelTradeOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.sendOrder, .sendOrder): return {
+        guard case .sendOrder(let l) = lhs, case .sendOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.freezeOrder, .freezeOrder): return {
+        guard case .freezeOrder(let l) = lhs, case .freezeOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.unfreezeOrder, .unfreezeOrder): return {
+        guard case .unfreezeOrder(let l) = lhs, case .unfreezeOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.htltOrder, .htltOrder): return {
+        guard case .htltOrder(let l) = lhs, case .htltOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.depositHtltOrder, .depositHtltOrder): return {
+        guard case .depositHtltOrder(let l) = lhs, case .depositHtltOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.claimHtltOrder, .claimHtltOrder): return {
+        guard case .claimHtltOrder(let l) = lhs, case .claimHtltOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.refundHtltOrder, .refundHtltOrder): return {
+        guard case .refundHtltOrder(let l) = lhs, case .refundHtltOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.issueOrder, .issueOrder): return {
+        guard case .issueOrder(let l) = lhs, case .issueOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.mintOrder, .mintOrder): return {
+        guard case .mintOrder(let l) = lhs, case .mintOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.burnOrder, .burnOrder): return {
+        guard case .burnOrder(let l) = lhs, case .burnOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.transferOutOrder, .transferOutOrder): return {
+        guard case .transferOutOrder(let l) = lhs, case .transferOutOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.sideDelegateOrder, .sideDelegateOrder): return {
+        guard case .sideDelegateOrder(let l) = lhs, case .sideDelegateOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.sideRedelegateOrder, .sideRedelegateOrder): return {
+        guard case .sideRedelegateOrder(let l) = lhs, case .sideRedelegateOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.sideUndelegateOrder, .sideUndelegateOrder): return {
+        guard case .sideUndelegateOrder(let l) = lhs, case .sideUndelegateOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.timeLockOrder, .timeLockOrder): return {
+        guard case .timeLockOrder(let l) = lhs, case .timeLockOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.timeRelockOrder, .timeRelockOrder): return {
+        guard case .timeRelockOrder(let l) = lhs, case .timeRelockOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.timeUnlockOrder, .timeUnlockOrder): return {
+        guard case .timeUnlockOrder(let l) = lhs, case .timeUnlockOrder(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -789,8 +828,6 @@ public struct TW_Binance_Proto_SigningInput {
   }
 
   public init() {}
-
-  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 /// Transaction signing output.
@@ -800,7 +837,7 @@ public struct TW_Binance_Proto_SigningOutput {
   // methods supported on all messages.
 
   /// Signed and encoded transaction bytes.
-  public var encoded: Data = SwiftProtobuf.Internal.emptyData
+  public var encoded: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -823,12 +860,15 @@ extension TW_Binance_Proto_Transaction: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeRepeatedBytesField(value: &self.msgs)
-      case 2: try decoder.decodeRepeatedBytesField(value: &self.signatures)
-      case 3: try decoder.decodeSingularStringField(value: &self.memo)
-      case 4: try decoder.decodeSingularInt64Field(value: &self.source)
-      case 5: try decoder.decodeSingularBytesField(value: &self.data)
+      case 1: try { try decoder.decodeRepeatedBytesField(value: &self.msgs) }()
+      case 2: try { try decoder.decodeRepeatedBytesField(value: &self.signatures) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.memo) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.source) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.data) }()
       default: break
       }
     }
@@ -875,11 +915,14 @@ extension TW_Binance_Proto_Signature: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.pubKey)
-      case 2: try decoder.decodeSingularBytesField(value: &self.signature)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.accountNumber)
-      case 4: try decoder.decodeSingularInt64Field(value: &self.sequence)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.pubKey) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.signature) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.accountNumber) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.sequence) }()
       default: break
       }
     }
@@ -945,15 +988,18 @@ extension TW_Binance_Proto_TradeOrder: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.sender)
-      case 2: try decoder.decodeSingularStringField(value: &self.id)
-      case 3: try decoder.decodeSingularStringField(value: &self.symbol)
-      case 4: try decoder.decodeSingularInt64Field(value: &self.ordertype)
-      case 5: try decoder.decodeSingularInt64Field(value: &self.side)
-      case 6: try decoder.decodeSingularInt64Field(value: &self.price)
-      case 7: try decoder.decodeSingularInt64Field(value: &self.quantity)
-      case 8: try decoder.decodeSingularInt64Field(value: &self.timeinforce)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.sender) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.symbol) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.ordertype) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.side) }()
+      case 6: try { try decoder.decodeSingularInt64Field(value: &self.price) }()
+      case 7: try { try decoder.decodeSingularInt64Field(value: &self.quantity) }()
+      case 8: try { try decoder.decodeSingularInt64Field(value: &self.timeinforce) }()
       default: break
       }
     }
@@ -1011,10 +1057,13 @@ extension TW_Binance_Proto_CancelTradeOrder: SwiftProtobuf.Message, SwiftProtobu
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.sender)
-      case 2: try decoder.decodeSingularStringField(value: &self.symbol)
-      case 3: try decoder.decodeSingularStringField(value: &self.refid)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.sender) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.symbol) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.refid) }()
       default: break
       }
     }
@@ -1051,9 +1100,12 @@ extension TW_Binance_Proto_SendOrder: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeRepeatedMessageField(value: &self.inputs)
-      case 2: try decoder.decodeRepeatedMessageField(value: &self.outputs)
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.inputs) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.outputs) }()
       default: break
       }
     }
@@ -1086,9 +1138,12 @@ extension TW_Binance_Proto_SendOrder.Token: SwiftProtobuf.Message, SwiftProtobuf
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.denom)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.amount)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.denom) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.amount) }()
       default: break
       }
     }
@@ -1121,9 +1176,12 @@ extension TW_Binance_Proto_SendOrder.Input: SwiftProtobuf.Message, SwiftProtobuf
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.address)
-      case 2: try decoder.decodeRepeatedMessageField(value: &self.coins)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.address) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.coins) }()
       default: break
       }
     }
@@ -1156,9 +1214,12 @@ extension TW_Binance_Proto_SendOrder.Output: SwiftProtobuf.Message, SwiftProtobu
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.address)
-      case 2: try decoder.decodeRepeatedMessageField(value: &self.coins)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.address) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.coins) }()
       default: break
       }
     }
@@ -1194,12 +1255,15 @@ extension TW_Binance_Proto_TokenIssueOrder: SwiftProtobuf.Message, SwiftProtobuf
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.from)
-      case 2: try decoder.decodeSingularStringField(value: &self.name)
-      case 3: try decoder.decodeSingularStringField(value: &self.symbol)
-      case 4: try decoder.decodeSingularInt64Field(value: &self.totalSupply)
-      case 5: try decoder.decodeSingularBoolField(value: &self.mintable)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.from) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.symbol) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.totalSupply) }()
+      case 5: try { try decoder.decodeSingularBoolField(value: &self.mintable) }()
       default: break
       }
     }
@@ -1245,10 +1309,13 @@ extension TW_Binance_Proto_TokenMintOrder: SwiftProtobuf.Message, SwiftProtobuf.
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.from)
-      case 2: try decoder.decodeSingularStringField(value: &self.symbol)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.amount)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.from) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.symbol) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.amount) }()
       default: break
       }
     }
@@ -1286,10 +1353,13 @@ extension TW_Binance_Proto_TokenBurnOrder: SwiftProtobuf.Message, SwiftProtobuf.
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.from)
-      case 2: try decoder.decodeSingularStringField(value: &self.symbol)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.amount)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.from) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.symbol) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.amount) }()
       default: break
       }
     }
@@ -1327,10 +1397,13 @@ extension TW_Binance_Proto_TokenFreezeOrder: SwiftProtobuf.Message, SwiftProtobu
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.from)
-      case 2: try decoder.decodeSingularStringField(value: &self.symbol)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.amount)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.from) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.symbol) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.amount) }()
       default: break
       }
     }
@@ -1368,10 +1441,13 @@ extension TW_Binance_Proto_TokenUnfreezeOrder: SwiftProtobuf.Message, SwiftProto
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.from)
-      case 2: try decoder.decodeSingularStringField(value: &self.symbol)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.amount)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.from) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.symbol) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.amount) }()
       default: break
       }
     }
@@ -1416,17 +1492,20 @@ extension TW_Binance_Proto_HTLTOrder: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.from)
-      case 2: try decoder.decodeSingularBytesField(value: &self.to)
-      case 3: try decoder.decodeSingularStringField(value: &self.recipientOtherChain)
-      case 4: try decoder.decodeSingularStringField(value: &self.senderOtherChain)
-      case 5: try decoder.decodeSingularBytesField(value: &self.randomNumberHash)
-      case 6: try decoder.decodeSingularInt64Field(value: &self.timestamp)
-      case 7: try decoder.decodeRepeatedMessageField(value: &self.amount)
-      case 8: try decoder.decodeSingularStringField(value: &self.expectedIncome)
-      case 9: try decoder.decodeSingularInt64Field(value: &self.heightSpan)
-      case 10: try decoder.decodeSingularBoolField(value: &self.crossChain)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.from) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.to) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.recipientOtherChain) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.senderOtherChain) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.randomNumberHash) }()
+      case 6: try { try decoder.decodeSingularInt64Field(value: &self.timestamp) }()
+      case 7: try { try decoder.decodeRepeatedMessageField(value: &self.amount) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.expectedIncome) }()
+      case 9: try { try decoder.decodeSingularInt64Field(value: &self.heightSpan) }()
+      case 10: try { try decoder.decodeSingularBoolField(value: &self.crossChain) }()
       default: break
       }
     }
@@ -1492,10 +1571,13 @@ extension TW_Binance_Proto_DepositHTLTOrder: SwiftProtobuf.Message, SwiftProtobu
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.from)
-      case 2: try decoder.decodeRepeatedMessageField(value: &self.amount)
-      case 3: try decoder.decodeSingularBytesField(value: &self.swapID)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.from) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.amount) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.swapID) }()
       default: break
       }
     }
@@ -1533,10 +1615,13 @@ extension TW_Binance_Proto_ClaimHTLOrder: SwiftProtobuf.Message, SwiftProtobuf._
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.from)
-      case 2: try decoder.decodeSingularBytesField(value: &self.swapID)
-      case 3: try decoder.decodeSingularBytesField(value: &self.randomNumber)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.from) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.swapID) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.randomNumber) }()
       default: break
       }
     }
@@ -1573,9 +1658,12 @@ extension TW_Binance_Proto_RefundHTLTOrder: SwiftProtobuf.Message, SwiftProtobuf
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.from)
-      case 2: try decoder.decodeSingularBytesField(value: &self.swapID)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.from) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.swapID) }()
       default: break
       }
     }
@@ -1610,11 +1698,14 @@ extension TW_Binance_Proto_TransferOut: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.from)
-      case 2: try decoder.decodeSingularBytesField(value: &self.to)
-      case 3: try decoder.decodeSingularMessageField(value: &self._amount)
-      case 4: try decoder.decodeSingularInt64Field(value: &self.expireTime)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.from) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.to) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._amount) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.expireTime) }()
       default: break
       }
     }
@@ -1657,11 +1748,14 @@ extension TW_Binance_Proto_SideChainDelegate: SwiftProtobuf.Message, SwiftProtob
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.delegatorAddr)
-      case 2: try decoder.decodeSingularBytesField(value: &self.validatorAddr)
-      case 3: try decoder.decodeSingularMessageField(value: &self._delegation)
-      case 4: try decoder.decodeSingularStringField(value: &self.chainID)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.delegatorAddr) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.validatorAddr) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._delegation) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
       default: break
       }
     }
@@ -1705,12 +1799,15 @@ extension TW_Binance_Proto_SideChainRedelegate: SwiftProtobuf.Message, SwiftProt
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.delegatorAddr)
-      case 2: try decoder.decodeSingularBytesField(value: &self.validatorSrcAddr)
-      case 3: try decoder.decodeSingularBytesField(value: &self.validatorDstAddr)
-      case 4: try decoder.decodeSingularMessageField(value: &self._amount)
-      case 5: try decoder.decodeSingularStringField(value: &self.chainID)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.delegatorAddr) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.validatorSrcAddr) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.validatorDstAddr) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._amount) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
       default: break
       }
     }
@@ -1757,11 +1854,14 @@ extension TW_Binance_Proto_SideChainUndelegate: SwiftProtobuf.Message, SwiftProt
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.delegatorAddr)
-      case 2: try decoder.decodeSingularBytesField(value: &self.validatorAddr)
-      case 3: try decoder.decodeSingularMessageField(value: &self._amount)
-      case 4: try decoder.decodeSingularStringField(value: &self.chainID)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.delegatorAddr) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.validatorAddr) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._amount) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
       default: break
       }
     }
@@ -1804,11 +1904,14 @@ extension TW_Binance_Proto_TimeLockOrder: SwiftProtobuf.Message, SwiftProtobuf._
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.fromAddress)
-      case 2: try decoder.decodeSingularStringField(value: &self.description_p)
-      case 3: try decoder.decodeRepeatedMessageField(value: &self.amount)
-      case 4: try decoder.decodeSingularInt64Field(value: &self.lockTime)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.fromAddress) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.description_p) }()
+      case 3: try { try decoder.decodeRepeatedMessageField(value: &self.amount) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.lockTime) }()
       default: break
       }
     }
@@ -1852,12 +1955,15 @@ extension TW_Binance_Proto_TimeRelockOrder: SwiftProtobuf.Message, SwiftProtobuf
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.fromAddress)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.id)
-      case 3: try decoder.decodeSingularStringField(value: &self.description_p)
-      case 4: try decoder.decodeRepeatedMessageField(value: &self.amount)
-      case 5: try decoder.decodeSingularInt64Field(value: &self.lockTime)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.fromAddress) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.description_p) }()
+      case 4: try { try decoder.decodeRepeatedMessageField(value: &self.amount) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.lockTime) }()
       default: break
       }
     }
@@ -1902,9 +2008,12 @@ extension TW_Binance_Proto_TimeUnlockOrder: SwiftProtobuf.Message, SwiftProtobuf
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.fromAddress)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.id)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.fromAddress) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
       default: break
       }
     }
@@ -1958,287 +2067,306 @@ extension TW_Binance_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
     26: .standard(proto: "time_unlock_order"),
   ]
 
-  fileprivate class _StorageClass {
-    var _chainID: String = String()
-    var _accountNumber: Int64 = 0
-    var _sequence: Int64 = 0
-    var _source: Int64 = 0
-    var _memo: String = String()
-    var _privateKey: Data = SwiftProtobuf.Internal.emptyData
-    var _orderOneof: TW_Binance_Proto_SigningInput.OneOf_OrderOneof?
-
-    static let defaultInstance = _StorageClass()
-
-    private init() {}
-
-    init(copying source: _StorageClass) {
-      _chainID = source._chainID
-      _accountNumber = source._accountNumber
-      _sequence = source._sequence
-      _source = source._source
-      _memo = source._memo
-      _privateKey = source._privateKey
-      _orderOneof = source._orderOneof
-    }
-  }
-
-  fileprivate mutating func _uniqueStorage() -> _StorageClass {
-    if !isKnownUniquelyReferenced(&_storage) {
-      _storage = _StorageClass(copying: _storage)
-    }
-    return _storage
-  }
-
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    _ = _uniqueStorage()
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      while let fieldNumber = try decoder.nextFieldNumber() {
-        switch fieldNumber {
-        case 1: try decoder.decodeSingularStringField(value: &_storage._chainID)
-        case 2: try decoder.decodeSingularInt64Field(value: &_storage._accountNumber)
-        case 3: try decoder.decodeSingularInt64Field(value: &_storage._sequence)
-        case 4: try decoder.decodeSingularInt64Field(value: &_storage._source)
-        case 5: try decoder.decodeSingularStringField(value: &_storage._memo)
-        case 6: try decoder.decodeSingularBytesField(value: &_storage._privateKey)
-        case 8:
-          var v: TW_Binance_Proto_TradeOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .tradeOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .tradeOrder(v)}
-        case 9:
-          var v: TW_Binance_Proto_CancelTradeOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .cancelTradeOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .cancelTradeOrder(v)}
-        case 10:
-          var v: TW_Binance_Proto_SendOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .sendOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .sendOrder(v)}
-        case 11:
-          var v: TW_Binance_Proto_TokenFreezeOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .freezeOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .freezeOrder(v)}
-        case 12:
-          var v: TW_Binance_Proto_TokenUnfreezeOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .unfreezeOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .unfreezeOrder(v)}
-        case 13:
-          var v: TW_Binance_Proto_HTLTOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .htltOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .htltOrder(v)}
-        case 14:
-          var v: TW_Binance_Proto_DepositHTLTOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .depositHtltOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .depositHtltOrder(v)}
-        case 15:
-          var v: TW_Binance_Proto_ClaimHTLOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .claimHtltOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .claimHtltOrder(v)}
-        case 16:
-          var v: TW_Binance_Proto_RefundHTLTOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .refundHtltOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .refundHtltOrder(v)}
-        case 17:
-          var v: TW_Binance_Proto_TokenIssueOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .issueOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .issueOrder(v)}
-        case 18:
-          var v: TW_Binance_Proto_TokenMintOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .mintOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .mintOrder(v)}
-        case 19:
-          var v: TW_Binance_Proto_TokenBurnOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .burnOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .burnOrder(v)}
-        case 20:
-          var v: TW_Binance_Proto_TransferOut?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .transferOutOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .transferOutOrder(v)}
-        case 21:
-          var v: TW_Binance_Proto_SideChainDelegate?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .sideDelegateOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .sideDelegateOrder(v)}
-        case 22:
-          var v: TW_Binance_Proto_SideChainRedelegate?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .sideRedelegateOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .sideRedelegateOrder(v)}
-        case 23:
-          var v: TW_Binance_Proto_SideChainUndelegate?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .sideUndelegateOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .sideUndelegateOrder(v)}
-        case 24:
-          var v: TW_Binance_Proto_TimeLockOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .timeLockOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .timeLockOrder(v)}
-        case 25:
-          var v: TW_Binance_Proto_TimeRelockOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .timeRelockOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .timeRelockOrder(v)}
-        case 26:
-          var v: TW_Binance_Proto_TimeUnlockOrder?
-          if let current = _storage._orderOneof {
-            try decoder.handleConflictingOneOf()
-            if case .timeUnlockOrder(let m) = current {v = m}
-          }
-          try decoder.decodeSingularMessageField(value: &v)
-          if let v = v {_storage._orderOneof = .timeUnlockOrder(v)}
-        default: break
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.accountNumber) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.sequence) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.source) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.memo) }()
+      case 6: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
+      case 8: try {
+        var v: TW_Binance_Proto_TradeOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .tradeOrder(let m) = current {v = m}
         }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .tradeOrder(v)}
+      }()
+      case 9: try {
+        var v: TW_Binance_Proto_CancelTradeOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .cancelTradeOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .cancelTradeOrder(v)}
+      }()
+      case 10: try {
+        var v: TW_Binance_Proto_SendOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .sendOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .sendOrder(v)}
+      }()
+      case 11: try {
+        var v: TW_Binance_Proto_TokenFreezeOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .freezeOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .freezeOrder(v)}
+      }()
+      case 12: try {
+        var v: TW_Binance_Proto_TokenUnfreezeOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .unfreezeOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .unfreezeOrder(v)}
+      }()
+      case 13: try {
+        var v: TW_Binance_Proto_HTLTOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .htltOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .htltOrder(v)}
+      }()
+      case 14: try {
+        var v: TW_Binance_Proto_DepositHTLTOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .depositHtltOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .depositHtltOrder(v)}
+      }()
+      case 15: try {
+        var v: TW_Binance_Proto_ClaimHTLOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .claimHtltOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .claimHtltOrder(v)}
+      }()
+      case 16: try {
+        var v: TW_Binance_Proto_RefundHTLTOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .refundHtltOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .refundHtltOrder(v)}
+      }()
+      case 17: try {
+        var v: TW_Binance_Proto_TokenIssueOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .issueOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .issueOrder(v)}
+      }()
+      case 18: try {
+        var v: TW_Binance_Proto_TokenMintOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .mintOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .mintOrder(v)}
+      }()
+      case 19: try {
+        var v: TW_Binance_Proto_TokenBurnOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .burnOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .burnOrder(v)}
+      }()
+      case 20: try {
+        var v: TW_Binance_Proto_TransferOut?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .transferOutOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .transferOutOrder(v)}
+      }()
+      case 21: try {
+        var v: TW_Binance_Proto_SideChainDelegate?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .sideDelegateOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .sideDelegateOrder(v)}
+      }()
+      case 22: try {
+        var v: TW_Binance_Proto_SideChainRedelegate?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .sideRedelegateOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .sideRedelegateOrder(v)}
+      }()
+      case 23: try {
+        var v: TW_Binance_Proto_SideChainUndelegate?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .sideUndelegateOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .sideUndelegateOrder(v)}
+      }()
+      case 24: try {
+        var v: TW_Binance_Proto_TimeLockOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .timeLockOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .timeLockOrder(v)}
+      }()
+      case 25: try {
+        var v: TW_Binance_Proto_TimeRelockOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .timeRelockOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .timeRelockOrder(v)}
+      }()
+      case 26: try {
+        var v: TW_Binance_Proto_TimeUnlockOrder?
+        if let current = self.orderOneof {
+          try decoder.handleConflictingOneOf()
+          if case .timeUnlockOrder(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {self.orderOneof = .timeUnlockOrder(v)}
+      }()
+      default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
-      if !_storage._chainID.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._chainID, fieldNumber: 1)
-      }
-      if _storage._accountNumber != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._accountNumber, fieldNumber: 2)
-      }
-      if _storage._sequence != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._sequence, fieldNumber: 3)
-      }
-      if _storage._source != 0 {
-        try visitor.visitSingularInt64Field(value: _storage._source, fieldNumber: 4)
-      }
-      if !_storage._memo.isEmpty {
-        try visitor.visitSingularStringField(value: _storage._memo, fieldNumber: 5)
-      }
-      if !_storage._privateKey.isEmpty {
-        try visitor.visitSingularBytesField(value: _storage._privateKey, fieldNumber: 6)
-      }
-      switch _storage._orderOneof {
-      case .tradeOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
-      case .cancelTradeOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
-      case .sendOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
-      case .freezeOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
-      case .unfreezeOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
-      case .htltOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
-      case .depositHtltOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
-      case .claimHtltOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
-      case .refundHtltOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 16)
-      case .issueOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 17)
-      case .mintOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 18)
-      case .burnOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 19)
-      case .transferOutOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 20)
-      case .sideDelegateOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 21)
-      case .sideRedelegateOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 22)
-      case .sideUndelegateOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 23)
-      case .timeLockOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 24)
-      case .timeRelockOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 25)
-      case .timeUnlockOrder(let v)?:
-        try visitor.visitSingularMessageField(value: v, fieldNumber: 26)
-      case nil: break
-      }
+    if !self.chainID.isEmpty {
+      try visitor.visitSingularStringField(value: self.chainID, fieldNumber: 1)
+    }
+    if self.accountNumber != 0 {
+      try visitor.visitSingularInt64Field(value: self.accountNumber, fieldNumber: 2)
+    }
+    if self.sequence != 0 {
+      try visitor.visitSingularInt64Field(value: self.sequence, fieldNumber: 3)
+    }
+    if self.source != 0 {
+      try visitor.visitSingularInt64Field(value: self.source, fieldNumber: 4)
+    }
+    if !self.memo.isEmpty {
+      try visitor.visitSingularStringField(value: self.memo, fieldNumber: 5)
+    }
+    if !self.privateKey.isEmpty {
+      try visitor.visitSingularBytesField(value: self.privateKey, fieldNumber: 6)
+    }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
+    switch self.orderOneof {
+    case .tradeOrder?: try {
+      guard case .tradeOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    }()
+    case .cancelTradeOrder?: try {
+      guard case .cancelTradeOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+    }()
+    case .sendOrder?: try {
+      guard case .sendOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+    }()
+    case .freezeOrder?: try {
+      guard case .freezeOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+    }()
+    case .unfreezeOrder?: try {
+      guard case .unfreezeOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
+    }()
+    case .htltOrder?: try {
+      guard case .htltOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
+    }()
+    case .depositHtltOrder?: try {
+      guard case .depositHtltOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
+    }()
+    case .claimHtltOrder?: try {
+      guard case .claimHtltOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
+    }()
+    case .refundHtltOrder?: try {
+      guard case .refundHtltOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 16)
+    }()
+    case .issueOrder?: try {
+      guard case .issueOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 17)
+    }()
+    case .mintOrder?: try {
+      guard case .mintOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 18)
+    }()
+    case .burnOrder?: try {
+      guard case .burnOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 19)
+    }()
+    case .transferOutOrder?: try {
+      guard case .transferOutOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 20)
+    }()
+    case .sideDelegateOrder?: try {
+      guard case .sideDelegateOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 21)
+    }()
+    case .sideRedelegateOrder?: try {
+      guard case .sideRedelegateOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 22)
+    }()
+    case .sideUndelegateOrder?: try {
+      guard case .sideUndelegateOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 23)
+    }()
+    case .timeLockOrder?: try {
+      guard case .timeLockOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 24)
+    }()
+    case .timeRelockOrder?: try {
+      guard case .timeRelockOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 25)
+    }()
+    case .timeUnlockOrder?: try {
+      guard case .timeUnlockOrder(let v)? = self.orderOneof else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 26)
+    }()
+    case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: TW_Binance_Proto_SigningInput, rhs: TW_Binance_Proto_SigningInput) -> Bool {
-    if lhs._storage !== rhs._storage {
-      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
-        let _storage = _args.0
-        let rhs_storage = _args.1
-        if _storage._chainID != rhs_storage._chainID {return false}
-        if _storage._accountNumber != rhs_storage._accountNumber {return false}
-        if _storage._sequence != rhs_storage._sequence {return false}
-        if _storage._source != rhs_storage._source {return false}
-        if _storage._memo != rhs_storage._memo {return false}
-        if _storage._privateKey != rhs_storage._privateKey {return false}
-        if _storage._orderOneof != rhs_storage._orderOneof {return false}
-        return true
-      }
-      if !storagesAreEqual {return false}
-    }
+    if lhs.chainID != rhs.chainID {return false}
+    if lhs.accountNumber != rhs.accountNumber {return false}
+    if lhs.sequence != rhs.sequence {return false}
+    if lhs.source != rhs.source {return false}
+    if lhs.memo != rhs.memo {return false}
+    if lhs.privateKey != rhs.privateKey {return false}
+    if lhs.orderOneof != rhs.orderOneof {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -2252,8 +2380,11 @@ extension TW_Binance_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.encoded)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
       default: break
       }
     }

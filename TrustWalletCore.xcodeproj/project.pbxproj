@@ -44,6 +44,7 @@
 		291A0E4452F29449FBBFDDD1 /* TWFIOProto.h in Headers */ = {isa = PBXBuildFile; fileRef = ADBC41B39BB9B8A3075F894C /* TWFIOProto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2C202462EB8E681D2CC99787 /* TWHRP.h in Headers */ = {isa = PBXBuildFile; fileRef = EEA05B17EB00B93B71D949A7 /* TWHRP.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2C67716E8A7C8BE9408663E6 /* TWStellarMemoType.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C24E08EFFE87B013E198011 /* TWStellarMemoType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C76513F2A1B8FC0812346FF /* TWOasisProto.h in Headers */ = {isa = PBXBuildFile; fileRef = 07EE441EDB416A8914A25FD1 /* TWOasisProto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E25C9AB0CC39A011DFBD233 /* TWAESPaddingMode.h in Headers */ = {isa = PBXBuildFile; fileRef = 4209850174F717DCA5BF7A9A /* TWAESPaddingMode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E5C04B73587C5BA41BA12F2 /* TWEthereumProto.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F6A8F56126DB05616066E6 /* TWEthereumProto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E6D267F2AA8BC1D06AAF989 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B2A819AB5108D2EB53B298 /* Wallet.swift */; };
@@ -69,6 +70,7 @@
 		49408E613CB77CD79AAD7764 /* Nebulas.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1AA198F9604744FFDF6A52 /* Nebulas.pb.swift */; };
 		4A7E5829019FC60571952E26 /* TWEthereumAbiValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 515E5753976FFF7B9AD496C7 /* TWEthereumAbiValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AB1EB1F05847D46CAD91244 /* SegwitAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = D241B09A11F6AABCDEBECD21 /* SegwitAddress.swift */; };
+		4BC832A7C72014D430624721 /* Oasis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CF7478CF27F52B904F7340 /* Oasis.pb.swift */; };
 		4D0B6B05793D23DBBF74CB71 /* TWAeternityProto.h in Headers */ = {isa = PBXBuildFile; fileRef = AE896367011691281B7F5D68 /* TWAeternityProto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D0C88A0616A8177C2998C3D /* TWNanoProto.h in Headers */ = {isa = PBXBuildFile; fileRef = 881FA13EFE081A997F3CDEA0 /* TWNanoProto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D36D5FEDC9824A290470CFE /* AESPaddingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81261342848749F6E44723FA /* AESPaddingMode.swift */; };
@@ -153,6 +155,7 @@
 		B8D3B590906F360EF54141A6 /* TWString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F4C18EDFEBD9B9A496AFF /* TWString.swift */; };
 		B9FF9B2CFD50775C680EFA59 /* TWCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = B5A39E87C1DD7AD99CE25D2F /* TWCurve.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB617A9E7F02B3946E6D2675 /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E49B75BF62C28DA6131FA6A /* AES.swift */; };
+		BD9008B1DF5C523E6DD67B6A /* Oasis+Proto.swift in Sources */ = {isa = PBXBuildFile; fileRef = F60E2B7C39FB310C2C345CEC /* Oasis+Proto.swift */; };
 		BE850A445149C7A8B63523D3 /* PublicKey+Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D343BAA549559503362D64 /* PublicKey+Bitcoin.swift */; };
 		BFCEFDD5BFEC1836A0AB91E6 /* TWBlockchain.h in Headers */ = {isa = PBXBuildFile; fileRef = A31FEBFEB696F52922DF4390 /* TWBlockchain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0144C7AD53CF75A79ADEC4A /* Decred.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F20276D9E28F7D8FD9CAE7 /* Decred.pb.swift */; };
@@ -210,6 +213,7 @@
 		025ABE5E0A5448DF70CB3DD8 /* TWStoredKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWStoredKey.h; sourceTree = "<group>"; };
 		0722AE0456E314A9F034F869 /* Harmony.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Harmony.pb.swift; sourceTree = "<group>"; };
 		0723B1BADE42A52E363D7E54 /* Icon+Proto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Icon+Proto.swift"; sourceTree = "<group>"; };
+		07EE441EDB416A8914A25FD1 /* TWOasisProto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWOasisProto.h; sourceTree = "<group>"; };
 		0861E200E673D32B86EB6873 /* Icon.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.pb.swift; sourceTree = "<group>"; };
 		0948509945546579F48D225B /* TWAccount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWAccount.h; sourceTree = "<group>"; };
 		0B9BADEE5E09870CEF19D96C /* HDVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDVersion.swift; sourceTree = "<group>"; };
@@ -356,6 +360,7 @@
 		B4F35BF5136A8A9C85CD86EA /* TWData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TWData.swift; sourceTree = "<group>"; };
 		B5A39E87C1DD7AD99CE25D2F /* TWCurve.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWCurve.h; sourceTree = "<group>"; };
 		B67F3F35F209359FC40038A9 /* Cosmos.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cosmos.pb.swift; sourceTree = "<group>"; };
+		B6CF7478CF27F52B904F7340 /* Oasis.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Oasis.pb.swift; sourceTree = "<group>"; };
 		B76FC262295A09AF3112BCAE /* TWIoTeXProto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWIoTeXProto.h; sourceTree = "<group>"; };
 		B93DFC0FE533C482E4DA0FC4 /* Data+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Hex.swift"; sourceTree = "<group>"; };
 		BA2A5E333A264489F0F690A0 /* Nimiq.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nimiq.pb.swift; sourceTree = "<group>"; };
@@ -393,6 +398,7 @@
 		EE82D3C9A90A400F032AE2B2 /* Nano.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nano.pb.swift; sourceTree = "<group>"; };
 		EEA05B17EB00B93B71D949A7 /* TWHRP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWHRP.h; sourceTree = "<group>"; };
 		F47EED17C86FA62A796F1351 /* TWGroestlcoinAddress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWGroestlcoinAddress.h; sourceTree = "<group>"; };
+		F60E2B7C39FB310C2C345CEC /* Oasis+Proto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Oasis+Proto.swift"; sourceTree = "<group>"; };
 		F807EE9FFFF4ED52A04B17CF /* SS58AddressType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SS58AddressType.swift; sourceTree = "<group>"; };
 		F875234901934D54ECDAAA31 /* BitcoinAddress+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BitcoinAddress+Extension.swift"; sourceTree = "<group>"; };
 		F99FDA4C4E69FDE1F3FCE13A /* TWDecredProto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWDecredProto.h; sourceTree = "<group>"; };
@@ -499,6 +505,7 @@
 				452366ACD446A6D2BC1A3DE2 /* TWNEOProto.h */,
 				0DC831486B45F28D4962717B /* TWNimiqProto.h */,
 				8CECE5C8ECB5A620FA3B753D /* TWNULSProto.h */,
+				07EE441EDB416A8914A25FD1 /* TWOasisProto.h */,
 				774156B1709DC6216757EA49 /* TWOntologyProto.h */,
 				709CCF8F540AF5778AE9DF8B /* TWPolkadotProto.h */,
 				4FE6A7A6F739EE17C31503EE /* TWPrivateKey.h */,
@@ -623,6 +630,8 @@
 				2EC04BF8C9F5A3AC6F4BBCD8 /* Nimiq+Proto.swift */,
 				ED6A62209190258CC6E57F87 /* NULS.pb.swift */,
 				2B761B3EBDF85ABACFE2EC45 /* NULS+Proto.swift */,
+				B6CF7478CF27F52B904F7340 /* Oasis.pb.swift */,
+				F60E2B7C39FB310C2C345CEC /* Oasis+Proto.swift */,
 				5EF18E3A51203629CC11ECB5 /* Ontology.pb.swift */,
 				8E9EF02810875F40F460B18C /* Ontology+Proto.swift */,
 				3028AE3CD939C1586A396899 /* Polkadot.pb.swift */,
@@ -798,6 +807,7 @@
 				4D0C88A0616A8177C2998C3D /* TWNanoProto.h in Headers */,
 				ECCC48014C1A0643D5A283DA /* TWNebulasProto.h in Headers */,
 				30482230B601AB7652FB375D /* TWNimiqProto.h in Headers */,
+				2C76513F2A1B8FC0812346FF /* TWOasisProto.h in Headers */,
 				B0B0FA77B7305275F431C362 /* TWOntologyProto.h in Headers */,
 				79BA9CA7DBE671A45F4CAE3F /* TWPolkadotProto.h in Headers */,
 				9BFF6D86E6555C2E1631E43E /* TWPrivateKey.h in Headers */,
@@ -958,6 +968,8 @@
 				49408E613CB77CD79AAD7764 /* Nebulas.pb.swift in Sources */,
 				CDDB24F93158AA3A1AE6FDD6 /* Nimiq+Proto.swift in Sources */,
 				722E13987E714075EE4BC902 /* Nimiq.pb.swift in Sources */,
+				BD9008B1DF5C523E6DD67B6A /* Oasis+Proto.swift in Sources */,
+				4BC832A7C72014D430624721 /* Oasis.pb.swift in Sources */,
 				A3AC6F734A9E79712331FF5C /* Ontology+Proto.swift in Sources */,
 				F89D42360BD40B72959EDC12 /* Ontology.pb.swift in Sources */,
 				AFC2131A10176B2530C9BE28 /* Polkadot+Proto.swift in Sources */,

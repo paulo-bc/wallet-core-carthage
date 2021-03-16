@@ -146,7 +146,7 @@ public struct TW_Solana_Proto_SigningInput {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var recentBlockhash: String = String()
 
@@ -221,14 +221,38 @@ public struct TW_Solana_Proto_SigningInput {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Solana_Proto_SigningInput.OneOf_TransactionType, rhs: TW_Solana_Proto_SigningInput.OneOf_TransactionType) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.transferTransaction(let l), .transferTransaction(let r)): return l == r
-      case (.stakeTransaction(let l), .stakeTransaction(let r)): return l == r
-      case (.deactivateStakeTransaction(let l), .deactivateStakeTransaction(let r)): return l == r
-      case (.withdrawTransaction(let l), .withdrawTransaction(let r)): return l == r
-      case (.createTokenAccountTransaction(let l), .createTokenAccountTransaction(let r)): return l == r
-      case (.tokenTransferTransaction(let l), .tokenTransferTransaction(let r)): return l == r
-      case (.createAndTransferTokenTransaction(let l), .createAndTransferTokenTransaction(let r)): return l == r
+      case (.transferTransaction, .transferTransaction): return {
+        guard case .transferTransaction(let l) = lhs, case .transferTransaction(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeTransaction, .stakeTransaction): return {
+        guard case .stakeTransaction(let l) = lhs, case .stakeTransaction(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.deactivateStakeTransaction, .deactivateStakeTransaction): return {
+        guard case .deactivateStakeTransaction(let l) = lhs, case .deactivateStakeTransaction(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.withdrawTransaction, .withdrawTransaction): return {
+        guard case .withdrawTransaction(let l) = lhs, case .withdrawTransaction(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.createTokenAccountTransaction, .createTokenAccountTransaction): return {
+        guard case .createTokenAccountTransaction(let l) = lhs, case .createTokenAccountTransaction(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.tokenTransferTransaction, .tokenTransferTransaction): return {
+        guard case .tokenTransferTransaction(let l) = lhs, case .tokenTransferTransaction(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.createAndTransferTokenTransaction, .createAndTransferTokenTransaction): return {
+        guard case .createAndTransferTokenTransaction(let l) = lhs, case .createAndTransferTokenTransaction(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -264,9 +288,12 @@ extension TW_Solana_Proto_Transfer: SwiftProtobuf.Message, SwiftProtobuf._Messag
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.recipient)
-      case 2: try decoder.decodeSingularUInt64Field(value: &self.value)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.recipient) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.value) }()
       default: break
       }
     }
@@ -299,9 +326,12 @@ extension TW_Solana_Proto_Stake: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.validatorPubkey)
-      case 2: try decoder.decodeSingularUInt64Field(value: &self.value)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.validatorPubkey) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.value) }()
       default: break
       }
     }
@@ -333,8 +363,11 @@ extension TW_Solana_Proto_DeactivateStake: SwiftProtobuf.Message, SwiftProtobuf.
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.validatorPubkey)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.validatorPubkey) }()
       default: break
       }
     }
@@ -363,9 +396,12 @@ extension TW_Solana_Proto_WithdrawStake: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.validatorPubkey)
-      case 2: try decoder.decodeSingularUInt64Field(value: &self.value)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.validatorPubkey) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.value) }()
       default: break
       }
     }
@@ -399,10 +435,13 @@ extension TW_Solana_Proto_CreateTokenAccount: SwiftProtobuf.Message, SwiftProtob
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.mainAddress)
-      case 2: try decoder.decodeSingularStringField(value: &self.tokenMintAddress)
-      case 3: try decoder.decodeSingularStringField(value: &self.tokenAddress)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.mainAddress) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.tokenMintAddress) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.tokenAddress) }()
       default: break
       }
     }
@@ -442,12 +481,15 @@ extension TW_Solana_Proto_TokenTransfer: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.tokenMintAddress)
-      case 2: try decoder.decodeSingularStringField(value: &self.senderTokenAddress)
-      case 3: try decoder.decodeSingularStringField(value: &self.recipientTokenAddress)
-      case 4: try decoder.decodeSingularUInt64Field(value: &self.amount)
-      case 5: try decoder.decodeSingularUInt32Field(value: &self.decimals)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.tokenMintAddress) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.senderTokenAddress) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.recipientTokenAddress) }()
+      case 4: try { try decoder.decodeSingularUInt64Field(value: &self.amount) }()
+      case 5: try { try decoder.decodeSingularUInt32Field(value: &self.decimals) }()
       default: break
       }
     }
@@ -496,13 +538,16 @@ extension TW_Solana_Proto_CreateAndTransferToken: SwiftProtobuf.Message, SwiftPr
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.recipientMainAddress)
-      case 2: try decoder.decodeSingularStringField(value: &self.tokenMintAddress)
-      case 3: try decoder.decodeSingularStringField(value: &self.recipientTokenAddress)
-      case 4: try decoder.decodeSingularStringField(value: &self.senderTokenAddress)
-      case 5: try decoder.decodeSingularUInt64Field(value: &self.amount)
-      case 6: try decoder.decodeSingularUInt32Field(value: &self.decimals)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.recipientMainAddress) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.tokenMintAddress) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.recipientTokenAddress) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.senderTokenAddress) }()
+      case 5: try { try decoder.decodeSingularUInt64Field(value: &self.amount) }()
+      case 6: try { try decoder.decodeSingularUInt32Field(value: &self.decimals) }()
       default: break
       }
     }
@@ -558,10 +603,13 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 2: try decoder.decodeSingularStringField(value: &self.recentBlockhash)
-      case 3:
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.recentBlockhash) }()
+      case 3: try {
         var v: TW_Solana_Proto_Transfer?
         if let current = self.transactionType {
           try decoder.handleConflictingOneOf()
@@ -569,7 +617,8 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionType = .transferTransaction(v)}
-      case 4:
+      }()
+      case 4: try {
         var v: TW_Solana_Proto_Stake?
         if let current = self.transactionType {
           try decoder.handleConflictingOneOf()
@@ -577,7 +626,8 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionType = .stakeTransaction(v)}
-      case 5:
+      }()
+      case 5: try {
         var v: TW_Solana_Proto_DeactivateStake?
         if let current = self.transactionType {
           try decoder.handleConflictingOneOf()
@@ -585,7 +635,8 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionType = .deactivateStakeTransaction(v)}
-      case 6:
+      }()
+      case 6: try {
         var v: TW_Solana_Proto_WithdrawStake?
         if let current = self.transactionType {
           try decoder.handleConflictingOneOf()
@@ -593,7 +644,8 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionType = .withdrawTransaction(v)}
-      case 7:
+      }()
+      case 7: try {
         var v: TW_Solana_Proto_CreateTokenAccount?
         if let current = self.transactionType {
           try decoder.handleConflictingOneOf()
@@ -601,7 +653,8 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionType = .createTokenAccountTransaction(v)}
-      case 8:
+      }()
+      case 8: try {
         var v: TW_Solana_Proto_TokenTransfer?
         if let current = self.transactionType {
           try decoder.handleConflictingOneOf()
@@ -609,7 +662,8 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionType = .tokenTransferTransaction(v)}
-      case 9:
+      }()
+      case 9: try {
         var v: TW_Solana_Proto_CreateAndTransferToken?
         if let current = self.transactionType {
           try decoder.handleConflictingOneOf()
@@ -617,6 +671,7 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.transactionType = .createAndTransferTokenTransaction(v)}
+      }()
       default: break
       }
     }
@@ -629,21 +684,38 @@ extension TW_Solana_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
     if !self.recentBlockhash.isEmpty {
       try visitor.visitSingularStringField(value: self.recentBlockhash, fieldNumber: 2)
     }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.transactionType {
-    case .transferTransaction(let v)?:
+    case .transferTransaction?: try {
+      guard case .transferTransaction(let v)? = self.transactionType else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    case .stakeTransaction(let v)?:
+    }()
+    case .stakeTransaction?: try {
+      guard case .stakeTransaction(let v)? = self.transactionType else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    case .deactivateStakeTransaction(let v)?:
+    }()
+    case .deactivateStakeTransaction?: try {
+      guard case .deactivateStakeTransaction(let v)? = self.transactionType else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-    case .withdrawTransaction(let v)?:
+    }()
+    case .withdrawTransaction?: try {
+      guard case .withdrawTransaction(let v)? = self.transactionType else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    case .createTokenAccountTransaction(let v)?:
+    }()
+    case .createTokenAccountTransaction?: try {
+      guard case .createTokenAccountTransaction(let v)? = self.transactionType else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
-    case .tokenTransferTransaction(let v)?:
+    }()
+    case .tokenTransferTransaction?: try {
+      guard case .tokenTransferTransaction(let v)? = self.transactionType else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
-    case .createAndTransferTokenTransaction(let v)?:
+    }()
+    case .createAndTransferTokenTransaction?: try {
+      guard case .createAndTransferTokenTransaction(let v)? = self.transactionType else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -666,8 +738,11 @@ extension TW_Solana_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.encoded)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.encoded) }()
       default: break
       }
     }

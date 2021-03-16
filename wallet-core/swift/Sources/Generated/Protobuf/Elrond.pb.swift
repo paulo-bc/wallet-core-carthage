@@ -61,7 +61,7 @@ public struct TW_Elrond_Proto_SigningInput {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var messageOneof: TW_Elrond_Proto_SigningInput.OneOf_MessageOneof? = nil
 
@@ -80,8 +80,14 @@ public struct TW_Elrond_Proto_SigningInput {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Elrond_Proto_SigningInput.OneOf_MessageOneof, rhs: TW_Elrond_Proto_SigningInput.OneOf_MessageOneof) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.transaction(let l), .transaction(let r)): return l == r
+      case (.transaction, .transaction): return {
+        guard case .transaction(let l) = lhs, case .transaction(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       }
     }
   #endif
@@ -125,16 +131,19 @@ extension TW_Elrond_Proto_TransactionMessage: SwiftProtobuf.Message, SwiftProtob
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt64Field(value: &self.nonce)
-      case 2: try decoder.decodeSingularStringField(value: &self.value)
-      case 3: try decoder.decodeSingularStringField(value: &self.receiver)
-      case 4: try decoder.decodeSingularStringField(value: &self.sender)
-      case 5: try decoder.decodeSingularUInt64Field(value: &self.gasPrice)
-      case 6: try decoder.decodeSingularUInt64Field(value: &self.gasLimit)
-      case 7: try decoder.decodeSingularStringField(value: &self.data)
-      case 8: try decoder.decodeSingularStringField(value: &self.chainID)
-      case 9: try decoder.decodeSingularUInt32Field(value: &self.version)
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.nonce) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.value) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.receiver) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.sender) }()
+      case 5: try { try decoder.decodeSingularUInt64Field(value: &self.gasPrice) }()
+      case 6: try { try decoder.decodeSingularUInt64Field(value: &self.gasLimit) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.data) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.chainID) }()
+      case 9: try { try decoder.decodeSingularUInt32Field(value: &self.version) }()
       default: break
       }
     }
@@ -195,9 +204,12 @@ extension TW_Elrond_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 2:
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
+      case 2: try {
         var v: TW_Elrond_Proto_TransactionMessage?
         if let current = self.messageOneof {
           try decoder.handleConflictingOneOf()
@@ -205,6 +217,7 @@ extension TW_Elrond_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Me
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.messageOneof = .transaction(v)}
+      }()
       default: break
       }
     }
@@ -237,9 +250,12 @@ extension TW_Elrond_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.encoded)
-      case 2: try decoder.decodeSingularStringField(value: &self.signature)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.encoded) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.signature) }()
       default: break
       }
     }

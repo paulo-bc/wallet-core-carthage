@@ -42,4 +42,5 @@ public enum Blockchain: UInt32, CaseIterable {
     case neo = 31
     case filecoin = 32
     case elrondNetwork = 33
+    case oasisNetwork = 34
 }

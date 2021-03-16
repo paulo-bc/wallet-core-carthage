@@ -30,31 +30,31 @@ public struct TW_Nebulas_Proto_SigningInput {
   public var fromAddress: String = String()
 
   /// Chain identifier (256-bit number)
-  public var chainID: Data = SwiftProtobuf.Internal.emptyData
+  public var chainID: Data = Data()
 
   /// Nonce (256-bit number)
-  public var nonce: Data = SwiftProtobuf.Internal.emptyData
+  public var nonce: Data = Data()
 
   /// Gas price (256-bit number)
-  public var gasPrice: Data = SwiftProtobuf.Internal.emptyData
+  public var gasPrice: Data = Data()
 
   /// Gas limit (256-bit number)
-  public var gasLimit: Data = SwiftProtobuf.Internal.emptyData
+  public var gasLimit: Data = Data()
 
   /// Recipient's address.
   public var toAddress: String = String()
 
   /// Amount to send in wei, 1 NAS = 10^18 Wei (256-bit number)
-  public var amount: Data = SwiftProtobuf.Internal.emptyData
+  public var amount: Data = Data()
 
   /// Timestamp to create transaction (256-bit number)
-  public var timestamp: Data = SwiftProtobuf.Internal.emptyData
+  public var timestamp: Data = Data()
 
   /// Optional payload
   public var payload: String = String()
 
   /// Private key.
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -69,7 +69,7 @@ public struct TW_Nebulas_Proto_SigningOutput {
 
   public var algorithm: UInt32 = 0
 
-  public var signature: Data = SwiftProtobuf.Internal.emptyData
+  public var signature: Data = Data()
 
   public var raw: String = String()
 
@@ -85,7 +85,7 @@ public struct TW_Nebulas_Proto_Data {
 
   public var type: String = String()
 
-  public var payload: Data = SwiftProtobuf.Internal.emptyData
+  public var payload: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -98,13 +98,13 @@ public struct TW_Nebulas_Proto_RawTransaction {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var hash: Data = SwiftProtobuf.Internal.emptyData
+  public var hash: Data = Data()
 
-  public var from: Data = SwiftProtobuf.Internal.emptyData
+  public var from: Data = Data()
 
-  public var to: Data = SwiftProtobuf.Internal.emptyData
+  public var to: Data = Data()
 
-  public var value: Data = SwiftProtobuf.Internal.emptyData
+  public var value: Data = Data()
 
   public var nonce: UInt64 = 0
 
@@ -121,13 +121,13 @@ public struct TW_Nebulas_Proto_RawTransaction {
 
   public var chainID: UInt32 = 0
 
-  public var gasPrice: Data = SwiftProtobuf.Internal.emptyData
+  public var gasPrice: Data = Data()
 
-  public var gasLimit: Data = SwiftProtobuf.Internal.emptyData
+  public var gasLimit: Data = Data()
 
   public var alg: UInt32 = 0
 
-  public var sign: Data = SwiftProtobuf.Internal.emptyData
+  public var sign: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -157,17 +157,20 @@ extension TW_Nebulas_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.fromAddress)
-      case 2: try decoder.decodeSingularBytesField(value: &self.chainID)
-      case 3: try decoder.decodeSingularBytesField(value: &self.nonce)
-      case 4: try decoder.decodeSingularBytesField(value: &self.gasPrice)
-      case 5: try decoder.decodeSingularBytesField(value: &self.gasLimit)
-      case 6: try decoder.decodeSingularStringField(value: &self.toAddress)
-      case 7: try decoder.decodeSingularBytesField(value: &self.amount)
-      case 8: try decoder.decodeSingularBytesField(value: &self.timestamp)
-      case 9: try decoder.decodeSingularStringField(value: &self.payload)
-      case 10: try decoder.decodeSingularBytesField(value: &self.privateKey)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.fromAddress) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.chainID) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.nonce) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.gasPrice) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.gasLimit) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.toAddress) }()
+      case 7: try { try decoder.decodeSingularBytesField(value: &self.amount) }()
+      case 8: try { try decoder.decodeSingularBytesField(value: &self.timestamp) }()
+      case 9: try { try decoder.decodeSingularStringField(value: &self.payload) }()
+      case 10: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
       default: break
       }
     }
@@ -233,10 +236,13 @@ extension TW_Nebulas_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt32Field(value: &self.algorithm)
-      case 2: try decoder.decodeSingularBytesField(value: &self.signature)
-      case 3: try decoder.decodeSingularStringField(value: &self.raw)
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self.algorithm) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.signature) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.raw) }()
       default: break
       }
     }
@@ -273,9 +279,12 @@ extension TW_Nebulas_Proto_Data: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.type)
-      case 2: try decoder.decodeSingularBytesField(value: &self.payload)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.type) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.payload) }()
       default: break
       }
     }
@@ -318,19 +327,22 @@ extension TW_Nebulas_Proto_RawTransaction: SwiftProtobuf.Message, SwiftProtobuf.
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.hash)
-      case 2: try decoder.decodeSingularBytesField(value: &self.from)
-      case 3: try decoder.decodeSingularBytesField(value: &self.to)
-      case 4: try decoder.decodeSingularBytesField(value: &self.value)
-      case 5: try decoder.decodeSingularUInt64Field(value: &self.nonce)
-      case 6: try decoder.decodeSingularInt64Field(value: &self.timestamp)
-      case 7: try decoder.decodeSingularMessageField(value: &self._data)
-      case 8: try decoder.decodeSingularUInt32Field(value: &self.chainID)
-      case 9: try decoder.decodeSingularBytesField(value: &self.gasPrice)
-      case 10: try decoder.decodeSingularBytesField(value: &self.gasLimit)
-      case 11: try decoder.decodeSingularUInt32Field(value: &self.alg)
-      case 12: try decoder.decodeSingularBytesField(value: &self.sign)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.hash) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.from) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.to) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.value) }()
+      case 5: try { try decoder.decodeSingularUInt64Field(value: &self.nonce) }()
+      case 6: try { try decoder.decodeSingularInt64Field(value: &self.timestamp) }()
+      case 7: try { try decoder.decodeSingularMessageField(value: &self._data) }()
+      case 8: try { try decoder.decodeSingularUInt32Field(value: &self.chainID) }()
+      case 9: try { try decoder.decodeSingularBytesField(value: &self.gasPrice) }()
+      case 10: try { try decoder.decodeSingularBytesField(value: &self.gasLimit) }()
+      case 11: try { try decoder.decodeSingularUInt32Field(value: &self.alg) }()
+      case 12: try { try decoder.decodeSingularBytesField(value: &self.sign) }()
       default: break
       }
     }

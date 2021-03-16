@@ -32,6 +32,7 @@ enum TWHRP {
     TWHRPZilliqa     /* "zil" */,
     TWHRPTerra     /* "terra" */,
     TWHRPKava     /* "kava" */,
+    TWHRPOasis     /* "oasis" */,
     TWHRPBandChain     /* "band" */,
     TWHRPElrond     /* "erd" */,
     TWHRPBinance     /* "bnb" */,
@@ -53,6 +54,7 @@ static const char *_Nonnull HRP_IOTEX = "io";
 static const char *_Nonnull HRP_ZILLIQA = "zil";
 static const char *_Nonnull HRP_TERRA = "terra";
 static const char *_Nonnull HRP_KAVA = "kava";
+static const char *_Nonnull HRP_OASIS = "oasis";
 static const char *_Nonnull HRP_BAND = "band";
 static const char *_Nonnull HRP_ELROND = "erd";
 static const char *_Nonnull HRP_BINANCE = "bnb";

@@ -70,4 +70,5 @@ public enum CoinType: UInt32, CaseIterable {
     case bandChain = 494
     case smartChainLegacy = 10000714
     case smartChain = 20000714
+    case oasis = 474
 }

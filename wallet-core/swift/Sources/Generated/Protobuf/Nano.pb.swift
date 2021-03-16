@@ -27,10 +27,10 @@ public struct TW_Nano_Proto_SigningInput {
   // methods supported on all messages.
 
   /// Private key
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   /// Optional parent block hash
-  public var parentBlock: Data = SwiftProtobuf.Internal.emptyData
+  public var parentBlock: Data = Data()
 
   public var linkOneof: TW_Nano_Proto_SigningInput.OneOf_LinkOneof? = nil
 
@@ -38,7 +38,7 @@ public struct TW_Nano_Proto_SigningInput {
   public var linkBlock: Data {
     get {
       if case .linkBlock(let v)? = linkOneof {return v}
-      return SwiftProtobuf.Internal.emptyData
+      return Data()
     }
     set {linkOneof = .linkBlock(newValue)}
   }
@@ -71,9 +71,18 @@ public struct TW_Nano_Proto_SigningInput {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Nano_Proto_SigningInput.OneOf_LinkOneof, rhs: TW_Nano_Proto_SigningInput.OneOf_LinkOneof) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.linkBlock(let l), .linkBlock(let r)): return l == r
-      case (.linkRecipient(let l), .linkRecipient(let r)): return l == r
+      case (.linkBlock, .linkBlock): return {
+        guard case .linkBlock(let l) = lhs, case .linkBlock(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.linkRecipient, .linkRecipient): return {
+        guard case .linkRecipient(let l) = lhs, case .linkRecipient(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -90,10 +99,10 @@ public struct TW_Nano_Proto_SigningOutput {
   // methods supported on all messages.
 
   /// Signature
-  public var signature: Data = SwiftProtobuf.Internal.emptyData
+  public var signature: Data = Data()
 
   /// Block hash
-  public var blockHash: Data = SwiftProtobuf.Internal.emptyData
+  public var blockHash: Data = Data()
 
   /// Json representation of the block
   public var json: String = String()
@@ -121,22 +130,27 @@ extension TW_Nano_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 2: try decoder.decodeSingularBytesField(value: &self.parentBlock)
-      case 3:
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.parentBlock) }()
+      case 3: try {
         if self.linkOneof != nil {try decoder.handleConflictingOneOf()}
         var v: Data?
         try decoder.decodeSingularBytesField(value: &v)
         if let v = v {self.linkOneof = .linkBlock(v)}
-      case 4:
+      }()
+      case 4: try {
         if self.linkOneof != nil {try decoder.handleConflictingOneOf()}
         var v: String?
         try decoder.decodeSingularStringField(value: &v)
         if let v = v {self.linkOneof = .linkRecipient(v)}
-      case 5: try decoder.decodeSingularStringField(value: &self.representative)
-      case 6: try decoder.decodeSingularStringField(value: &self.balance)
-      case 7: try decoder.decodeSingularStringField(value: &self.work)
+      }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.representative) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.balance) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.work) }()
       default: break
       }
     }
@@ -149,11 +163,18 @@ extension TW_Nano_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if !self.parentBlock.isEmpty {
       try visitor.visitSingularBytesField(value: self.parentBlock, fieldNumber: 2)
     }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.linkOneof {
-    case .linkBlock(let v)?:
+    case .linkBlock?: try {
+      guard case .linkBlock(let v)? = self.linkOneof else { preconditionFailure() }
       try visitor.visitSingularBytesField(value: v, fieldNumber: 3)
-    case .linkRecipient(let v)?:
+    }()
+    case .linkRecipient?: try {
+      guard case .linkRecipient(let v)? = self.linkOneof else { preconditionFailure() }
       try visitor.visitSingularStringField(value: v, fieldNumber: 4)
+    }()
     case nil: break
     }
     if !self.representative.isEmpty {
@@ -190,10 +211,13 @@ extension TW_Nano_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.signature)
-      case 2: try decoder.decodeSingularBytesField(value: &self.blockHash)
-      case 3: try decoder.decodeSingularStringField(value: &self.json)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.signature) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.blockHash) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.json) }()
       default: break
       }
     }

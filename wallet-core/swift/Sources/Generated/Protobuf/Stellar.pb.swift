@@ -141,7 +141,7 @@ public struct TW_Stellar_Proto_MemoHash {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var hash: Data = SwiftProtobuf.Internal.emptyData
+  public var hash: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -161,7 +161,7 @@ public struct TW_Stellar_Proto_SigningInput {
   public var account: String = String()
 
   /// Private key.
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var passphrase: String = String()
 
@@ -242,10 +242,22 @@ public struct TW_Stellar_Proto_SigningInput {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Stellar_Proto_SigningInput.OneOf_OperationOneof, rhs: TW_Stellar_Proto_SigningInput.OneOf_OperationOneof) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.opCreateAccount(let l), .opCreateAccount(let r)): return l == r
-      case (.opPayment(let l), .opPayment(let r)): return l == r
-      case (.opChangeTrust(let l), .opChangeTrust(let r)): return l == r
+      case (.opCreateAccount, .opCreateAccount): return {
+        guard case .opCreateAccount(let l) = lhs, case .opCreateAccount(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.opPayment, .opPayment): return {
+        guard case .opPayment(let l) = lhs, case .opPayment(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.opChangeTrust, .opChangeTrust): return {
+        guard case .opChangeTrust(let l) = lhs, case .opChangeTrust(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -261,12 +273,30 @@ public struct TW_Stellar_Proto_SigningInput {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_Stellar_Proto_SigningInput.OneOf_MemoTypeOneof, rhs: TW_Stellar_Proto_SigningInput.OneOf_MemoTypeOneof) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.memoVoid(let l), .memoVoid(let r)): return l == r
-      case (.memoText(let l), .memoText(let r)): return l == r
-      case (.memoID(let l), .memoID(let r)): return l == r
-      case (.memoHash(let l), .memoHash(let r)): return l == r
-      case (.memoReturnHash(let l), .memoReturnHash(let r)): return l == r
+      case (.memoVoid, .memoVoid): return {
+        guard case .memoVoid(let l) = lhs, case .memoVoid(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.memoText, .memoText): return {
+        guard case .memoText(let l) = lhs, case .memoText(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.memoID, .memoID): return {
+        guard case .memoID(let l) = lhs, case .memoID(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.memoHash, .memoHash): return {
+        guard case .memoHash(let l) = lhs, case .memoHash(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.memoReturnHash, .memoReturnHash): return {
+        guard case .memoReturnHash(let l) = lhs, case .memoReturnHash(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -303,9 +333,12 @@ extension TW_Stellar_Proto_Asset: SwiftProtobuf.Message, SwiftProtobuf._MessageI
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.issuer)
-      case 2: try decoder.decodeSingularStringField(value: &self.alphanum4)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.issuer) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.alphanum4) }()
       default: break
       }
     }
@@ -338,9 +371,12 @@ extension TW_Stellar_Proto_OperationCreateAccount: SwiftProtobuf.Message, SwiftP
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.destination)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.amount)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.destination) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.amount) }()
       default: break
       }
     }
@@ -374,10 +410,13 @@ extension TW_Stellar_Proto_OperationPayment: SwiftProtobuf.Message, SwiftProtobu
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.destination)
-      case 2: try decoder.decodeSingularMessageField(value: &self._asset)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.amount)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.destination) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._asset) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.amount) }()
       default: break
       }
     }
@@ -414,9 +453,12 @@ extension TW_Stellar_Proto_OperationChangeTrust: SwiftProtobuf.Message, SwiftPro
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularMessageField(value: &self._asset)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.validBefore)
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._asset) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.validBefore) }()
       default: break
       }
     }
@@ -467,8 +509,11 @@ extension TW_Stellar_Proto_MemoText: SwiftProtobuf.Message, SwiftProtobuf._Messa
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.text)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.text) }()
       default: break
       }
     }
@@ -496,8 +541,11 @@ extension TW_Stellar_Proto_MemoId: SwiftProtobuf.Message, SwiftProtobuf._Message
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularInt64Field(value: &self.id)
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.id) }()
       default: break
       }
     }
@@ -525,8 +573,11 @@ extension TW_Stellar_Proto_MemoHash: SwiftProtobuf.Message, SwiftProtobuf._Messa
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.hash)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.hash) }()
       default: break
       }
     }
@@ -566,13 +617,16 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularInt32Field(value: &self.fee)
-      case 2: try decoder.decodeSingularInt64Field(value: &self.sequence)
-      case 3: try decoder.decodeSingularStringField(value: &self.account)
-      case 4: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 5: try decoder.decodeSingularStringField(value: &self.passphrase)
-      case 6:
+      case 1: try { try decoder.decodeSingularInt32Field(value: &self.fee) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.sequence) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.account) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.passphrase) }()
+      case 6: try {
         var v: TW_Stellar_Proto_OperationCreateAccount?
         if let current = self.operationOneof {
           try decoder.handleConflictingOneOf()
@@ -580,7 +634,8 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.operationOneof = .opCreateAccount(v)}
-      case 7:
+      }()
+      case 7: try {
         var v: TW_Stellar_Proto_OperationPayment?
         if let current = self.operationOneof {
           try decoder.handleConflictingOneOf()
@@ -588,7 +643,8 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.operationOneof = .opPayment(v)}
-      case 8:
+      }()
+      case 8: try {
         var v: TW_Stellar_Proto_OperationChangeTrust?
         if let current = self.operationOneof {
           try decoder.handleConflictingOneOf()
@@ -596,7 +652,8 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.operationOneof = .opChangeTrust(v)}
-      case 9:
+      }()
+      case 9: try {
         var v: TW_Stellar_Proto_MemoVoid?
         if let current = self.memoTypeOneof {
           try decoder.handleConflictingOneOf()
@@ -604,7 +661,8 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.memoTypeOneof = .memoVoid(v)}
-      case 10:
+      }()
+      case 10: try {
         var v: TW_Stellar_Proto_MemoText?
         if let current = self.memoTypeOneof {
           try decoder.handleConflictingOneOf()
@@ -612,7 +670,8 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.memoTypeOneof = .memoText(v)}
-      case 11:
+      }()
+      case 11: try {
         var v: TW_Stellar_Proto_MemoId?
         if let current = self.memoTypeOneof {
           try decoder.handleConflictingOneOf()
@@ -620,7 +679,8 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.memoTypeOneof = .memoID(v)}
-      case 12:
+      }()
+      case 12: try {
         var v: TW_Stellar_Proto_MemoHash?
         if let current = self.memoTypeOneof {
           try decoder.handleConflictingOneOf()
@@ -628,7 +688,8 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.memoTypeOneof = .memoHash(v)}
-      case 13:
+      }()
+      case 13: try {
         var v: TW_Stellar_Proto_MemoHash?
         if let current = self.memoTypeOneof {
           try decoder.handleConflictingOneOf()
@@ -636,6 +697,7 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.memoTypeOneof = .memoReturnHash(v)}
+      }()
       default: break
       }
     }
@@ -657,26 +719,48 @@ extension TW_Stellar_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._M
     if !self.passphrase.isEmpty {
       try visitor.visitSingularStringField(value: self.passphrase, fieldNumber: 5)
     }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.operationOneof {
-    case .opCreateAccount(let v)?:
+    case .opCreateAccount?: try {
+      guard case .opCreateAccount(let v)? = self.operationOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    case .opPayment(let v)?:
+    }()
+    case .opPayment?: try {
+      guard case .opPayment(let v)? = self.operationOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
-    case .opChangeTrust(let v)?:
+    }()
+    case .opChangeTrust?: try {
+      guard case .opChangeTrust(let v)? = self.operationOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    }()
     case nil: break
     }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.memoTypeOneof {
-    case .memoVoid(let v)?:
+    case .memoVoid?: try {
+      guard case .memoVoid(let v)? = self.memoTypeOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
-    case .memoText(let v)?:
+    }()
+    case .memoText?: try {
+      guard case .memoText(let v)? = self.memoTypeOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
-    case .memoID(let v)?:
+    }()
+    case .memoID?: try {
+      guard case .memoID(let v)? = self.memoTypeOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
-    case .memoHash(let v)?:
+    }()
+    case .memoHash?: try {
+      guard case .memoHash(let v)? = self.memoTypeOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
-    case .memoReturnHash(let v)?:
+    }()
+    case .memoReturnHash?: try {
+      guard case .memoReturnHash(let v)? = self.memoTypeOneof else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -703,8 +787,11 @@ extension TW_Stellar_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.signature)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signature) }()
       default: break
       }
     }

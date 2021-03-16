@@ -29,7 +29,7 @@ public struct TW_IoTeX_Proto_Transfer {
 
   public var recipient: String = String()
 
-  public var payload: Data = SwiftProtobuf.Internal.emptyData
+  public var payload: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -130,16 +130,46 @@ public struct TW_IoTeX_Proto_Staking {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_IoTeX_Proto_Staking.OneOf_Message, rhs: TW_IoTeX_Proto_Staking.OneOf_Message) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.stakeCreate(let l), .stakeCreate(let r)): return l == r
-      case (.stakeUnstake(let l), .stakeUnstake(let r)): return l == r
-      case (.stakeWithdraw(let l), .stakeWithdraw(let r)): return l == r
-      case (.stakeAddDeposit(let l), .stakeAddDeposit(let r)): return l == r
-      case (.stakeRestake(let l), .stakeRestake(let r)): return l == r
-      case (.stakeChangeCandidate(let l), .stakeChangeCandidate(let r)): return l == r
-      case (.stakeTransferOwnership(let l), .stakeTransferOwnership(let r)): return l == r
-      case (.candidateRegister(let l), .candidateRegister(let r)): return l == r
-      case (.candidateUpdate(let l), .candidateUpdate(let r)): return l == r
+      case (.stakeCreate, .stakeCreate): return {
+        guard case .stakeCreate(let l) = lhs, case .stakeCreate(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeUnstake, .stakeUnstake): return {
+        guard case .stakeUnstake(let l) = lhs, case .stakeUnstake(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeWithdraw, .stakeWithdraw): return {
+        guard case .stakeWithdraw(let l) = lhs, case .stakeWithdraw(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeAddDeposit, .stakeAddDeposit): return {
+        guard case .stakeAddDeposit(let l) = lhs, case .stakeAddDeposit(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeRestake, .stakeRestake): return {
+        guard case .stakeRestake(let l) = lhs, case .stakeRestake(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeChangeCandidate, .stakeChangeCandidate): return {
+        guard case .stakeChangeCandidate(let l) = lhs, case .stakeChangeCandidate(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeTransferOwnership, .stakeTransferOwnership): return {
+        guard case .stakeTransferOwnership(let l) = lhs, case .stakeTransferOwnership(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.candidateRegister, .candidateRegister): return {
+        guard case .candidateRegister(let l) = lhs, case .candidateRegister(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.candidateUpdate, .candidateUpdate): return {
+        guard case .candidateUpdate(let l) = lhs, case .candidateUpdate(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -160,7 +190,7 @@ public struct TW_IoTeX_Proto_Staking {
 
     public var autoStake: Bool = false
 
-    public var payload: Data = SwiftProtobuf.Internal.emptyData
+    public var payload: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -175,7 +205,7 @@ public struct TW_IoTeX_Proto_Staking {
 
     public var bucketIndex: UInt64 = 0
 
-    public var payload: Data = SwiftProtobuf.Internal.emptyData
+    public var payload: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -192,7 +222,7 @@ public struct TW_IoTeX_Proto_Staking {
 
     public var amount: String = String()
 
-    public var payload: Data = SwiftProtobuf.Internal.emptyData
+    public var payload: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -211,7 +241,7 @@ public struct TW_IoTeX_Proto_Staking {
 
     public var autoStake: Bool = false
 
-    public var payload: Data = SwiftProtobuf.Internal.emptyData
+    public var payload: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -228,7 +258,7 @@ public struct TW_IoTeX_Proto_Staking {
 
     public var candidateName: String = String()
 
-    public var payload: Data = SwiftProtobuf.Internal.emptyData
+    public var payload: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -244,7 +274,7 @@ public struct TW_IoTeX_Proto_Staking {
 
     public var voterAddress: String = String()
 
-    public var payload: Data = SwiftProtobuf.Internal.emptyData
+    public var payload: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -290,7 +320,7 @@ public struct TW_IoTeX_Proto_Staking {
     /// if ownerAddress is absent, owner of candidate is the sender
     public var ownerAddress: String = String()
 
-    public var payload: Data = SwiftProtobuf.Internal.emptyData
+    public var payload: Data = Data()
 
     public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -311,7 +341,7 @@ public struct TW_IoTeX_Proto_ContractCall {
 
   public var contract: String = String()
 
-  public var data: Data = SwiftProtobuf.Internal.emptyData
+  public var data: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -332,7 +362,7 @@ public struct TW_IoTeX_Proto_SigningInput {
 
   public var gasPrice: String = String()
 
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var action: TW_IoTeX_Proto_SigningInput.OneOf_Action? = nil
 
@@ -443,18 +473,54 @@ public struct TW_IoTeX_Proto_SigningInput {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_IoTeX_Proto_SigningInput.OneOf_Action, rhs: TW_IoTeX_Proto_SigningInput.OneOf_Action) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.transfer(let l), .transfer(let r)): return l == r
-      case (.call(let l), .call(let r)): return l == r
-      case (.stakeCreate(let l), .stakeCreate(let r)): return l == r
-      case (.stakeUnstake(let l), .stakeUnstake(let r)): return l == r
-      case (.stakeWithdraw(let l), .stakeWithdraw(let r)): return l == r
-      case (.stakeAddDeposit(let l), .stakeAddDeposit(let r)): return l == r
-      case (.stakeRestake(let l), .stakeRestake(let r)): return l == r
-      case (.stakeChangeCandidate(let l), .stakeChangeCandidate(let r)): return l == r
-      case (.stakeTransferOwnership(let l), .stakeTransferOwnership(let r)): return l == r
-      case (.candidateRegister(let l), .candidateRegister(let r)): return l == r
-      case (.candidateUpdate(let l), .candidateUpdate(let r)): return l == r
+      case (.transfer, .transfer): return {
+        guard case .transfer(let l) = lhs, case .transfer(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.call, .call): return {
+        guard case .call(let l) = lhs, case .call(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeCreate, .stakeCreate): return {
+        guard case .stakeCreate(let l) = lhs, case .stakeCreate(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeUnstake, .stakeUnstake): return {
+        guard case .stakeUnstake(let l) = lhs, case .stakeUnstake(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeWithdraw, .stakeWithdraw): return {
+        guard case .stakeWithdraw(let l) = lhs, case .stakeWithdraw(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeAddDeposit, .stakeAddDeposit): return {
+        guard case .stakeAddDeposit(let l) = lhs, case .stakeAddDeposit(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeRestake, .stakeRestake): return {
+        guard case .stakeRestake(let l) = lhs, case .stakeRestake(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeChangeCandidate, .stakeChangeCandidate): return {
+        guard case .stakeChangeCandidate(let l) = lhs, case .stakeChangeCandidate(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeTransferOwnership, .stakeTransferOwnership): return {
+        guard case .stakeTransferOwnership(let l) = lhs, case .stakeTransferOwnership(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.candidateRegister, .candidateRegister): return {
+        guard case .candidateRegister(let l) = lhs, case .candidateRegister(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.candidateUpdate, .candidateUpdate): return {
+        guard case .candidateUpdate(let l) = lhs, case .candidateUpdate(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -471,10 +537,10 @@ public struct TW_IoTeX_Proto_SigningOutput {
   // methods supported on all messages.
 
   /// Signed and encoded Action bytes
-  public var encoded: Data = SwiftProtobuf.Internal.emptyData
+  public var encoded: Data = Data()
 
   /// Signed Action hash
-  public var hash: Data = SwiftProtobuf.Internal.emptyData
+  public var hash: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -603,18 +669,54 @@ public struct TW_IoTeX_Proto_ActionCore {
 
   #if !swift(>=4.1)
     public static func ==(lhs: TW_IoTeX_Proto_ActionCore.OneOf_Action, rhs: TW_IoTeX_Proto_ActionCore.OneOf_Action) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch (lhs, rhs) {
-      case (.transfer(let l), .transfer(let r)): return l == r
-      case (.execution(let l), .execution(let r)): return l == r
-      case (.stakeCreate(let l), .stakeCreate(let r)): return l == r
-      case (.stakeUnstake(let l), .stakeUnstake(let r)): return l == r
-      case (.stakeWithdraw(let l), .stakeWithdraw(let r)): return l == r
-      case (.stakeAddDeposit(let l), .stakeAddDeposit(let r)): return l == r
-      case (.stakeRestake(let l), .stakeRestake(let r)): return l == r
-      case (.stakeChangeCandidate(let l), .stakeChangeCandidate(let r)): return l == r
-      case (.stakeTransferOwnership(let l), .stakeTransferOwnership(let r)): return l == r
-      case (.candidateRegister(let l), .candidateRegister(let r)): return l == r
-      case (.candidateUpdate(let l), .candidateUpdate(let r)): return l == r
+      case (.transfer, .transfer): return {
+        guard case .transfer(let l) = lhs, case .transfer(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.execution, .execution): return {
+        guard case .execution(let l) = lhs, case .execution(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeCreate, .stakeCreate): return {
+        guard case .stakeCreate(let l) = lhs, case .stakeCreate(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeUnstake, .stakeUnstake): return {
+        guard case .stakeUnstake(let l) = lhs, case .stakeUnstake(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeWithdraw, .stakeWithdraw): return {
+        guard case .stakeWithdraw(let l) = lhs, case .stakeWithdraw(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeAddDeposit, .stakeAddDeposit): return {
+        guard case .stakeAddDeposit(let l) = lhs, case .stakeAddDeposit(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeRestake, .stakeRestake): return {
+        guard case .stakeRestake(let l) = lhs, case .stakeRestake(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeChangeCandidate, .stakeChangeCandidate): return {
+        guard case .stakeChangeCandidate(let l) = lhs, case .stakeChangeCandidate(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.stakeTransferOwnership, .stakeTransferOwnership): return {
+        guard case .stakeTransferOwnership(let l) = lhs, case .stakeTransferOwnership(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.candidateRegister, .candidateRegister): return {
+        guard case .candidateRegister(let l) = lhs, case .candidateRegister(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.candidateUpdate, .candidateUpdate): return {
+        guard case .candidateUpdate(let l) = lhs, case .candidateUpdate(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
       default: return false
       }
     }
@@ -638,9 +740,9 @@ public struct TW_IoTeX_Proto_Action {
   /// Clears the value of `core`. Subsequent reads from it will return its default value.
   public mutating func clearCore() {self._core = nil}
 
-  public var senderPubKey: Data = SwiftProtobuf.Internal.emptyData
+  public var senderPubKey: Data = Data()
 
-  public var signature: Data = SwiftProtobuf.Internal.emptyData
+  public var signature: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -663,10 +765,13 @@ extension TW_IoTeX_Proto_Transfer: SwiftProtobuf.Message, SwiftProtobuf._Message
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.amount)
-      case 2: try decoder.decodeSingularStringField(value: &self.recipient)
-      case 3: try decoder.decodeSingularBytesField(value: &self.payload)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.amount) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.recipient) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.payload) }()
       default: break
       }
     }
@@ -710,8 +815,11 @@ extension TW_IoTeX_Proto_Staking: SwiftProtobuf.Message, SwiftProtobuf._MessageI
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1:
+      case 1: try {
         var v: TW_IoTeX_Proto_Staking.Create?
         if let current = self.message {
           try decoder.handleConflictingOneOf()
@@ -719,7 +827,8 @@ extension TW_IoTeX_Proto_Staking: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.message = .stakeCreate(v)}
-      case 2:
+      }()
+      case 2: try {
         var v: TW_IoTeX_Proto_Staking.Reclaim?
         if let current = self.message {
           try decoder.handleConflictingOneOf()
@@ -727,7 +836,8 @@ extension TW_IoTeX_Proto_Staking: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.message = .stakeUnstake(v)}
-      case 3:
+      }()
+      case 3: try {
         var v: TW_IoTeX_Proto_Staking.Reclaim?
         if let current = self.message {
           try decoder.handleConflictingOneOf()
@@ -735,7 +845,8 @@ extension TW_IoTeX_Proto_Staking: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.message = .stakeWithdraw(v)}
-      case 4:
+      }()
+      case 4: try {
         var v: TW_IoTeX_Proto_Staking.AddDeposit?
         if let current = self.message {
           try decoder.handleConflictingOneOf()
@@ -743,7 +854,8 @@ extension TW_IoTeX_Proto_Staking: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.message = .stakeAddDeposit(v)}
-      case 5:
+      }()
+      case 5: try {
         var v: TW_IoTeX_Proto_Staking.Restake?
         if let current = self.message {
           try decoder.handleConflictingOneOf()
@@ -751,7 +863,8 @@ extension TW_IoTeX_Proto_Staking: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.message = .stakeRestake(v)}
-      case 6:
+      }()
+      case 6: try {
         var v: TW_IoTeX_Proto_Staking.ChangeCandidate?
         if let current = self.message {
           try decoder.handleConflictingOneOf()
@@ -759,7 +872,8 @@ extension TW_IoTeX_Proto_Staking: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.message = .stakeChangeCandidate(v)}
-      case 7:
+      }()
+      case 7: try {
         var v: TW_IoTeX_Proto_Staking.TransferOwnership?
         if let current = self.message {
           try decoder.handleConflictingOneOf()
@@ -767,7 +881,8 @@ extension TW_IoTeX_Proto_Staking: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.message = .stakeTransferOwnership(v)}
-      case 8:
+      }()
+      case 8: try {
         var v: TW_IoTeX_Proto_Staking.CandidateRegister?
         if let current = self.message {
           try decoder.handleConflictingOneOf()
@@ -775,7 +890,8 @@ extension TW_IoTeX_Proto_Staking: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.message = .candidateRegister(v)}
-      case 9:
+      }()
+      case 9: try {
         var v: TW_IoTeX_Proto_Staking.CandidateBasicInfo?
         if let current = self.message {
           try decoder.handleConflictingOneOf()
@@ -783,31 +899,53 @@ extension TW_IoTeX_Proto_Staking: SwiftProtobuf.Message, SwiftProtobuf._MessageI
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.message = .candidateUpdate(v)}
+      }()
       default: break
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.message {
-    case .stakeCreate(let v)?:
+    case .stakeCreate?: try {
+      guard case .stakeCreate(let v)? = self.message else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    case .stakeUnstake(let v)?:
+    }()
+    case .stakeUnstake?: try {
+      guard case .stakeUnstake(let v)? = self.message else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    case .stakeWithdraw(let v)?:
+    }()
+    case .stakeWithdraw?: try {
+      guard case .stakeWithdraw(let v)? = self.message else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    case .stakeAddDeposit(let v)?:
+    }()
+    case .stakeAddDeposit?: try {
+      guard case .stakeAddDeposit(let v)? = self.message else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    case .stakeRestake(let v)?:
+    }()
+    case .stakeRestake?: try {
+      guard case .stakeRestake(let v)? = self.message else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-    case .stakeChangeCandidate(let v)?:
+    }()
+    case .stakeChangeCandidate?: try {
+      guard case .stakeChangeCandidate(let v)? = self.message else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    case .stakeTransferOwnership(let v)?:
+    }()
+    case .stakeTransferOwnership?: try {
+      guard case .stakeTransferOwnership(let v)? = self.message else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
-    case .candidateRegister(let v)?:
+    }()
+    case .candidateRegister?: try {
+      guard case .candidateRegister(let v)? = self.message else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
-    case .candidateUpdate(let v)?:
+    }()
+    case .candidateUpdate?: try {
+      guard case .candidateUpdate(let v)? = self.message else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -832,12 +970,15 @@ extension TW_IoTeX_Proto_Staking.Create: SwiftProtobuf.Message, SwiftProtobuf._M
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.candidateName)
-      case 2: try decoder.decodeSingularStringField(value: &self.stakedAmount)
-      case 3: try decoder.decodeSingularUInt32Field(value: &self.stakedDuration)
-      case 4: try decoder.decodeSingularBoolField(value: &self.autoStake)
-      case 5: try decoder.decodeSingularBytesField(value: &self.payload)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.candidateName) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.stakedAmount) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self.stakedDuration) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.autoStake) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.payload) }()
       default: break
       }
     }
@@ -882,9 +1023,12 @@ extension TW_IoTeX_Proto_Staking.Reclaim: SwiftProtobuf.Message, SwiftProtobuf._
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt64Field(value: &self.bucketIndex)
-      case 2: try decoder.decodeSingularBytesField(value: &self.payload)
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.bucketIndex) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.payload) }()
       default: break
       }
     }
@@ -918,10 +1062,13 @@ extension TW_IoTeX_Proto_Staking.AddDeposit: SwiftProtobuf.Message, SwiftProtobu
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt64Field(value: &self.bucketIndex)
-      case 2: try decoder.decodeSingularStringField(value: &self.amount)
-      case 3: try decoder.decodeSingularBytesField(value: &self.payload)
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.bucketIndex) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.amount) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.payload) }()
       default: break
       }
     }
@@ -960,11 +1107,14 @@ extension TW_IoTeX_Proto_Staking.Restake: SwiftProtobuf.Message, SwiftProtobuf._
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt64Field(value: &self.bucketIndex)
-      case 2: try decoder.decodeSingularUInt32Field(value: &self.stakedDuration)
-      case 3: try decoder.decodeSingularBoolField(value: &self.autoStake)
-      case 4: try decoder.decodeSingularBytesField(value: &self.payload)
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.bucketIndex) }()
+      case 2: try { try decoder.decodeSingularUInt32Field(value: &self.stakedDuration) }()
+      case 3: try { try decoder.decodeSingularBoolField(value: &self.autoStake) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.payload) }()
       default: break
       }
     }
@@ -1006,10 +1156,13 @@ extension TW_IoTeX_Proto_Staking.ChangeCandidate: SwiftProtobuf.Message, SwiftPr
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt64Field(value: &self.bucketIndex)
-      case 2: try decoder.decodeSingularStringField(value: &self.candidateName)
-      case 3: try decoder.decodeSingularBytesField(value: &self.payload)
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.bucketIndex) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.candidateName) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.payload) }()
       default: break
       }
     }
@@ -1047,10 +1200,13 @@ extension TW_IoTeX_Proto_Staking.TransferOwnership: SwiftProtobuf.Message, Swift
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt64Field(value: &self.bucketIndex)
-      case 2: try decoder.decodeSingularStringField(value: &self.voterAddress)
-      case 3: try decoder.decodeSingularBytesField(value: &self.payload)
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.bucketIndex) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.voterAddress) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.payload) }()
       default: break
       }
     }
@@ -1088,10 +1244,13 @@ extension TW_IoTeX_Proto_Staking.CandidateBasicInfo: SwiftProtobuf.Message, Swif
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.name)
-      case 2: try decoder.decodeSingularStringField(value: &self.operatorAddress)
-      case 3: try decoder.decodeSingularStringField(value: &self.rewardAddress)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.operatorAddress) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.rewardAddress) }()
       default: break
       }
     }
@@ -1132,13 +1291,16 @@ extension TW_IoTeX_Proto_Staking.CandidateRegister: SwiftProtobuf.Message, Swift
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularMessageField(value: &self._candidate)
-      case 2: try decoder.decodeSingularStringField(value: &self.stakedAmount)
-      case 3: try decoder.decodeSingularUInt32Field(value: &self.stakedDuration)
-      case 4: try decoder.decodeSingularBoolField(value: &self.autoStake)
-      case 5: try decoder.decodeSingularStringField(value: &self.ownerAddress)
-      case 6: try decoder.decodeSingularBytesField(value: &self.payload)
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._candidate) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.stakedAmount) }()
+      case 3: try { try decoder.decodeSingularUInt32Field(value: &self.stakedDuration) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.autoStake) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.ownerAddress) }()
+      case 6: try { try decoder.decodeSingularBytesField(value: &self.payload) }()
       default: break
       }
     }
@@ -1188,10 +1350,13 @@ extension TW_IoTeX_Proto_ContractCall: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.amount)
-      case 2: try decoder.decodeSingularStringField(value: &self.contract)
-      case 3: try decoder.decodeSingularBytesField(value: &self.data)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.amount) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.contract) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.data) }()
       default: break
       }
     }
@@ -1242,13 +1407,16 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt32Field(value: &self.version)
-      case 2: try decoder.decodeSingularUInt64Field(value: &self.nonce)
-      case 3: try decoder.decodeSingularUInt64Field(value: &self.gasLimit)
-      case 4: try decoder.decodeSingularStringField(value: &self.gasPrice)
-      case 5: try decoder.decodeSingularBytesField(value: &self.privateKey)
-      case 10:
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self.version) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.nonce) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.gasLimit) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.gasPrice) }()
+      case 5: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
+      case 10: try {
         var v: TW_IoTeX_Proto_Transfer?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1256,7 +1424,8 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .transfer(v)}
-      case 12:
+      }()
+      case 12: try {
         var v: TW_IoTeX_Proto_ContractCall?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1264,7 +1433,8 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .call(v)}
-      case 40:
+      }()
+      case 40: try {
         var v: TW_IoTeX_Proto_Staking.Create?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1272,7 +1442,8 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeCreate(v)}
-      case 41:
+      }()
+      case 41: try {
         var v: TW_IoTeX_Proto_Staking.Reclaim?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1280,7 +1451,8 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeUnstake(v)}
-      case 42:
+      }()
+      case 42: try {
         var v: TW_IoTeX_Proto_Staking.Reclaim?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1288,7 +1460,8 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeWithdraw(v)}
-      case 43:
+      }()
+      case 43: try {
         var v: TW_IoTeX_Proto_Staking.AddDeposit?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1296,7 +1469,8 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeAddDeposit(v)}
-      case 44:
+      }()
+      case 44: try {
         var v: TW_IoTeX_Proto_Staking.Restake?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1304,7 +1478,8 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeRestake(v)}
-      case 45:
+      }()
+      case 45: try {
         var v: TW_IoTeX_Proto_Staking.ChangeCandidate?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1312,7 +1487,8 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeChangeCandidate(v)}
-      case 46:
+      }()
+      case 46: try {
         var v: TW_IoTeX_Proto_Staking.TransferOwnership?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1320,7 +1496,8 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeTransferOwnership(v)}
-      case 47:
+      }()
+      case 47: try {
         var v: TW_IoTeX_Proto_Staking.CandidateRegister?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1328,7 +1505,8 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .candidateRegister(v)}
-      case 48:
+      }()
+      case 48: try {
         var v: TW_IoTeX_Proto_Staking.CandidateBasicInfo?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1336,6 +1514,7 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .candidateUpdate(v)}
+      }()
       default: break
       }
     }
@@ -1357,29 +1536,54 @@ extension TW_IoTeX_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mes
     if !self.privateKey.isEmpty {
       try visitor.visitSingularBytesField(value: self.privateKey, fieldNumber: 5)
     }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.action {
-    case .transfer(let v)?:
+    case .transfer?: try {
+      guard case .transfer(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
-    case .call(let v)?:
+    }()
+    case .call?: try {
+      guard case .call(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
-    case .stakeCreate(let v)?:
+    }()
+    case .stakeCreate?: try {
+      guard case .stakeCreate(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 40)
-    case .stakeUnstake(let v)?:
+    }()
+    case .stakeUnstake?: try {
+      guard case .stakeUnstake(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 41)
-    case .stakeWithdraw(let v)?:
+    }()
+    case .stakeWithdraw?: try {
+      guard case .stakeWithdraw(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 42)
-    case .stakeAddDeposit(let v)?:
+    }()
+    case .stakeAddDeposit?: try {
+      guard case .stakeAddDeposit(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 43)
-    case .stakeRestake(let v)?:
+    }()
+    case .stakeRestake?: try {
+      guard case .stakeRestake(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 44)
-    case .stakeChangeCandidate(let v)?:
+    }()
+    case .stakeChangeCandidate?: try {
+      guard case .stakeChangeCandidate(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 45)
-    case .stakeTransferOwnership(let v)?:
+    }()
+    case .stakeTransferOwnership?: try {
+      guard case .stakeTransferOwnership(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 46)
-    case .candidateRegister(let v)?:
+    }()
+    case .candidateRegister?: try {
+      guard case .candidateRegister(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 47)
-    case .candidateUpdate(let v)?:
+    }()
+    case .candidateUpdate?: try {
+      guard case .candidateUpdate(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 48)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -1406,9 +1610,12 @@ extension TW_IoTeX_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Me
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularBytesField(value: &self.encoded)
-      case 2: try decoder.decodeSingularBytesField(value: &self.hash)
+      case 1: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.hash) }()
       default: break
       }
     }
@@ -1454,12 +1661,15 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularUInt32Field(value: &self.version)
-      case 2: try decoder.decodeSingularUInt64Field(value: &self.nonce)
-      case 3: try decoder.decodeSingularUInt64Field(value: &self.gasLimit)
-      case 4: try decoder.decodeSingularStringField(value: &self.gasPrice)
-      case 10:
+      case 1: try { try decoder.decodeSingularUInt32Field(value: &self.version) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.nonce) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.gasLimit) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.gasPrice) }()
+      case 10: try {
         var v: TW_IoTeX_Proto_Transfer?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1467,7 +1677,8 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .transfer(v)}
-      case 12:
+      }()
+      case 12: try {
         var v: TW_IoTeX_Proto_ContractCall?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1475,7 +1686,8 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .execution(v)}
-      case 40:
+      }()
+      case 40: try {
         var v: TW_IoTeX_Proto_Staking.Create?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1483,7 +1695,8 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeCreate(v)}
-      case 41:
+      }()
+      case 41: try {
         var v: TW_IoTeX_Proto_Staking.Reclaim?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1491,7 +1704,8 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeUnstake(v)}
-      case 42:
+      }()
+      case 42: try {
         var v: TW_IoTeX_Proto_Staking.Reclaim?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1499,7 +1713,8 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeWithdraw(v)}
-      case 43:
+      }()
+      case 43: try {
         var v: TW_IoTeX_Proto_Staking.AddDeposit?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1507,7 +1722,8 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeAddDeposit(v)}
-      case 44:
+      }()
+      case 44: try {
         var v: TW_IoTeX_Proto_Staking.Restake?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1515,7 +1731,8 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeRestake(v)}
-      case 45:
+      }()
+      case 45: try {
         var v: TW_IoTeX_Proto_Staking.ChangeCandidate?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1523,7 +1740,8 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeChangeCandidate(v)}
-      case 46:
+      }()
+      case 46: try {
         var v: TW_IoTeX_Proto_Staking.TransferOwnership?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1531,7 +1749,8 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .stakeTransferOwnership(v)}
-      case 47:
+      }()
+      case 47: try {
         var v: TW_IoTeX_Proto_Staking.CandidateRegister?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1539,7 +1758,8 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .candidateRegister(v)}
-      case 48:
+      }()
+      case 48: try {
         var v: TW_IoTeX_Proto_Staking.CandidateBasicInfo?
         if let current = self.action {
           try decoder.handleConflictingOneOf()
@@ -1547,6 +1767,7 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
         }
         try decoder.decodeSingularMessageField(value: &v)
         if let v = v {self.action = .candidateUpdate(v)}
+      }()
       default: break
       }
     }
@@ -1565,29 +1786,54 @@ extension TW_IoTeX_Proto_ActionCore: SwiftProtobuf.Message, SwiftProtobuf._Messa
     if !self.gasPrice.isEmpty {
       try visitor.visitSingularStringField(value: self.gasPrice, fieldNumber: 4)
     }
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every case branch when no optimizations are
+    // enabled. https://github.com/apple/swift-protobuf/issues/1034
     switch self.action {
-    case .transfer(let v)?:
+    case .transfer?: try {
+      guard case .transfer(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
-    case .execution(let v)?:
+    }()
+    case .execution?: try {
+      guard case .execution(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
-    case .stakeCreate(let v)?:
+    }()
+    case .stakeCreate?: try {
+      guard case .stakeCreate(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 40)
-    case .stakeUnstake(let v)?:
+    }()
+    case .stakeUnstake?: try {
+      guard case .stakeUnstake(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 41)
-    case .stakeWithdraw(let v)?:
+    }()
+    case .stakeWithdraw?: try {
+      guard case .stakeWithdraw(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 42)
-    case .stakeAddDeposit(let v)?:
+    }()
+    case .stakeAddDeposit?: try {
+      guard case .stakeAddDeposit(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 43)
-    case .stakeRestake(let v)?:
+    }()
+    case .stakeRestake?: try {
+      guard case .stakeRestake(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 44)
-    case .stakeChangeCandidate(let v)?:
+    }()
+    case .stakeChangeCandidate?: try {
+      guard case .stakeChangeCandidate(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 45)
-    case .stakeTransferOwnership(let v)?:
+    }()
+    case .stakeTransferOwnership?: try {
+      guard case .stakeTransferOwnership(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 46)
-    case .candidateRegister(let v)?:
+    }()
+    case .candidateRegister?: try {
+      guard case .candidateRegister(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 47)
-    case .candidateUpdate(let v)?:
+    }()
+    case .candidateUpdate?: try {
+      guard case .candidateUpdate(let v)? = self.action else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 48)
+    }()
     case nil: break
     }
     try unknownFields.traverse(visitor: &visitor)
@@ -1614,10 +1860,13 @@ extension TW_IoTeX_Proto_Action: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularMessageField(value: &self._core)
-      case 2: try decoder.decodeSingularBytesField(value: &self.senderPubKey)
-      case 3: try decoder.decodeSingularBytesField(value: &self.signature)
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._core) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.senderPubKey) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.signature) }()
       default: break
       }
     }

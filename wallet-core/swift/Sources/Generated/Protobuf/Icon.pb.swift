@@ -33,22 +33,22 @@ public struct TW_Icon_Proto_SigningInput {
   public var toAddress: String = String()
 
   /// Transfer amount.
-  public var value: Data = SwiftProtobuf.Internal.emptyData
+  public var value: Data = Data()
 
   /// The amount of step to send with the transaction.
-  public var stepLimit: Data = SwiftProtobuf.Internal.emptyData
+  public var stepLimit: Data = Data()
 
   /// UNIX epoch time (from 1970.1.1 00:00:00) in microseconds
   public var timestamp: Int64 = 0
 
   /// Integer value increased by request to avoid replay attacks.
-  public var nonce: Data = SwiftProtobuf.Internal.emptyData
+  public var nonce: Data = Data()
 
   /// Network identifier
-  public var networkID: Data = SwiftProtobuf.Internal.emptyData
+  public var networkID: Data = Data()
 
   /// Private key.
-  public var privateKey: Data = SwiftProtobuf.Internal.emptyData
+  public var privateKey: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -65,7 +65,7 @@ public struct TW_Icon_Proto_SigningOutput {
   public var encoded: String = String()
 
   /// Signature.
-  public var signature: Data = SwiftProtobuf.Internal.emptyData
+  public var signature: Data = Data()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -91,15 +91,18 @@ extension TW_Icon_Proto_SigningInput: SwiftProtobuf.Message, SwiftProtobuf._Mess
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.fromAddress)
-      case 2: try decoder.decodeSingularStringField(value: &self.toAddress)
-      case 3: try decoder.decodeSingularBytesField(value: &self.value)
-      case 4: try decoder.decodeSingularBytesField(value: &self.stepLimit)
-      case 5: try decoder.decodeSingularInt64Field(value: &self.timestamp)
-      case 6: try decoder.decodeSingularBytesField(value: &self.nonce)
-      case 7: try decoder.decodeSingularBytesField(value: &self.networkID)
-      case 8: try decoder.decodeSingularBytesField(value: &self.privateKey)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.fromAddress) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.toAddress) }()
+      case 3: try { try decoder.decodeSingularBytesField(value: &self.value) }()
+      case 4: try { try decoder.decodeSingularBytesField(value: &self.stepLimit) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.timestamp) }()
+      case 6: try { try decoder.decodeSingularBytesField(value: &self.nonce) }()
+      case 7: try { try decoder.decodeSingularBytesField(value: &self.networkID) }()
+      case 8: try { try decoder.decodeSingularBytesField(value: &self.privateKey) }()
       default: break
       }
     }
@@ -156,9 +159,12 @@ extension TW_Icon_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Mes
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.encoded)
-      case 2: try decoder.decodeSingularBytesField(value: &self.signature)
+      case 1: try { try decoder.decodeSingularStringField(value: &self.encoded) }()
+      case 2: try { try decoder.decodeSingularBytesField(value: &self.signature) }()
       default: break
       }
     }
