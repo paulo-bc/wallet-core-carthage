@@ -100,8 +100,8 @@ public struct TW_NEO_Proto_SigningOutput {
   /// Signed and encoded transaction bytes.
   public var encoded: Data = Data()
 
-  /// Error message in case of error
-  public var error: String = String()
+  /// Optional error
+  public var error: TW_Common_Proto_SigningError = .ok
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -148,8 +148,8 @@ public struct TW_NEO_Proto_TransactionPlan {
   /// GAS used
   public var fee: Int64 = 0
 
-  /// Error message in case of error
-  public var error: String = String()
+  /// Optional error
+  public var error: TW_Common_Proto_SigningError = .ok
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -342,7 +342,7 @@ extension TW_NEO_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Mess
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.error) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.error) }()
       default: break
       }
     }
@@ -352,8 +352,8 @@ extension TW_NEO_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if !self.encoded.isEmpty {
       try visitor.visitSingularBytesField(value: self.encoded, fieldNumber: 1)
     }
-    if !self.error.isEmpty {
-      try visitor.visitSingularStringField(value: self.error, fieldNumber: 2)
+    if self.error != .ok {
+      try visitor.visitSingularEnumField(value: self.error, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -446,7 +446,7 @@ extension TW_NEO_Proto_TransactionPlan: SwiftProtobuf.Message, SwiftProtobuf._Me
       case 1: try { try decoder.decodeRepeatedMessageField(value: &self.outputs) }()
       case 2: try { try decoder.decodeRepeatedMessageField(value: &self.inputs) }()
       case 3: try { try decoder.decodeSingularInt64Field(value: &self.fee) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.error) }()
+      case 4: try { try decoder.decodeSingularEnumField(value: &self.error) }()
       default: break
       }
     }
@@ -462,8 +462,8 @@ extension TW_NEO_Proto_TransactionPlan: SwiftProtobuf.Message, SwiftProtobuf._Me
     if self.fee != 0 {
       try visitor.visitSingularInt64Field(value: self.fee, fieldNumber: 3)
     }
-    if !self.error.isEmpty {
-      try visitor.visitSingularStringField(value: self.error, fieldNumber: 4)
+    if self.error != .ok {
+      try visitor.visitSingularEnumField(value: self.error, fieldNumber: 4)
     }
     try unknownFields.traverse(visitor: &visitor)
   }

@@ -79,6 +79,13 @@ public final class PrivateKey {
         return PublicKey(rawValue: TWPrivateKeyGetPublicKeyCurve25519(rawValue))
     }
 
+    public func getSharedKey(publicKey: PublicKey, curve: Curve) -> Data? {
+        guard let result = TWPrivateKeyGetSharedKey(rawValue, publicKey.rawValue, TWCurve(rawValue: curve.rawValue)) else {
+            return nil
+        }
+        return TWDataNSData(result)
+    }
+
     public func sign(digest: Data, curve: Curve) -> Data? {
         let digestData = TWDataCreateWithNSData(digest)
         defer {

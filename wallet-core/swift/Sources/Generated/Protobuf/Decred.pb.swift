@@ -125,8 +125,8 @@ public struct TW_Decred_Proto_SigningOutput {
   /// Transaction id
   public var transactionID: String = String()
 
-  /// Optional error message
-  public var error: String = String()
+  /// Optional error
+  public var error: TW_Common_Proto_SigningError = .ok
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -325,7 +325,7 @@ extension TW_Decred_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._M
       case 1: try { try decoder.decodeSingularMessageField(value: &self._transaction) }()
       case 2: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.transactionID) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.error) }()
+      case 4: try { try decoder.decodeSingularEnumField(value: &self.error) }()
       default: break
       }
     }
@@ -341,8 +341,8 @@ extension TW_Decred_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._M
     if !self.transactionID.isEmpty {
       try visitor.visitSingularStringField(value: self.transactionID, fieldNumber: 3)
     }
-    if !self.error.isEmpty {
-      try visitor.visitSingularStringField(value: self.error, fieldNumber: 4)
+    if self.error != .ok {
+      try visitor.visitSingularEnumField(value: self.error, fieldNumber: 4)
     }
     try unknownFields.traverse(visitor: &visitor)
   }

@@ -246,8 +246,8 @@ public struct TW_Bitcoin_Proto_TransactionPlan {
   /// Zcash branch id
   public var branchID: Data = Data()
 
-  /// Optional error message
-  public var error: String = String()
+  /// Optional error
+  public var error: TW_Common_Proto_SigningError = .ok
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -276,8 +276,8 @@ public struct TW_Bitcoin_Proto_SigningOutput {
   /// Transaction id
   public var transactionID: String = String()
 
-  /// Optional error message
-  public var error: String = String()
+  /// Optional error
+  public var error: TW_Common_Proto_SigningError = .ok
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -678,7 +678,7 @@ extension TW_Bitcoin_Proto_TransactionPlan: SwiftProtobuf.Message, SwiftProtobuf
       case 4: try { try decoder.decodeSingularInt64Field(value: &self.change) }()
       case 5: try { try decoder.decodeRepeatedMessageField(value: &self.utxos) }()
       case 6: try { try decoder.decodeSingularBytesField(value: &self.branchID) }()
-      case 7: try { try decoder.decodeSingularStringField(value: &self.error) }()
+      case 7: try { try decoder.decodeSingularEnumField(value: &self.error) }()
       default: break
       }
     }
@@ -703,8 +703,8 @@ extension TW_Bitcoin_Proto_TransactionPlan: SwiftProtobuf.Message, SwiftProtobuf
     if !self.branchID.isEmpty {
       try visitor.visitSingularBytesField(value: self.branchID, fieldNumber: 6)
     }
-    if !self.error.isEmpty {
-      try visitor.visitSingularStringField(value: self.error, fieldNumber: 7)
+    if self.error != .ok {
+      try visitor.visitSingularEnumField(value: self.error, fieldNumber: 7)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -740,7 +740,7 @@ extension TW_Bitcoin_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._
       case 1: try { try decoder.decodeSingularMessageField(value: &self._transaction) }()
       case 2: try { try decoder.decodeSingularBytesField(value: &self.encoded) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.transactionID) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.error) }()
+      case 4: try { try decoder.decodeSingularEnumField(value: &self.error) }()
       default: break
       }
     }
@@ -756,8 +756,8 @@ extension TW_Bitcoin_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._
     if !self.transactionID.isEmpty {
       try visitor.visitSingularStringField(value: self.transactionID, fieldNumber: 3)
     }
-    if !self.error.isEmpty {
-      try visitor.visitSingularStringField(value: self.error, fieldNumber: 4)
+    if self.error != .ok {
+      try visitor.visitSingularEnumField(value: self.error, fieldNumber: 4)
     }
     try unknownFields.traverse(visitor: &visitor)
   }

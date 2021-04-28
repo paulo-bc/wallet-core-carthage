@@ -40,6 +40,7 @@ FOUNDATION_EXPORT const unsigned char WalletCoreVersionString[];
 #include "TWHDWallet.h"
 #include "TWHRP.h"
 #include "TWHash.h"
+#include "TWMnemonic.h"
 #include "TWNEARAccount.h"
 #include "TWPrivateKey.h"
 #include "TWPublicKey.h"

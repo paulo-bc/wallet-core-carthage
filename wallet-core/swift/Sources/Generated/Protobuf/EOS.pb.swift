@@ -140,7 +140,8 @@ public struct TW_EOS_Proto_SigningOutput {
   /// JSON of the packed transaction.
   public var jsonEncoded: String = String()
 
-  public var error: String = String()
+  /// Optional error
+  public var error: TW_Common_Proto_SigningError = .ok
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -303,7 +304,7 @@ extension TW_EOS_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Mess
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.jsonEncoded) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.error) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.error) }()
       default: break
       }
     }
@@ -313,8 +314,8 @@ extension TW_EOS_Proto_SigningOutput: SwiftProtobuf.Message, SwiftProtobuf._Mess
     if !self.jsonEncoded.isEmpty {
       try visitor.visitSingularStringField(value: self.jsonEncoded, fieldNumber: 1)
     }
-    if !self.error.isEmpty {
-      try visitor.visitSingularStringField(value: self.error, fieldNumber: 2)
+    if self.error != .ok {
+      try visitor.visitSingularEnumField(value: self.error, fieldNumber: 2)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
