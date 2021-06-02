@@ -1,1 +1,2 @@
 WalletCoreCommon.xcframework filter=lfs diff=lfs merge=lfs -text
+wallet-core/WalletCoreCommon.xcframework/** filter=lfs diff=lfs merge=lfs -text
