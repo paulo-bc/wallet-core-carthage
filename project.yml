@@ -8,7 +8,6 @@ settings:
     CLANG_CXX_LANGUAGE_STANDARD: c++17
     CODE_SIGN_STYLE: Manual
     ENABLE_BITCODE: false
-    LIBRARY_SEARCH_PATHS: wallet-core/build/ios
     SUPPORTS_MACCATALYST: false
     SWIFT_VERSION: 5.0
   configs:
@@ -18,10 +17,8 @@ settings:
 targets:
   WalletCore:
     dependencies:
-    - carthage: SwiftProtobuf
-    - framework: libprotobuf.a
-    - framework: libTrezorCrypto.a
-    - framework: libCore.a
+    - framework: Carthage/Build/SwiftProtobuf.xcframework
+    - framework: wallet-core/WalletCoreCommon.xcframework
     - sdk: libc++.tbd
     deploymentTarget:
       iOS: '12.0'
@@ -31,8 +28,6 @@ targets:
       CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION: YES_ERROR
       SKIP_INSTALL: false
     sources:
-    - headerVisibility: public
-      path: wallet-core/include
-    - wallet-core/swift/Sources
-    - TrustWalletCore
+    - wallet-core/Sources
+    - wallet-core/include
     type: framework

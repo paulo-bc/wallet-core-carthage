@@ -1,12 +1,11 @@
 *~
 .DS_Store
 .vscode/
-
 Carthage/
 build/
 .build/
 .cquery_cache/
 *.zip
-
+*.tar.xz
 *.xcuserdatad/
 *.bak

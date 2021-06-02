@@ -5,15 +5,21 @@ if [ -z $1 ]; then
 	exit 0
 fi
 VERSION=$1
-BUILD_NAME="TrustWalletCore-iOS-$VERSION.zip"
+BUILD_NAME="TrustWalletCore-$VERSION.tar.xz"
 BUILD_URL="https://github.com/trustwallet/wallet-core/releases/download/$VERSION/$BUILD_NAME"
 UNZIP_DIR=wallet-core
 
 rm -rf $UNZIP_DIR $BUILD_NAME
+mkdir $UNZIP_DIR
 
+echo "---------------"
 echo "Downloading $BUILD_URL"
 curl -L $BUILD_URL -o $BUILD_NAME
-unzip $BUILD_NAME -d $UNZIP_DIR
 
-echo "Building..."
-xcodegen && xcodebuild
+echo "---------------"
+echo "Expanding $BUILD_NAME"
+tar -xvf $BUILD_NAME -C $UNZIP_DIR
+
+echo "---------------"
+echo "Generating Project"
+xcodegen
