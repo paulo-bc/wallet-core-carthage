@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -258,6 +258,7 @@
 		38486662C825EFB3BCEB31CA /* Stellar.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stellar.pb.swift; sourceTree = "<group>"; };
 		38DEEE498DA934C3E3466F97 /* TWNEARProto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWNEARProto.h; sourceTree = "<group>"; };
 		398BB6C84F571B693B3E3A9C /* PublicKey+Bitcoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PublicKey+Bitcoin.swift"; sourceTree = "<group>"; };
+		3A8CD7DC2667D4CF00E1B65B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B5037DDC1A12324D071591D /* WalletCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WalletCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EBFFBC6BBF29FFC84FB4B0D /* TWFIOAccount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWFIOAccount.h; sourceTree = "<group>"; };
 		4152BF70D0B57F22594D3671 /* Ethereum+Proto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ethereum+Proto.swift"; sourceTree = "<group>"; };
@@ -515,6 +516,7 @@
 		185B36272040EC2244D3BC77 = {
 			isa = PBXGroup;
 			children = (
+				3A8CD7DC2667D4CF00E1B65B /* Info.plist */,
 				632B47307E1056E97F50928E /* wallet-core */,
 				62DC2E90FCE5AD6855E0E7AA /* Frameworks */,
 				78BBD15B1BC3783A650514A5 /* Products */,
@@ -1138,6 +1140,7 @@
 					"\"Carthage/Build\"",
 					"\"wallet-core\"",
 				);
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1168,6 +1171,7 @@
 					"\"Carthage/Build\"",
 					"\"wallet-core\"",
 				);
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
