@@ -8,6 +8,7 @@ settings:
     CLANG_CXX_LANGUAGE_STANDARD: c++17
     CODE_SIGN_STYLE: Manual
     ENABLE_BITCODE: false
+    INFOPLIST_FILE: Info.plist
     SUPPORTS_MACCATALYST: false
     SWIFT_VERSION: 5.0
   configs:
@@ -21,9 +22,10 @@ targets:
     - framework: wallet-core/WalletCoreCommon.xcframework
     - sdk: libc++.tbd
     deploymentTarget:
-      iOS: '12.0'
+      iOS: '13.0'
     platform:
     - iOS
+    scheme: {}
     settings:
       CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION: YES_ERROR
       SKIP_INSTALL: false
